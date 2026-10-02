@@ -1,0 +1,455 @@
+SIH SMART SCAN STRATEGY — MASTER EXPERIMENT SUMMARY
+========================================================
+
+EXECUTION
+---------
+Master runner: 16/16 scripts completed successfully
+Failed/skipped: 0
+Total runtime: 45.50 minutes
+Python: D:\Code\SIH\SIH\.venv\Scripts\python.exe
+
+1. ORIGINAL PROTOTYPE
+---------------------
+Scenario: 8 bands, 4000 steps, 4 emitters.
+
+RoundRobin:       26.0% interception, reward 0.260, delay 1.48
+Random:           26.0%, reward 0.260, delay 1.42
+BeliefScheduler:  49.4%, reward 0.494, delay 1.64
+
+Conclusion: learning nearly doubles interception in the prototype.
+
+2. V2 MULTI-CHANNEL
+-------------------
+k=1: RR 12.8%, Random 12.5%, BeliefUCB 27.4%
+k=2: RR 25.1%, Random 24.9%, BeliefUCB 54.9%
+k=3: RR 37.5%, Random 36.8%, BeliefUCB 68.2%
+
+Conclusion: BeliefUCB scales strongly with concurrent scan channels.
+
+3. V3 PRI-AWARE
+---------------
+Beacon, k=1:
+RR 12.8%, BeliefUCB 28.7%, PRIAware 24.9%
+
+Beacon, k=2:
+RR 25.1%, BeliefUCB 53.5%, PRIAware 54.2%
+
+Sparse radar, k=1:
+RR 11.8%, BeliefUCB 35.6%, PRIAware 37.1%
+
+Sparse radar, k=2:
+RR 23.2%, BeliefUCB 50.4%, PRIAware 52.5%
+
+Single-seed sparse-radar per-emitter result:
+BeliefUCB radar 0/267 = 0.0%
+PRIAware radar 267/267 = 100.0%
+BeliefUCB comm-1 876/1005 = 87.2%
+PRIAware comm-1 794/1005 = 79.0%
+PRIAware radar PRI = 12.0, confidence = 1.00
+
+Conclusion: PRI awareness can capture sparse periodic threats that
+Markov/UCB misses, but may sacrifice strong communication emitters.
+
+4. V4 PERSISTENT PRIAWARE
+-------------------------
+Seed-11 sanity:
+BeliefUCB 33.2%
+Original PRIAware 36.0%
+Persistent PRIAware 34.3%
+
+This single seed is not sufficient to judge V4.
+
+5. BEACON REGRESSION DIAGNOSIS
+------------------------------
+10 seeds.
+
+k=1:
+Beacon capture: BeliefUCB 27.9 +/- 5.6%, PRIAware 34.2 +/- 6.4%
+Comm capture:   BeliefUCB 46.0 +/- 7.1%, PRIAware 33.2 +/- 13.4%
+
+k=2:
+Beacon capture: BeliefUCB 75.1 +/- 1.7%, PRIAware 73.5 +/- 6.1%
+Comm capture:   BeliefUCB 51.4 +/- 3.6%, PRIAware 48.5 +/- 14.9%
+Double-beacon-bet steps: 1941/4000 = 48.5%
+Hit rate on double-bet steps: 87.6%
+
+Conclusion: PRIAware can over-concentrate both k=2 slots on beacon bands,
+reducing productive communication-band scanning.
+
+6. PRI LOCK-ON DIAGNOSIS
+------------------------
+40 seeds, sparse radar, true PRI=12, warmup=800.
+
+Expected confirmed warmup hits: about 8.3
+Observed mean: 7.95
+Stdev: 2.69
+Range: 2–13
+Seeds below 8 hits at warmup end: 19/40
+Final lock-on: 21/40
+
+Locked seeds reached PRI 12.00 with confidence 1.00 and 100% radar capture.
+
+Conclusion: original PRI lock-on is seed-sensitive because the required
+8-hit threshold is almost exactly equal to expected warmup observations.
+
+7. MULTI-SEED ROBUSTNESS
+------------------------
+10 seeds.
+
+Prototype:
+RR 25.7 +/- 0.5%
+Random 25.5 +/- 0.6%
+BeliefScheduler 52.2 +/- 2.7%
+Belief vs RR: +26.5pp +/- 2.5pp, won 10/10
+
+V2 k=1:
+RR 12.5 +/- 0.2%
+Random 12.4 +/- 0.3%
+BeliefUCB 28.3 +/- 1.3%
+Gain vs RR +15.7pp, won 10/10
+
+V2 k=2:
+RR 25.1 +/- 0.2%
+Random 24.8 +/- 0.4%
+BeliefUCB 54.6 +/- 0.6%
+Gain vs RR +29.5pp, won 10/10
+
+V2 k=3:
+RR 37.5 +/- 0.2%
+Random 37.4 +/- 0.4%
+BeliefUCB 68.5 +/- 0.6%
+Gain vs RR +31.1pp, won 10/10
+
+Beacon k=1:
+BeliefUCB 27.7 +/- 1.0%
+PRIAware 27.3 +/- 1.5%
+PRIAware vs Belief: -0.5pp +/- 1.9pp, won 4/10
+
+Beacon k=2:
+BeliefUCB 54.4 +/- 0.7%
+PRIAware 53.9 +/- 1.0%
+PRIAware vs Belief: -0.5pp +/- 1.2pp, won 4/10
+
+Sparse radar k=1:
+BeliefUCB 32.5 +/- 0.8%
+PRIAware 33.9 +/- 3.0%
+PRIAware vs Belief: +1.3pp +/- 3.3pp, won 7/10
+
+Sparse radar k=2:
+BeliefUCB 47.7 +/- 1.0%
+PRIAware 52.3 +/- 0.8%
+PRIAware vs Belief: +4.6pp +/- 1.3pp, won 10/10
+
+Sparse per-emitter k=1:
+Radar: BeliefUCB 0.3 +/- 0.8%; PRIAware 30.0 +/- 48.3%
+Comm-1: BeliefUCB 86.9 +/- 2.4%; PRIAware 83.1 +/- 7.2%
+
+V4 fix:
+Radar original 30.0 +/- 48.3%
+Radar persistent 93.3 +/- 0.9%
+Seeds >50% radar capture: 3/10 -> 10/10
+
+Comm-1:
+Original 83.1 +/- 7.2%
+Persistent 70.1 +/- 9.0%
+
+8. CONFIDENCE-SCALE TUNING
+--------------------------
+Tested: 0.25, 0.20, 0.17, 0.15, 0.12, 0.10
+
+Selected confidence_scale = 0.17.
+
+At 0.17:
+k=1 vs Plateau: approximately -0.0pp
+k=2 vs Plateau: -0.1pp
+PDW band-4 correct: 15/15
+
+At 0.15:
+k=2 vs Plateau +0.2pp, PDW 14/15
+
+At 0.12:
+k=2 vs Plateau +0.5pp, but PDW 13/15
+
+At 0.10:
+k=2 vs Plateau +0.5pp, but PDW only 8/15
+
+Conclusion: 0.17 was selected as a conservative balance preserving fractional-
+PRI performance while avoiding degradation at k=1.
+
+9. OFF-BY-ONE FIX
+-----------------
+30 identical-environment seeds.
+
+k=1:
+BeliefUCB 27.9 +/- 1.3%
+Pre-fix 27.8 +/- 1.6%
+Current 27.9 +/- 1.7%
+Current vs pre-fix: +0.1pp +/- 0.6pp, won 1/30
+
+k=2:
+BeliefUCB 54.4 +/- 0.8%
+Pre-fix 53.4 +/- 1.5%
+Current 53.4 +/- 1.5%
+Current vs pre-fix: +0.0pp +/- 0.1pp, won 1/30
+Current vs BeliefUCB: -1.0pp +/- 1.6pp, won 5/30
+
+Conclusion: +/-1 candidate expansion has negligible effect on beacon
+aggregate interception and does not explain the k=2 regression.
+
+10. PLATEAU FIX
+---------------
+k=1:
+BeliefUCB 27.9 +/- 1.0%
+Original 29.2 +/- 1.9%
+PlateauOnly 27.5 +/- 1.7%
+Current 27.2 +/- 1.4%
+
+k=2:
+BeliefUCB 54.2 +/- 0.8%
+Original 51.8 +/- 2.4%
+PlateauOnly 53.2 +/- 1.2%
+Current 53.0 +/- 1.4%
+
+Identical-environment k=2:
+PlateauOnly vs Original: +1.8pp +/- 1.8pp, won 25/30
+Current vs BeliefUCB: -1.0pp +/- 1.6pp in the later 30-seed isolation
+
+Conclusion: plateau handling improves k=2 behavior relative to the original,
+but does not make PRIAware beat BeliefUCB.
+
+11. WARMUP/DWELL FIX
+--------------------
+Switch cost = 1:
+Original radar 3.8 +/- 11.7%
+Dwell-only radar 0.0%
+Scaled/no-jitter radar 0.0%
+PRIAware dwell+jitter radar 76.7 +/- 42.3%
+Persistent full fix radar 93.2 +/- 0.4%
+Persistent locked >50%: 30/30
+
+Switch cost = 2:
+Original radar 0.5 +/- 0.5%
+PRIAware dwell+jitter radar 83.3 +/- 37.3%
+Persistent full fix radar 92.0 +/- 0.2%
+Persistent locked >50%: 30/30
+
+Communication cost:
+cost=1: original 68.4%, PRIAware fix 56.7%, persistent 46.5%
+cost=2: original 64.9%, PRIAware fix 38.6%, persistent 28.1%
+
+Dwell formula:
+D = switch_cost + 2
+W_new = W * D / (D - switch_cost)
+cost 1: dwell=3, warmup 800 -> 1200
+cost 2: dwell=4, warmup 800 -> 1600
+
+Important sanity output:
+cost=0 default: radar 100.0%, comm1 79.0%, confidence 1.00
+A separate dwell=2,jitter=1 cost=0 invocation produced radar 0.0%,
+comm1 85.4%, confidence 0.00, so the script's "all variants collapse"
+assumption was not literally satisfied by that invocation.
+
+Conclusion: dwell/jitter/scaled warmup is effective for sparse radar under
+switch cost, but has a large communication-capture cost.
+
+12. BEACON SWITCH-COST/DWELL VALIDATION
+---------------------------------------
+k=1:
+cost 0: Belief 27.9%, PRIAware 27.9%
+cost 1: Belief 18.2%, PRIAware warmup=0 17.3%, +fix 13.6%, V4 +fix 13.8%
+cost 2: Belief 14.5%, PRIAware warmup=0 13.7%, +fix 12.0%, V4 +fix 12.0%
+
+k=2:
+cost 0: Belief 54.4%, PRIAware 53.4%
+cost 1: Belief 33.8%, PRIAware warmup=0 34.8%, +fix 30.1%, V4 +fix 30.1%
+cost 2: Belief 30.2%, PRIAware warmup=0 30.1%, +fix 23.0%, V4 +fix 23.0%
+
+Mechanism isolation, cost=1, k=1:
+baseline warmup=0: 17.9 +/- 2.5%
+dwell-fix only: 14.9 +/- 2.6%
+lead only: 17.4 +/- 2.3%
+both: 14.1 +/- 2.3%
+
+Conclusion: sparse-radar warmup/dwell fix does NOT generalize to beacon
+scenarios. The artificial warmup/dwell phase is the main regression source;
+lead alone is comparatively neutral.
+
+13. SWITCH-COST COMPARISON
+--------------------------
+k=1 switch frequency:
+RoundRobin 100.0%
+Random 87.3%
+BeliefUCB 37.4%
+
+Beacon interception:
+
+k=1:
+cost 0/1/2/4
+RR 12.8/0.0/0.0/0.0
+Random 12.4/1.4/0.2/0.0
+BeliefUCB 28.2/15.9/11.1/9.6
+
+k=2:
+RR 25.1/0.0/0.0/0.0
+Random 24.8/6.0/1.4/0.1
+BeliefUCB 54.8/32.2/30.7/13.6
+
+k=3:
+RR 37.5/0.0/0.0/0.0
+Random 36.4/13.1/4.8/0.7
+BeliefUCB 68.5/50.1/45.4/29.8
+
+Conclusion: switching/settling is a major realism constraint. Learned
+schedulers switch much less than open-loop schedulers.
+
+14. SETTLE-FIX INTERACTION
+--------------------------
+30 identical-environment seeds, beacon k=2.
+
+BeliefUCB 54.4 +/- 0.8%
+Original 51.9 +/- 1.8%
+PlateauOnly 53.6 +/- 1.1%
+Current 53.4 +/- 1.5%
+
+Paired:
+PlateauOnly vs Original: +1.8pp +/- 1.8pp, won 25/30
+Current vs PlateauOnly: -0.3pp +/- 1.0pp, won 3/30
+Current vs Original: +1.5pp +/- 2.3pp, won 24/30
+Current vs BeliefUCB: -1.0pp +/- 1.6pp, won 5/30
+
+Conclusion: plateau fix contributes the clear positive effect; later fixes
+can slightly reduce aggregate interception while improving PRI modeling.
+
+15. SYNTHETIC PDW MULTI-SEED
+----------------------------
+20 seeds, dwell=20us, k=1.
+
+True periodic bands:
+band 1 = 1000us = 50.000 steps
+band 4 = 650us = 32.500 steps
+band 6 = 1500us = 75.000 steps
+
+Interception:
+BeliefUCB 17.6 +/- 1.3%
+PlateauOnly 23.4 +/- 1.0%
+Current PRIAware 26.5 +/- 1.9%
+Persistent V4 26.1 +/- 2.8%
+
+PRI lock classification:
+
+PlateauOnly:
+band1 0/20 correct, 20/20 no-lock
+band4 14/20 correct, 6/20 no-lock
+band6 0/20 correct, 20/20 no-lock
+
+Current:
+band1 0/20 correct, 20/20 no-lock
+band4 19/20 correct, 1/20 no-lock
+band6 8/20 correct, 12/20 no-lock
+
+Persistent:
+band1 0/20 correct, 20/20 no-lock
+band4 16/20 correct, 4/20 no-lock
+band6 14/20 correct, 6/20 no-lock
+
+Critical fractional-PRI result:
+band4 correct lock: PlateauOnly 14/20 = 70%
+Current 19/20 = 95%
+
+Conclusion: strong evidence that harmonic/fractional-PRI candidate handling
+improves lock-on for the 32.5-step case.
+
+16. TURING DATASET INTEGRATION
+-----------------------------
+The actual Turing/TSRD HDF5 dataset was NOT used.
+The script used the local schema-faithful synthetic stand-in.
+
+10000 steps, 8 bands, dwell 200us, k=1, warmup=0, switch cost=0.
+
+RR 12.0%, reward 0.175, delay 0.07
+Random 12.9%, reward 0.188, delay 0.08
+BeliefUCB 26.6%, reward 0.387, delay 0.04
+PRIAware 26.6%, reward 0.387, delay 0.04
+Persistent 26.1%, reward 0.380, delay 0.04
+
+No stable PRI detected in this short integration run.
+
+Conclusion: integration succeeded, but real Turing data validation remains
+pending.
+
+OVERALL MASTER CONCLUSIONS
+==========================
+
+1. Belief/UCB learning is the most robustly validated improvement:
+   large gains over open-loop scanning, with 10/10 multi-seed wins.
+
+2. Multi-channel scanning strongly increases interception.
+
+3. PRI awareness has a specialized EW advantage: sparse periodic emitters
+   can be captured when Markov/UCB misses them.
+
+4. Original PRI lock-on was seed-sensitive because the 8-hit requirement
+   was too close to expected warmup observations.
+
+5. Persistent V4 is the strongest robustness fix for sparse radar:
+   30.0 +/- 48.3% -> 93.3 +/- 0.9% radar capture in the 10-seed validation,
+   with >50% capture seeds improving 3/10 -> 10/10.
+
+6. V4 has an explicit resource-allocation cost: communication-emitter
+   capture falls substantially.
+
+7. Plateau handling improves k=2 relative to the original PRIAware.
+
+8. The +/-1 off-by-one candidate expansion has negligible effect on beacon
+   aggregate interception and does not explain the k=2 regression.
+
+9. Fractional/harmonic PRI handling is validated on synthetic PDW:
+   band-4 correct lock improves 70% -> 95%.
+
+10. Switch cost is a major system constraint. Frequent switching can make
+    otherwise good schedulers miss pulses during settling.
+
+11. The sparse-radar warmup/dwell fix should NOT be blindly generalized to
+    beacon scenarios. Its added warmup causes a measurable regression there.
+
+12. The actual Turing/TSRD dataset has not yet been tested in this run.
+
+CURRENT PROJECT POSITION
+====================================
+
+Project/Demo workflow:
+
+Baseline:
+    RoundRobin / Random
+        ↓
+Learning:
+    BeliefScheduler / BeliefUCB
+        ↓
+Multi-channel:
+    k-channel BeliefUCB
+        ↓
+Temporal intelligence:
+    PRIAware
+        ↓
+PRI-model fixes:
+    plateau + fractional/harmonic handling
+        ↓
+Robust characterization:
+    Persistent PRIAware V4
+        ↓
+Realistic switch-cost handling:
+    use only where validated for the relevant emitter class
+
+We do NOT claim:
+- PRIAware universally beats BeliefUCB.
+- V4 improves every metric.
+- The Turing dataset has been validated.
+- The off-by-one fix improves beacon interception.
+
+We DO claim, with the present evidence:
+- Learning substantially beats open-loop scanning.
+- PRI awareness improves sparse-threat capture.
+- Persistent characterization makes sparse-radar PRI capture dramatically more reliable.
+- Fractional-PRI lock-on improved from 70% to 95% on the tested synthetic PDW.
+- Switch cost materially changes scheduler performance.
+- Different fixes are scenario-specific and require separate validation.

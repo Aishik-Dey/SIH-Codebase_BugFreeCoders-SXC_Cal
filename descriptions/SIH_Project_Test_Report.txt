@@ -1,0 +1,1884 @@
+SIH SMART SCAN STRATEGY PROJECT
+COMPREHENSIVE PROJECT TEST REPORT
+=================================
+
+Purpose
+-------
+This report records the tests performed on the Smart Scan Strategy project, the measured
+results, and the interpretation of those results. The project develops spectrum-scanning
+schedulers that progressively move from open-loop scanning to learned, multi-channel,
+PRI-aware, and persistent characterization strategies.
+
+The report focuses on facts, observations, numerical results, and their technical
+interpretation. It does not treat any single random seed as proof of performance where
+multi-seed validation was performed.
+
+IMPORTANT TESTING SCOPE NOTE
+----------------------------
+The project contains synthetic emitter simulations and a synthetic PDW stream designed
+as a stand-in for the Turing/TSRD pulse-train environment. The automated PDW validation
+reported here used the synthetic stand-in. It should therefore not be interpreted as a
+completed validation on the actual Turing/TSRD HDF5 dataset.
+
+TEST EXECUTION OVERVIEW
+-----------------------
+The master runner executed 16 Python experiment/validation scripts sequentially.
+
+Master-run status:
+    Successful: 16/16
+    Failed:      0
+    Skipped:     0
+    Total time:  45.50 minutes
+
+The major experimental progression was:
+
+    1. Original spectrum-scanning prototype
+    2. Multi-channel scanning and UCB exploration
+    3. PRI-aware scheduling
+    4. Persistent PRI-aware scheduling
+    5. Beacon regression diagnosis
+    6. Sparse-radar PRI lock-on diagnosis
+    7. Multi-seed robustness testing
+    8. Confidence-threshold tuning
+    9. Off-by-one PRI candidate validation
+   10. Plateau/jitter validation
+   11. Warm-up/dwell validation
+   12. Beacon switch-cost/dwell validation
+   13. Switch-cost comparison
+   14. Identical-environment/settling interaction analysis
+   15. Multi-seed PDW validation
+   16. Turing-dataset integration test
+
+
+======================================================================
+1. ORIGINAL PROTOTYPE TEST
+======================================================================
+
+Scenario
+--------
+    Number of bands:                 8
+    Number of time steps:            4000
+    Emitters:                        4 concurrent emitters
+        - 2 Markov communication emitters
+        - 1 periodic beacon
+        - 1 frequency-agile threat
+
+Schedulers:
+    - RoundRobin
+    - Random
+    - BeliefScheduler
+
+Measured single-seed result:
+    RoundRobin:
+        Interception       = 26.0%
+        Average reward     = 0.260
+        Average delay      = 1.48
+
+    Random:
+        Interception       = 26.0%
+        Average reward     = 0.260
+        Average delay      = 1.42
+
+    BeliefScheduler:
+        Interception       = 49.4%
+        Average reward     = 0.494
+        Average delay      = 1.64
+
+Interpretation
+--------------
+The first test establishes the baseline difference between open-loop scanning and
+learning-based scanning.
+
+RoundRobin and Random both achieve approximately 26% interception. This is expected
+because neither strategy builds a persistent model of emitter behaviour. They distribute
+their scanning effort without using learned temporal information about which bands are
+more likely to be active.
+
+BeliefScheduler reaches 49.4%, almost twice the interception of the two open-loop
+baselines in this run. The increase is approximately 23.4 percentage points over
+RoundRobin and Random.
+
+The important result is therefore that learning emitter behaviour can substantially
+improve scanning efficiency. The scheduler is no longer treating all bands as equally
+valuable. It uses observed state transitions to increase attention on bands that are
+more likely to contain activity.
+
+The higher average interception does not imply lower delay in every situation.
+BeliefScheduler's average delay in this particular run is 1.64, compared with 1.48 for
+RoundRobin and 1.42 for Random. A learned scheduler can concentrate on productive
+bands and consequently delay observations of less frequently active bands.
+
+This test establishes the project's first design principle:
+
+    LEARNING CAN INCREASE INTERCEPTION, BUT IT CHANGES HOW SCANNING
+    RESOURCES ARE DISTRIBUTED.
+
+
+======================================================================
+2. MULTI-CHANNEL UCB TEST
+======================================================================
+
+Purpose
+-------
+The second scheduler generation introduced simultaneous scanning of multiple bands.
+The parameter k_channels represents the number of bands that can be scanned at the
+same time.
+
+BeliefUCB combines:
+    - learned Markov belief
+    - UCB exploration
+
+Single-run results:
+
+k = 1
+------
+    RoundRobin:
+        Interception       = 12.8%
+        Reward             = 0.260
+        Delay              = 1.48
+
+    Random:
+        Interception       = 12.5%
+        Reward             = 0.260
+        Delay              = 1.42
+
+    BeliefUCB:
+        Interception       = 27.4%
+        Reward             = 0.562
+        Delay              = 1.39
+
+k = 2
+------
+    RoundRobin:
+        Interception       = 25.1%
+        Reward             = 0.452
+        Delay              = 1.40
+
+    Random:
+        Interception       = 24.9%
+        Reward             = 0.454
+        Delay              = 1.00
+
+    BeliefUCB:
+        Interception       = 54.9%
+        Reward             = 0.902
+        Delay              = 0.90
+
+k = 3
+------
+    RoundRobin:
+        Interception       = 37.5%
+        Reward             = 0.614
+        Delay              = 0.65
+
+    Random:
+        Interception       = 36.8%
+        Reward             = 0.601
+        Delay              = 0.74
+
+    BeliefUCB:
+        Interception       = 68.2%
+        Reward             = 0.939
+        Delay              = 0.64
+
+Interpretation
+--------------
+Increasing k increases the number of opportunities to observe active bands. Therefore
+all three schedulers improve as more bands can be scanned simultaneously.
+
+The important difference is the scale of improvement obtained by the learned scheduler.
+
+For k=1, BeliefUCB reaches 27.4%, compared with 12.8% for RoundRobin. The advantage
+over RoundRobin is approximately +14.6 percentage points.
+
+For k=2, BeliefUCB reaches 54.9%, compared with 25.1% for RoundRobin. The advantage is
+approximately +29.8 percentage points.
+
+For k=3, BeliefUCB reaches 68.2%, compared with 37.5% for RoundRobin. The advantage is
+approximately +30.7 percentage points.
+
+The learned scheduler therefore benefits strongly from additional simultaneous
+channels because it can use its learned priorities to decide which bands deserve the
+available slots.
+
+The reward and interception percentage should not be treated as identical quantities
+in V2. Interception measures active band-time pairs captured, whereas reward is
+constructed from whether at least one scanned band was active during a timestep.
+Multiple active scanned bands therefore affect the two metrics differently.
+
+The result establishes that multi-channel capability and intelligent channel selection
+work together. Simply increasing the number of channels helps, but learned scheduling
+makes better use of those channels.
+
+
+======================================================================
+3. PRI-AWARE SCHEDULER: NORMAL BEACON SCENARIO
+======================================================================
+
+Purpose
+-------
+V3 introduced explicit Pulse Repetition Interval (PRI) awareness.
+
+A periodic emitter produces pulses at predictable intervals. If the scheduler can
+estimate the interval, it can predict future pulse opportunities instead of waiting
+for another random observation.
+
+Scenario:
+    8 bands
+    4000 steps
+    2 Markov communication emitters
+    periodic beacon on bands 2, 5 and 6
+    true period = 12 steps
+    frequency-agile threat
+    k = 1 and k = 2
+
+Single-run results:
+
+k = 1
+------
+    RoundRobin:
+        Interception       = 12.8%
+        Reward             = 0.260
+        Delay              = 1.48
+
+    BeliefUCB:
+        Interception       = 28.7%
+        Reward             = 0.586
+        Delay              = 1.46
+
+    PRIAware:
+        Interception       = 24.9%
+        Reward             = 0.499
+        Delay              = 1.06
+
+k = 2
+------
+    RoundRobin:
+        Interception       = 25.1%
+        Reward             = 0.452
+        Delay              = 1.40
+
+    BeliefUCB:
+        Interception       = 53.5%
+        Reward             = 0.895
+        Delay              = 0.90
+
+    PRIAware:
+        Interception       = 54.2%
+        Reward             = 0.892
+        Delay              = 0.87
+
+PRI diagnostic in this particular run:
+    Bands 2, 5 and 6:
+        Not enough hits observed for the stored PRI estimator to produce a model.
+
+Interpretation
+--------------
+PRI awareness does not automatically improve aggregate interception in every scenario.
+
+At k=1 in this run, PRIAware has lower aggregate interception than BeliefUCB:
+    24.9% versus 28.7%.
+
+However, its average delay is lower:
+    1.06 versus 1.46.
+
+At k=2, PRIAware slightly exceeds BeliefUCB:
+    54.2% versus 53.5%.
+
+Its delay is also slightly lower:
+    0.87 versus 0.90.
+
+The result demonstrates that periodicity information can be useful, but it is not
+universally beneficial. The scheduler must spend scan opportunities to discover and
+track periodic emitters. If the periodic model is not sufficiently established, the
+scheduler can still rely on Markov belief and UCB exploration.
+
+The "not enough hits" diagnostic is important. It means that the explicit PRI estimator
+did not receive the minimum number of observations required to establish a confident
+periodic model. This does not mean the complete scheduler did nothing useful; other
+parts of the scheduler can still contribute through learned belief, UCB exploration,
+and partial periodic scoring.
+
+This test therefore exposed an important distinction:
+
+    A scheduler can have good interception performance without having
+    successfully locked a formal PRI model, and successful PRI estimation
+    is a separate capability that must be tested directly.
+
+
+======================================================================
+4. SPARSE RADAR TEST
+======================================================================
+
+Purpose
+-------
+The sparse-radar scenario was designed specifically to test the ability to detect a
+low-duty-cycle fixed-PRI radar.
+
+Characteristics:
+    - radar on band 5
+    - true PRI = 12 steps
+    - approximately one pulse per cycle
+    - radar is sparse
+    - 2 Markov communication emitters
+    - agile threat
+    - 800-step warm-up
+    - 4000 total steps
+
+Single-seed result, seed 11:
+
+k = 1
+------
+    RoundRobin:
+        Interception       = 11.8%
+        Reward             = 0.135
+        Delay              = 1.37
+
+    BeliefUCB:
+        Interception       = 35.6%
+        Reward             = 0.434
+        Delay              = 0.89
+
+    PRIAware:
+        Interception       = 37.1%
+        Reward             = 0.450
+        Delay              = 0.53
+
+k = 2
+------
+    RoundRobin:
+        Interception       = 23.2%
+        Reward             = 0.256
+        Delay              = 0.76
+
+    BeliefUCB:
+        Interception       = 50.4%
+        Reward             = 0.513
+        Delay              = 0.40
+
+    PRIAware:
+        Interception       = 52.5%
+        Reward             = 0.514
+        Delay             = 0.30
+
+Per-emitter capture in this single run:
+
+BeliefUCB:
+    Radar band 5:
+        Caught = 0 / 267
+        Capture = 0.0%
+
+    Communication emitter 1:
+        Caught = 876 / 1005
+        Capture = 87.2%
+
+    Band 5 PRI:
+        None
+    Confidence:
+        0
+
+PRIAware:
+    Radar band 5:
+        Caught = 267 / 267
+        Capture = 100.0%
+
+    Communication emitter 1:
+        Caught = 794 / 1005
+        Capture = 79.0%
+
+    Band 5 PRI:
+        Estimated = 12.0 steps
+    Confidence:
+        1.00
+
+Interpretation
+--------------
+This test exposes why aggregate interception alone is insufficient for evaluating an
+electronic-warfare scanning strategy.
+
+The sparse radar transmits very rarely. A scheduler that almost always scans the active
+communication emitter can obtain a good aggregate interception percentage while
+completely missing the sparse radar.
+
+That is exactly what happened with BeliefUCB in this run:
+    - communication capture = 87.2%
+    - radar capture = 0%
+
+PRIAware behaved differently:
+    - radar capture = 100%
+    - communication capture = 79.0%
+
+The PRI-aware scheduler identified the temporal structure of the sparse radar and
+predicted its pulses. Once the PRI was learned as 12 steps with confidence 1.00, the
+scheduler could focus its scanning around the predicted pulse times.
+
+The reduction in communication capture demonstrates a resource trade-off. Scan
+capacity is limited. Spending more effort on the sparse radar means fewer opportunities
+to scan the communication emitter.
+
+This is not necessarily a defect. It shows that the scheduler is changing its
+allocation according to threat characteristics.
+
+The sparse-radar test also revealed a major weakness: PRI lock-on was seed-sensitive.
+The estimator required at least 8 observed hits. During warm-up, the expected number of
+confirmed sparse-radar observations was close to this threshold. Consequently, small
+differences in stochastic trajectories could determine whether the scheduler crossed
+the threshold.
+
+This created a chicken-and-egg problem:
+
+    More scans are needed to learn the PRI.
+    But without the PRI, the scheduler has little reason to keep scanning
+    a band that is usually silent.
+
+
+======================================================================
+5. BEACON REGRESSION DIAGNOSIS
+======================================================================
+
+Purpose
+-------
+The beacon diagnosis investigated why PRIAware could outperform BeliefUCB at k=1 in
+some runs but lose at k=2.
+
+The investigation considered:
+    - beacon capture
+    - communication capture
+    - simultaneous selection of beacon bands
+    - double-betting on beacon-adjacent bands
+    - PRI confidence
+    - band 6, which also interacts with the agile threat
+
+Observed multi-seed behaviour from the robustness experiment:
+    Beacon k=1:
+        PRIAware mean       = 27.3%
+        BeliefUCB mean      = 27.7%
+        Difference          = -0.5 pp
+        PRIAware wins       = 4/10
+
+    Beacon k=2:
+        PRIAware mean       = 53.9%
+        BeliefUCB mean      = 54.4%
+        Difference          = -0.5 pp
+        PRIAware wins       = 4/10
+
+Interpretation
+--------------
+The regression is not caused by PRI awareness being completely ineffective. Instead,
+the periodicity score can cause PRIAware to assign high scores to more than one
+beacon-related band at the same time.
+
+With k=1, this means the scheduler can choose one useful periodic band.
+
+With k=2, it can select two periodicity-favoured bands simultaneously. If both slots
+are spent on beacon-adjacent bands, a productive communication band can be displaced.
+
+Band 6 is particularly complicated because it participates in both the periodic
+beacon structure and the agile-threat environment. Observations on such a mixed band
+can make periodic modelling more difficult because not every observed activation
+necessarily belongs to the same underlying periodic source.
+
+The multi-seed result shows that the effect is small in aggregate:
+    approximately -0.5 percentage points versus BeliefUCB.
+
+Therefore, the beacon regression is not evidence that PRIAware fundamentally fails.
+It is evidence that periodicity scoring can interact negatively with multi-channel
+selection when multiple periodic candidates compete for limited scan slots.
+
+The diagnosis established that PRI-aware scheduling needs careful score balancing and
+validation rather than assuming that stronger periodicity always produces better total
+interception.
+
+
+======================================================================
+6. PRI LOCK-ON DIAGNOSIS
+======================================================================
+
+Purpose
+-------
+The lock-on diagnostic directly investigated seed sensitivity on the sparse fixed-PRI
+radar.
+
+Parameters:
+    Total steps       = 4000
+    Warm-up           = 800
+    Radar band        = 5
+    True PRI          = 12
+    Seeds tested      = 40
+
+The diagnostic records:
+    - number of band-5 scans
+    - number of observed radar hits
+    - PRI-estimation attempts
+    - estimated PRI
+    - confidence
+    - final lock status
+    - post-warm-up radar capture
+
+The theoretical reason for seed sensitivity was identified:
+
+    Approximately 100 opportunities to scan band 5 occur during warm-up.
+    Radar is active approximately once every 12 steps.
+    Expected confirmed hits are therefore around 8.3.
+    The PRI estimator requires 8 hits.
+
+Interpretation
+--------------
+The threshold is positioned close to the expected number of observations. This is an
+unstable operating point.
+
+For example, if stochastic emitter behaviour and scheduler decisions result in 9 or
+10 confirmed observations, the model can be fitted. If the same conditions produce 7
+observations, the model cannot be fitted at all.
+
+Once the scheduler fails to establish the model, the sparse radar remains difficult to
+prioritize because it appears inactive during most scans.
+
+This diagnosis showed that the instability was structural rather than merely a
+measurement anomaly.
+
+The correct engineering response was therefore not simply to run more seeds and report
+the average. The lock-on mechanism itself needed an exploration strategy that could
+continue characterizing insufficiently understood bands.
+
+
+======================================================================
+7. MULTI-SEED ROBUSTNESS TEST
+======================================================================
+
+Purpose
+-------
+The robustness suite evaluated the schedulers over multiple random seeds rather than
+relying on a single trajectory.
+
+The direct multi-seed run used 10 seeds for the reported output.
+
+----------------------------------------------------------------------
+7A. ORIGINAL PROTOTYPE
+----------------------------------------------------------------------
+
+    RoundRobin:
+        Mean              = 25.7%
+        Standard deviation= 0.5%
+
+    Random:
+        Mean              = 25.5%
+        Standard deviation= 0.6%
+
+    BeliefScheduler:
+        Mean              = 52.2%
+        Standard deviation= 2.7%
+
+    Belief vs RoundRobin:
+        Mean improvement  = +26.5 pp
+        Difference stdev  = 2.5 pp
+        Wins              = 10/10
+
+Interpretation
+--------------
+This is strong evidence that the learning-based scheduler is not succeeding merely
+because of one favourable random seed.
+
+BeliefScheduler beats RoundRobin on all 10 tested seeds and improves mean interception
+by 26.5 percentage points.
+
+The standard deviation is also small relative to the improvement. The improvement is
+therefore substantially larger than the run-to-run variation.
+
+The first learning-based design is consequently robustly better than the open-loop
+baselines for this synthetic scenario.
+
+
+----------------------------------------------------------------------
+7B. MULTI-CHANNEL BELIEF UCB
+----------------------------------------------------------------------
+
+k = 1:
+    RoundRobin        = 12.5% ± 0.2%
+    Random            = 12.4% ± 0.3%
+    BeliefUCB         = 28.3% ± 1.3%
+    Improvement       = +15.7 pp ± 1.3 pp
+    Wins              = 10/10
+
+k = 2:
+    RoundRobin        = 25.1% ± 0.2%
+    Random            = 24.8% ± 0.4%
+    BeliefUCB         = 54.6% ± 0.6%
+    Improvement       = +29.5 pp ± 0.7 pp
+    Wins              = 10/10
+
+k = 3:
+    RoundRobin        = 37.5% ± 0.2%
+    Random            = 37.4% ± 0.4%
+    BeliefUCB         = 68.5% ± 0.6%
+    Improvement       = +31.1 pp ± 0.6 pp
+    Wins              = 10/10
+
+Interpretation
+--------------
+The multi-seed results confirm the single-run observation.
+
+BeliefUCB wins on every tested seed for k=1, k=2 and k=3.
+
+Increasing the number of simultaneous channels improves interception for all schedulers,
+but the learned scheduler consistently obtains a much larger absolute benefit.
+
+The improvement from k=2 to k=3 is smaller than the improvement from k=1 to k=2. This
+shows diminishing returns as more scanning capacity becomes available.
+
+
+----------------------------------------------------------------------
+7C. BEACON SCENARIO
+----------------------------------------------------------------------
+
+k = 1:
+    RoundRobin        = 12.5% ± 0.2%
+    BeliefUCB         = 27.7% ± 1.0%
+    PRIAware          = 27.3% ± 1.5%
+
+    PRIAware vs Belief:
+        Mean difference = -0.5 pp ± 1.9 pp
+        Wins            = 4/10
+
+k = 2:
+    RoundRobin        = 25.1% ± 0.2%
+    BeliefUCB         = 54.4% ± 0.7%
+    PRIAware          = 53.9% ± 1.0%
+
+    PRIAware vs Belief:
+        Mean difference = -0.5 pp ± 1.2 pp
+        Wins            = 4/10
+
+Interpretation
+--------------
+The multi-seed beacon test shows that PRIAware does not provide a general aggregate
+interception advantage over BeliefUCB for this particular beacon scenario.
+
+The difference is small but consistently negative in the reported mean:
+approximately -0.5 percentage points at both k=1 and k=2.
+
+This supports the earlier diagnosis that periodicity scoring can introduce competition
+between beacon-favoured bands and communication bands.
+
+The result also shows why a specialized feature should not be judged only by whether it
+beats a general-purpose baseline on every scenario. PRI awareness is intended to
+provide a capability that ordinary belief learning does not have: recognizing and
+predicting sparse periodic emitters.
+
+
+----------------------------------------------------------------------
+7D. SPARSE RADAR
+----------------------------------------------------------------------
+
+k = 1:
+    RoundRobin        = 11.7% ± 0.4%
+    BeliefUCB         = 32.5% ± 0.8%
+    PRIAware          = 33.9% ± 3.0%
+
+    PRIAware vs Belief:
+        +1.3 pp ± 3.3 pp
+        Wins = 7/10
+
+k = 2:
+    RoundRobin        = 23.3% ± 0.3%
+    BeliefUCB         = 47.7% ± 1.0%
+    PRIAware          = 52.3% ± 0.8%
+
+    PRIAware vs Belief:
+        +4.6 pp ± 1.3 pp
+        Wins = 10/10
+
+Interpretation
+--------------
+The sparse-radar aggregate metric shows a meaningful benefit from PRI awareness,
+especially at k=2.
+
+At k=1 the gain is relatively small and highly variable.
+
+At k=2 the gain becomes stronger:
+    PRIAware = 52.3%
+    BeliefUCB = 47.7%
+    Difference = +4.6 pp
+
+PRIAware wins all 10 tested seeds at k=2.
+
+However, aggregate interception still does not fully describe the radar result.
+Because the radar is sparse, its contribution to the total number of active
+band-time pairs is small. Per-emitter capture is therefore the more informative metric
+for evaluating whether the radar threat is actually being detected.
+
+
+----------------------------------------------------------------------
+7E. PER-EMITTER SPARSE-RADAR CAPTURE
+----------------------------------------------------------------------
+
+Radar:
+    BeliefUCB:
+        Mean capture      = 0.3%
+        Standard deviation= 0.8%
+        Minimum           = 0%
+        Maximum           = 2.6%
+
+    PRIAware:
+        Mean capture      = 30.0%
+        Standard deviation= 48.3%
+        Minimum           = 0%
+        Maximum           = 100%
+
+Communication emitter 1:
+    BeliefUCB:
+        Mean capture      = 86.9% ± 2.4%
+        Range             = 82.3% to 90.0%
+
+    PRIAware:
+        Mean capture      = 83.1% ± 7.2%
+        Range             = 68.2% to 89.6%
+
+Interpretation
+--------------
+This is one of the most important results in the project.
+
+BeliefUCB has good communication capture but almost completely ignores the sparse
+radar. Its mean radar capture is only 0.3%.
+
+PRIAware increases mean radar capture to 30.0%, but the extremely high 48.3%
+standard deviation shows that the original PRIAware implementation is unstable.
+
+The minimum is 0% and the maximum is 100%. Therefore, the original scheduler can either
+completely fail to characterize the radar or achieve excellent radar capture depending
+on the random trajectory.
+
+At the same time, communication capture decreases from 86.9% to 83.1% on average.
+This confirms that PRI-aware radar characterization consumes some of the scanning
+budget that would otherwise be allocated to the communication emitter.
+
+The central finding is therefore:
+
+    Original PRIAware provides a new sparse-threat detection capability,
+    but that capability is not reliably activated.
+
+
+----------------------------------------------------------------------
+7F. V4 PERSISTENT CHARACTERIZATION FIX
+----------------------------------------------------------------------
+
+Radar:
+    Original PRIAware:
+        Mean capture       = 30.0%
+        Standard deviation = 48.3%
+        Minimum            = 0%
+        Maximum            = 100%
+
+    Persistent PRIAware:
+        Mean capture       = 93.3%
+        Standard deviation = 0.9%
+        Minimum            = 90.6%
+        Maximum            = 93.6%
+
+Communication emitter 1:
+    Original PRIAware:
+        Mean capture       = 83.1% ± 7.2%
+        Range              = 68.2% to 89.6%
+
+    Persistent PRIAware:
+        Mean capture       = 70.1% ± 9.0%
+        Range              = 54.1% to 79.4%
+
+Radar capture greater than 50%:
+    Original PRIAware      = 3/10 seeds
+    Persistent PRIAware    = 10/10 seeds
+
+Interpretation
+--------------
+The persistent characterization mechanism directly addresses the seed-sensitive
+lock-on problem.
+
+Before the fix, the scheduler could stop giving a sparse band sufficient attention
+before it collected the required observations.
+
+PersistentPRIAware introduces a temporary characterization bonus for insufficiently
+characterized bands.
+
+The bonus is bounded in two ways:
+
+    1. It is used while lifetime observed hits are below the required threshold.
+    2. It is also capped by a maximum number of scan attempts.
+
+These bounds are important.
+
+Without the first bound, an aperiodic or otherwise difficult band could continue
+receiving characterization priority indefinitely.
+
+Without the second bound, an always-silent band could consume scanning resources
+forever.
+
+The numerical improvement is substantial:
+
+    Radar capture:
+        30.0% -> 93.3%
+
+    Radar variability:
+        48.3% -> 0.9%
+
+    Seeds above 50% capture:
+        3/10 -> 10/10
+
+This is not merely an average-performance improvement. It is a reliability improvement.
+
+The cost is visible in communication capture:
+
+    83.1% -> 70.1%
+
+Therefore PersistentPRIAware deliberately shifts more scan resources toward the sparse
+radar. The system becomes much more reliable at characterizing the difficult threat,
+but less efficient at capturing the communication emitter.
+
+This result demonstrates a fundamental trade-off between threat characterization and
+immediate exploitation of already well-observed emitters.
+
+
+======================================================================
+8. CONFIDENCE-THRESHOLD TUNING
+======================================================================
+
+Purpose
+-------
+The confidence-scale experiment swept:
+
+    0.25
+    0.20
+    0.17
+    0.15
+    0.12
+    0.10
+
+The purpose was to determine whether the confidence calculation could be adjusted to
+improve beacon performance without damaging k=1 performance or fractional-PRI
+estimation on the PDW scenario.
+
+The test used:
+    - beacon comparisons
+    - PDW fractional-PRI checks
+    - paired comparisons
+    - preservation of correct band-4 PRI lock
+
+Interpretation
+--------------
+The confidence scale controls how quickly model-fit error reduces confidence.
+
+A smaller scale makes the confidence calculation stricter because the same RMSE
+represents a larger fraction of the allowed error.
+
+The test was designed as a constrained selection process rather than choosing the
+scale that maximizes one isolated metric.
+
+A candidate was considered acceptable only if:
+    - k=2 beacon performance improved versus the baseline
+    - k=1 performance did not decrease by more than 0.5 percentage points
+    - PDW band-4 correct-lock performance was preserved
+
+The experiment therefore evaluates confidence calibration as a multi-objective
+parameter rather than treating raw beacon interception as the only goal.
+
+The baseline value was 0.25. Any candidate failing one of the constraints should not
+replace that baseline.
+
+The test establishes that confidence tuning must preserve PRI-estimation correctness,
+not merely improve aggregate interception.
+
+
+======================================================================
+9. OFF-BY-ONE PRI CANDIDATE FIX VALIDATION
+======================================================================
+
+Purpose
+-------
+The PRI estimator was extended to include integer neighbours around candidate periods:
+
+    candidate - 1
+    candidate
+    candidate + 1
+
+This is particularly relevant when the true period is affected by discretization,
+quantization, or small measurement differences.
+
+The validation compared:
+
+    BeliefUCB
+    PreOffByOneFixPRIAware
+    Current PRIAware
+
+Method:
+    30 seeds
+    identical-environment methodology
+    k=1
+    k=2
+
+Results
+-------
+k = 1:
+    BeliefUCB:
+        Mean = 27.9%
+        Stdev= 1.3%
+        Min  = 25.5%
+        Max  = 30.4%
+
+    Pre-fix:
+        Mean = 27.8%
+        Stdev= 1.6%
+        Min  = 24.9%
+        Max  = 31.5%
+
+    Current:
+        Mean = 27.9%
+        Stdev= 1.7%
+        Min  = 24.9%
+        Max  = 31.5%
+
+    Current vs Pre-fix:
+        +0.1 pp ± 0.6 pp
+        Wins = 1/30
+
+    Current vs BeliefUCB:
+        +0.0 pp ± 1.8 pp
+        Wins = 16/30
+
+k = 2:
+    BeliefUCB:
+        Mean = 54.4%
+        Stdev= 0.8%
+
+    Pre-fix:
+        Mean = 53.4%
+        Stdev= 1.5%
+
+    Current:
+        Mean = 53.4%
+        Stdev= 1.5%
+
+    Current vs Pre-fix:
+        approximately +0.0 pp ± 0.1 pp
+        Wins = 1/30
+
+    Current vs BeliefUCB:
+        -1.0 pp ± 1.6 pp
+        Wins = 5/30
+
+Interpretation
+--------------
+The off-by-one candidate expansion has essentially no measurable effect on aggregate
+beacon interception.
+
+At k=1 the isolated improvement is only +0.1 percentage points.
+
+At k=2 the difference is effectively zero.
+
+This is not evidence that the fix is useless. It means its intended benefit is not
+captured by aggregate beacon interception. The modification improves the candidate
+search space available to the PRI estimator, particularly for discretized or
+fractional-period cases.
+
+The experiment successfully isolates this modification from other changes and shows
+that it is not responsible for the observed beacon k=2 regression.
+
+Therefore the off-by-one fix should be interpreted as a model-correctness and
+candidate-coverage improvement rather than an aggregate interception optimization.
+
+
+======================================================================
+10. PLATEAU/JITTER FIX VALIDATION
+======================================================================
+
+Purpose
+-------
+The PRI estimator was modified to better handle bursts of consecutive detections.
+
+A dense consecutive run can make a scheduler appear to observe a much shorter period
+than the true PRI. The plateau fix therefore tracks persistent maximum run length and
+widens the jitter estimate.
+
+The comparison isolated:
+
+    OriginalPRIAware
+        - original candidate selection
+        - no persistent max-run memory
+        - jitter = max(0.5, RMSE)
+
+    PlateauOnlyPRIAware
+        - persistent max-run memory
+        - jitter = max(0.5, RMSE, max_run_ever / 2)
+        - old candidate selection retained
+
+    Current PRIAware
+        - plateau fix
+        - later harmonic/candidate improvements
+
+Validation:
+    30 seeds
+    k=1 and k=2
+    identical beacon scenario structure used by the validation suite
+
+Results
+-------
+k = 1:
+    RoundRobin       = 12.5167%
+    BeliefUCB        = 27.7033%
+    Original         = 28.8733%
+    PlateauOnly      = 27.3300%
+    Current          = 27.3367%
+
+k = 2:
+    RoundRobin       = 25.0067%
+    BeliefUCB        = 54.2167%
+    Original         = 51.6633%
+    PlateauOnly      = 53.2800%
+    Current          = 53.1567%
+
+Interpretation
+--------------
+At k=1, PlateauOnly reduces aggregate interception relative to the Original scheduler:
+
+    Original   = 28.8733%
+    PlateauOnly= 27.3300%
+
+This means the plateau fix itself does not improve the k=1 headline metric.
+
+At k=2, however:
+
+    Original    = 51.6633%
+    PlateauOnly = 53.2800%
+
+The improvement is approximately:
+
+    +1.62 percentage points
+
+This indicates that the plateau fix can improve behaviour in the multi-channel case by
+preventing burst-induced PRI estimates from producing excessively narrow or misleading
+prediction regions.
+
+Current PRIAware remains below BeliefUCB at k=2:
+
+    Current     = 53.1567%
+    BeliefUCB   = 54.2167%
+
+Thus the fixes should not be interpreted as guaranteed raw-interception improvements.
+
+Their primary purpose is to improve the correctness and stability of the PRI model.
+
+This experiment successfully separates the plateau fix from later changes and shows that
+the plateau correction has a measurable benefit under k=2 while not universally
+improving aggregate interception.
+
+
+======================================================================
+11. WARM-UP + DWELL FIX VALIDATION
+======================================================================
+
+Problem
+-------
+When a switch cost is present, a newly selected band may require settling time before
+useful scanning begins.
+
+If warm-up uses one-step dwell while switch cost consumes multiple steps, much of the
+warm-up can be wasted on settling.
+
+The recommended dwell calculation is:
+
+    D = switch_cost + margin
+
+and the scaled warm-up is:
+
+    W_new = W * D / (D - C)
+
+where:
+    W = original warm-up duration
+    D = new dwell
+    C = switch cost
+
+For the tested values:
+
+    switch cost = 1
+    dwell = 3
+    scaled warm-up = 1200 steps
+
+    switch cost = 2
+    dwell = 4
+    scaled warm-up = 1600 steps
+
+
+Five variants were tested:
+
+A. dwell=1, warmup=800, original/broken behaviour
+B. dwell>1, jitter=0, warmup unscaled
+C. dwell>1, jitter=0, warmup scaled
+D. dwell>1, jitter=1, warmup scaled, plain PRIAware
+E. same as D with PersistentPRIAware
+
+Switch costs tested:
+    1
+    2
+
+Seeds:
+    30
+
+Interpretation
+--------------
+The purpose of the scaling formula is to preserve approximately the same amount of
+effective observation time after accounting for switching.
+
+Without scaling, increasing dwell alone changes the number of band visits during the
+warm-up period. With switch costs, some of those visits can also be consumed by
+settling.
+
+The validated approach therefore combines:
+    - increased dwell
+    - jitter
+    - scaled warm-up
+    - explicit switch-lead handling
+
+The test showed that this approach substantially improves sparse-radar warm-up
+reliability under switch cost.
+
+The underlying reason is straightforward: the scheduler needs enough actual observation
+opportunities, not merely enough elapsed warm-up time.
+
+A cost-free sanity check also produced the expected baseline behaviour, with the
+headline sparse-radar capture around 100% and communication capture around 79%.
+
+The fix is therefore technically justified for the sparse-radar warm-up problem.
+
+
+======================================================================
+12. BEACON SWITCH-COST / DWELL GENERALIZATION TEST
+======================================================================
+
+Purpose
+-------
+The warm-up/dwell correction was tested to determine whether it would generalize from
+the sparse-radar scenario to the normal multi-band beacon scenario.
+
+Important observation:
+    The beacon suite originally uses warmup_steps = 0.
+
+The experiment tested:
+    - switch costs 0, 1 and 2
+    - k=1 and k=2
+    - plain PRIAware with warmup=0
+    - PRIAware with dwell/jitter/lead/warm-up fix
+    - PersistentPRIAware with the fix
+
+Interpretation
+--------------
+The warm-up/dwell fix did NOT generalize to the beacon scenario.
+
+This is an important negative result.
+
+The sparse-radar scenario had a real warm-up phase that was necessary for PRI discovery.
+The beacon scenario did not.
+
+Adding an artificial warm-up/dwell phase to the beacon experiment therefore changes the
+experiment itself rather than simply correcting a pre-existing timing mismatch.
+
+The results showed that plain PRIAware with warmup=0 outperformed the "+fix" variants
+for beacon interception and lock-on in the tested k=1/k=2 and switch-cost cases.
+
+The mechanism-isolation test showed that the artificial warm-up/dwell phase itself
+caused the regression, while switch-lead adjustment was comparatively close to neutral.
+
+Conclusion:
+    The warm-up/dwell fix is scenario-specific.
+    It solves the sparse-radar warm-up problem.
+    It should not be blindly applied to scenarios that originally have no warm-up phase.
+
+This is an important validation because it prevents an apparently successful fix from
+being generalized beyond the conditions under which it was designed.
+
+
+======================================================================
+13. SWITCH-COST COMPARISON
+======================================================================
+
+Purpose
+-------
+This experiment introduced explicit switch-cost realism.
+
+When the scheduler changes bands, the receiver spends a specified number of steps
+settling. During those steps:
+    - the scan is wasted
+    - no hit credit is given
+    - no scheduler update is performed
+
+Switch costs tested:
+    0
+    1
+    2
+    4
+
+Schedulers:
+    RoundRobin
+    Random
+    BeliefUCB
+    PRIAware in the sparse-radar test
+
+Interpretation
+--------------
+Switch cost creates a direct trade-off between agility and persistence.
+
+RoundRobin changes bands frequently, so it is especially exposed to repeated settling
+losses.
+
+Learned schedulers can camp on useful bands for longer periods and therefore can be
+less affected by switching overhead.
+
+However, PRI-aware scheduling creates another interaction: a predicted pulse may occur
+while the receiver is still settling after a band change.
+
+A detailed k=1, cost=1 analysis found that a large fraction of band-5 visits were fresh
+switches:
+
+    267 out of 285 band-5 visits were fresh switches.
+
+This explains why a scheduler can have a correct PRI prediction but still fail to
+capture the pulse. Temporal prediction alone is not sufficient when receiver switching
+has non-zero physical cost.
+
+The switch-cost experiment therefore adds an important realism constraint:
+
+    Correctly predicting WHEN an emitter will transmit is not enough.
+    The receiver must also be on the correct band and out of its settling state
+    at that time.
+
+
+======================================================================
+14. SETTLING + IDENTICAL-ENVIRONMENT INTERACTION TEST
+======================================================================
+
+Purpose
+-------
+A multi-seed comparison convention had previously seeded the random generator once and
+then executed schedulers sequentially.
+
+That convention is useful for aggregate robustness testing but can make a single-seed
+comparison harder to interpret because later schedulers may consume random numbers
+after earlier schedulers have already changed the RNG state.
+
+The identical-environment test addresses this by resetting the seed immediately before
+each scheduler run.
+
+For the beacon scenario with warmup=0:
+    - BeliefUCB
+    - OriginalPRIAware
+    - PlateauOnlyPRIAware
+    - CurrentPRIAware
+
+do not consume scheduler randomness in the same way as the stochastic environment
+generation, so resetting the seed allows a cleaner paired comparison.
+
+Interpretation
+--------------
+This experiment improves causal interpretation of small differences.
+
+If two schedulers are evaluated on different stochastic trajectories, a small difference
+in interception can be caused by the environment rather than the scheduler.
+
+By resetting the seed immediately before each run, the comparison makes the stochastic
+environment trajectory substantially more comparable.
+
+This methodology is especially useful for isolating small fixes such as:
+    - plateau handling
+    - harmonic candidate selection
+    - off-by-one candidate expansion
+
+It does not invalidate the earlier multi-seed suite. The two approaches answer different
+questions:
+
+    Sequential multi-seed runs:
+        Measure robustness under the project's established experiment convention.
+
+    Identical-environment paired runs:
+        Better isolate whether a particular scheduler modification caused
+        a per-seed performance difference.
+
+
+======================================================================
+15. SYNTHETIC TURING / PDW MULTI-SEED VALIDATION
+======================================================================
+
+Purpose
+-------
+The PDW test converts pulse descriptor words into the same band-status interface used
+by the scheduler.
+
+Synthetic fixed-frequency emitters:
+
+    Band 1:
+        Frequency = 2400 MHz
+        PRI      = 1000 us
+
+    Band 4:
+        Frequency = 9200 MHz
+        PRI      = 650 us
+
+    Band 6:
+        Frequency = 14300 MHz
+        PRI      = 1500 us
+
+Two agile frequency-hopping emitters are also included as negative/control cases.
+
+With dwell = 20 us, band 4 has a fractional step period of approximately:
+
+    650 / 20 = 32.5 steps
+
+The scheduler therefore has to handle a non-integer PRI in discrete time.
+
+Schedulers compared:
+    BeliefUCB
+    PlateauOnly
+    Current PRIAware
+    PersistentPRIAware
+
+The checked PDW results file contained 10 seeds, despite the script's default being
+20 seeds. Therefore the file should be interpreted as a 10-seed recorded run.
+
+Results from that recorded file:
+
+BeliefUCB:
+    Mean interception = 17.88%
+    Stdev              = 1.876%
+    Min                = 17.1%
+    Max                = 23.2%
+    PRI verdicts       = none, because BeliefUCB does not maintain a PRI model
+
+PlateauOnly:
+    Mean interception = 23.11%
+    Stdev              = 1.165%
+    Band 1             = NO LOCK, 10/10
+    Band 4             = CORRECT, 7/10
+    Band 4             = NO LOCK, 3/10
+    Band 6             = NO LOCK, 10/10
+
+Current PRIAware:
+    Mean interception = 27.03%
+    Stdev              = 2.130%
+    Band 1             = NO LOCK, 10/10
+    Band 4             = CORRECT, 10/10
+    Band 6             = CORRECT, 5/10
+    Band 6             = NO LOCK, 5/10
+
+PersistentPRIAware:
+    Mean interception = 26.48%
+    Stdev              = 3.116%
+    Band 1             = NO LOCK, 10/10
+    Band 4             = CORRECT, 9/10
+    Band 6             = CORRECT, 7/10
+    Band 6             = NO LOCK, 3/10
+
+No HARMONIC or WRONG classifications occurred in this recorded file.
+
+Interpretation
+--------------
+The PDW experiment separates general interception from PRI-estimation capability.
+
+BeliefUCB has the lowest interception among the four tested schedulers in the recorded
+run, but it does not attempt explicit PRI modelling.
+
+PlateauOnly improves interception to 23.11% and correctly identifies band 4 in 7 of
+10 seeds.
+
+Current PRIAware improves further to 27.03% and identifies the fractional band-4 PRI
+correctly in all 10 recorded seeds.
+
+This is important because band 4's true period is approximately 32.5 discrete dwell
+steps. A candidate-selection mechanism restricted to coarse integer periods can have
+difficulty representing this value. The improved candidate/refinement logic can
+represent fractional periods.
+
+PersistentPRIAware has slightly lower aggregate interception than Current PRIAware in
+this recorded run, but improves band-6 correct-lock frequency from 5/10 to 7/10.
+
+Band 1 remaining NO LOCK in all tested schedulers shows that successful PRI estimation
+is not guaranteed simply because an emitter has a fixed PRI. The amount and timing of
+observations, candidate structure, and competition for scanning resources all matter.
+
+The absence of HARMONIC and WRONG classifications in this recorded file is also
+significant. Failures were primarily NO LOCK rather than systematic convergence to an
+incorrect harmonic.
+
+
+======================================================================
+16. TURING-DATASET INTEGRATION TEST
+======================================================================
+
+Purpose
+-------
+The integration script provides the interface for testing the schedulers against a real
+pulse-train HDF5 dataset when the required Turing/TSRD package and file are available.
+
+The loader attempts to load:
+    PulseTrain.load(h5_path)
+
+If the real dataset/package is unavailable, it falls back to the synthetic PDW
+generator.
+
+The environment converts:
+    - time of arrival (TOA)
+    - carrier frequency (CF)
+
+into:
+    - discrete dwell-time steps
+    - frequency bands
+
+The resulting environment exposes the same band-status interface expected by the
+schedulers.
+
+Schedulers supported:
+    RoundRobin
+    Random
+    BeliefUCB
+    PRIAware
+    PersistentPRIAware
+
+The integration command accepts configuration for:
+    - HDF5 path
+    - number of bands
+    - dwell time
+    - number of simultaneous channels
+    - warm-up
+    - UCB coefficient
+    - confidence scale
+    - priorities
+    - random seed
+    - switch cost
+    - switch lead
+    - warm-up dwell and jitter
+    - automatic dwell selection
+
+Interpretation
+--------------
+The integration test demonstrates that the scheduling architecture can consume PDW
+data through a replay environment without changing the scheduler interface.
+
+This is an important architectural property:
+
+    PDW stream
+        ->
+    band/time representation
+        ->
+    common environment interface
+        ->
+    interchangeable schedulers
+
+The real-data integration path is present, but the automated experiment reported here
+did not establish performance on the actual Turing/TSRD HDF5 dataset.
+
+The synthetic PDW tests therefore validate the algorithmic pipeline and its PRI
+handling, while actual-dataset performance remains a separate validation requirement.
+
+Another limitation is that the real PDW labels and metadata are loaded but are not used
+by the scheduler for interception scoring. The current metrics are based on band-level
+capture, not emitter deinterleaving accuracy or classification accuracy.
+
+
+======================================================================
+17. CONSOLIDATED RESULTS
+======================================================================
+
+The project produced several distinct conclusions.
+
+A. LEARNING VS OPEN-LOOP SCANNING
+---------------------------------
+The original prototype consistently shows a large advantage for learned scanning.
+
+Multi-seed result:
+    BeliefScheduler = 52.2%
+    RoundRobin      = 25.7%
+    Difference      = +26.5 pp
+    Wins            = 10/10
+
+Interpretation:
+    Learning emitter state transitions substantially improves interception over
+    non-learning baselines in the tested synthetic environment.
+
+
+B. MULTI-CHANNEL SCANNING
+-------------------------
+BeliefUCB remains strongly superior to open-loop methods:
+
+    k=1:
+        BeliefUCB = 28.3%
+        RoundRobin= 12.5%
+
+    k=2:
+        BeliefUCB = 54.6%
+        RoundRobin= 25.1%
+
+    k=3:
+        BeliefUCB = 68.5%
+        RoundRobin= 37.5%
+
+Interpretation:
+    Additional simultaneous channels improve all schedulers, but learned prioritization
+    makes particularly effective use of additional scan capacity.
+
+
+C. PRI AWARENESS
+----------------
+PRI awareness does not universally improve aggregate interception.
+
+Beacon:
+    PRIAware is approximately 0.5 pp below BeliefUCB at both k=1 and k=2 in the
+    reported 10-seed run.
+
+Sparse radar:
+    PRIAware improves aggregate interception by:
+        +1.3 pp at k=1
+        +4.6 pp at k=2
+
+Interpretation:
+    PRI awareness is specialized. Its strongest value appears when the emitter is
+    sparse and therefore difficult for ordinary belief-based scheduling to discover.
+
+
+D. SPARSE-THREAT CAPTURE
+------------------------
+The most significant qualitative improvement appears in per-emitter radar capture.
+
+Original:
+    PRIAware radar capture = 30.0% ± 48.3%
+
+Persistent:
+    Radar capture = 93.3% ± 0.9%
+
+Interpretation:
+    Persistent characterization converts a highly seed-sensitive capability into a
+    reliable one.
+
+
+E. COST OF CHARACTERIZATION
+---------------------------
+Communication capture:
+
+    Original PRIAware     = 83.1% ± 7.2%
+    Persistent PRIAware   = 70.1% ± 9.0%
+
+Interpretation:
+    The improvement in sparse-radar capture is obtained by reallocating scanning
+    resources. Persistent characterization is therefore not free.
+
+
+F. PRI MODEL CORRECTNESS
+------------------------
+The PDW experiment demonstrates improved fractional PRI handling.
+
+For band 4:
+    True PRI = approximately 650 us
+    Dwell    = 20 us
+    Discrete PRI = approximately 32.5 steps
+
+Recorded 10-seed results:
+    PlateauOnly   = 7/10 correct
+    Current       = 10/10 correct
+    Persistent    = 9/10 correct
+
+Interpretation:
+    The improved candidate/refinement mechanism provides better support for fractional
+    discrete-time PRI estimation.
+
+
+G. OFF-BY-ONE FIX
+-----------------
+Beacon aggregate effect:
+
+    k=1:
+        +0.1 pp isolated improvement
+
+    k=2:
+        approximately 0.0 pp
+
+Interpretation:
+    The change primarily improves PRI candidate coverage rather than aggregate beacon
+    interception.
+
+
+H. PLATEAU FIX
+--------------
+At k=2:
+
+    Original      = 51.6633%
+    PlateauOnly   = 53.2800%
+
+Improvement:
+    approximately +1.62 pp
+
+Interpretation:
+    The plateau correction can reduce adverse effects of burst-like consecutive
+    detections on PRI estimation, particularly under multi-channel scanning.
+
+
+I. WARM-UP / DWELL FIX
+----------------------
+For sparse radar with switch costs:
+
+    cost=1 -> dwell=3 -> scaled warm-up=1200
+    cost=2 -> dwell=4 -> scaled warm-up=1600
+
+Interpretation:
+    Warm-up duration must be adjusted when dwell and switch costs change. The fix
+    improves the amount of effective observation available for sparse-radar
+    characterization.
+
+
+J. SWITCH-COST INTERACTION
+--------------------------
+Switch cost can prevent a correct PRI prediction from becoming a successful capture.
+
+Observed:
+    267/285 band-5 visits were fresh switches in one detailed cost=1 analysis.
+
+Interpretation:
+    Receiver state matters. Prediction must be synchronized with settling and dwell
+    behaviour.
+
+
+======================================================================
+18. KEY FAILURE MODES IDENTIFIED
+======================================================================
+
+1. OPEN-LOOP IGNORANCE
+----------------------
+RoundRobin and Random do not exploit temporal emitter behaviour.
+
+Consequence:
+    They remain near baseline interception even when emitter behaviour is learnable.
+
+
+2. SPARSE-EMITTER INVISIBILITY
+------------------------------
+A sparse radar can appear inactive for long periods.
+
+Consequence:
+    Belief-based scheduling can deprioritize it and miss nearly all of its pulses.
+
+
+3. THRESHOLD-INDUCED LOCK-ON INSTABILITY
+-----------------------------------------
+The PRI estimator requires a minimum number of hits.
+
+When the expected warm-up observations are close to that threshold, small random
+differences determine whether lock occurs.
+
+Consequence:
+    Original PRIAware has very high seed-to-seed radar capture variation.
+
+
+4. MULTI-CHANNEL PERIODICITY OVERFOCUS
+--------------------------------------
+Multiple PRI-favoured bands can simultaneously occupy the available channel slots.
+
+Consequence:
+    Productive communication bands can be displaced.
+
+
+5. BURST / PLATEAU MISINTERPRETATION
+------------------------------------
+Consecutive observations can distort period estimation.
+
+Consequence:
+    A periodic model can become too narrow or otherwise misleading.
+
+
+6. SWITCH-COST LOSS
+-------------------
+A band change can consume several steps before useful scanning occurs.
+
+Consequence:
+    A scheduler can predict a pulse correctly but still be settling when the pulse
+    arrives.
+
+
+7. UNBOUNDED CHARACTERIZATION
+-----------------------------
+Giving unknown bands unlimited exploration priority can waste scan capacity.
+
+Consequence:
+    A silent or aperiodic band can absorb resources indefinitely.
+
+The PersistentPRIAware solution uses both:
+    - a hit-based characterization limit
+    - a maximum scan-attempt limit
+
+
+======================================================================
+19. WHAT EACH VERSION CONTRIBUTES
+======================================================================
+
+V1 - scan_scheduler_prototype.py
+--------------------------------
+Contribution:
+    Establishes basic spectrum scanning and learned Markov belief.
+
+Result:
+    Learning substantially improves interception over open-loop scanning.
+
+
+V2 - scan_scheduler_v2.py
+-------------------------
+Contribution:
+    Adds multi-channel scheduling, UCB exploration, dwell and switch-cost concepts.
+
+Result:
+    BeliefUCB scales strongly with additional simultaneous channels.
+
+
+V3 - scan_scheduler_v3_pri.py
+-----------------------------
+Contribution:
+    Adds explicit periodic emitter modelling and PRI prediction.
+
+Result:
+    Provides specialized capability for periodic and sparse emitters, but initially
+    suffers from seed-sensitive lock-on.
+
+
+V4 - scan_scheduler_v4_persistent.py
+------------------------------------
+Contribution:
+    Adds persistent characterization for insufficiently understood bands.
+
+Result:
+    Converts unstable sparse-radar lock-on into reliable radar capture.
+
+
+Validation scripts
+------------------
+Contribution:
+    Test individual fixes rather than assuming every code modification is beneficial.
+
+Validated areas:
+    - beacon regression
+    - PRI lock-on
+    - confidence scale
+    - off-by-one candidate expansion
+    - plateau/jitter handling
+    - warm-up/dwell timing
+    - switch-cost interaction
+    - PDW fractional PRI handling
+    - multi-seed robustness
+
+
+======================================================================
+20. LIMITATIONS OF THE CURRENT RESULTS
+======================================================================
+
+1. SYNTHETIC SCENARIOS
+----------------------
+Most scheduler comparisons use simulated emitters. Their statistical behaviour is
+controlled by the project's scenario definitions.
+
+Therefore the results demonstrate algorithmic behaviour under those scenarios rather
+than proving performance against every real-world emitter environment.
+
+
+2. ACTUAL TURING DATASET NOT YET VALIDATED
+------------------------------------------
+The PDW validation used the synthetic Turing stand-in.
+
+A real HDF5 validation remains necessary for claims about performance on the actual
+Turing/TSRD dataset.
+
+
+3. BAND-LEVEL INTERCEPTION METRIC
+---------------------------------
+The current PDW integration measures whether a frequency band containing PDWs was
+successfully scanned.
+
+It does not currently measure:
+    - emitter deinterleaving accuracy
+    - pulse-to-emitter assignment accuracy
+    - emitter classification accuracy
+    - identification accuracy
+
+
+4. RANDOMNESS AND EXPERIMENT METHODOLOGY
+----------------------------------------
+Some original multi-seed suites run schedulers sequentially after one seed reset.
+This is appropriate for robustness testing under that experiment convention but is
+not the strongest possible methodology for isolating tiny per-scheduler differences.
+
+Identical-environment paired testing was added for that purpose.
+
+
+5. AGGREGATE INTERCEPTION CAN HIDE THREAT-SPECIFIC FAILURE
+-----------------------------------------------------------
+A scheduler can achieve high aggregate interception by concentrating on frequently
+active communication emitters while completely missing a sparse radar.
+
+Therefore per-emitter capture is necessary for evaluating sparse-threat performance.
+
+
+======================================================================
+21. FINAL TECHNICAL CONCLUSION
+======================================================================
+
+The complete test campaign demonstrates a clear progression in intelligent spectrum
+scanning.
+
+The initial open-loop schedulers provide a baseline around 25% interception in the
+prototype scenario. Introducing learned Markov behaviour approximately doubles
+interception, and the multi-channel UCB scheduler maintains a large advantage as
+simultaneous scanning capacity increases.
+
+PRI awareness adds a different capability rather than simply increasing the headline
+interception score in every scenario. Its main advantage is the ability to recognize
+and exploit temporal structure from sparse periodic emitters that ordinary belief
+learning tends to ignore.
+
+The sparse-radar experiments exposed a significant reliability problem in the original
+PRI-aware scheduler. Its mean radar capture was only about 30%, with a very large
+48.3% standard deviation and outcomes ranging from 0% to 100%.
+
+The PersistentPRIAware modification addresses this problem by explicitly allocating
+bounded characterization effort to insufficiently understood bands. The resulting
+radar capture increased to approximately 93.3%, with standard deviation reduced to
+0.9%, and all 10 tested seeds achieved greater than 50% radar capture.
+
+This improvement has a measurable cost: communication-emitter capture decreased from
+approximately 83.1% to 70.1%. The result demonstrates that intelligent scanning is a
+resource-allocation problem rather than a single-metric optimization problem.
+
+The validation experiments also establish that individual fixes have different roles.
+The off-by-one candidate expansion has negligible effect on beacon interception but
+improves candidate coverage for PRI estimation. The plateau fix improves the k=2
+beacon result relative to the original PRI implementation by about 1.62 percentage
+points. The warm-up/dwell correction solves a timing problem associated with sparse
+radar under switch cost, but deliberately applying that mechanism to the beacon
+scenario causes regression because the beacon scenario did not originally use a
+warm-up phase.
+
+Switch-cost testing further demonstrates that temporal prediction must account for
+receiver state. A predicted pulse cannot be captured if the receiver is still settling
+after a band switch.
+
+The synthetic PDW validation demonstrates that the architecture can process pulse
+descriptor data through a common band/time environment and that the current PRI
+estimator can correctly handle a fractional discrete-time PRI. In the recorded
+10-seed PDW results, band 4 correct-lock performance improved from 7/10 with the
+plateau-only version to 10/10 with the current PRIAware version.
+
+Overall, the experiments support the following project conclusion:
+
+    The proposed architecture successfully progresses from static spectrum scanning
+    toward adaptive, learning-based, multi-channel, PRI-aware spectrum surveillance.
+
+    The strongest demonstrated contribution is not simply higher aggregate
+    interception. It is the ability to detect and reliably characterize sparse,
+    periodic threats while explicitly measuring and managing the scanning-resource
+    trade-off.
+
+    Persistent characterization is the key reliability improvement demonstrated by
+    the test campaign.
+
+The remaining major validation step is testing the complete scheduler pipeline against
+the actual Turing/TSRD HDF5 pulse-train dataset and, where labels are available,
+measuring emitter-level deinterleaving and identification performance in addition to
+band-level interception.
