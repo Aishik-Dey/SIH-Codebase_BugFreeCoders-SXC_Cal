@@ -1,0 +1,901 @@
+suite,scheduler,seed,interception_ratio
+plateau_validation_k1,RoundRobin (open-loop),1,0.123
+plateau_validation_k1,RoundRobin (open-loop),2,0.12
+plateau_validation_k1,RoundRobin (open-loop),3,0.126
+plateau_validation_k1,RoundRobin (open-loop),4,0.125
+plateau_validation_k1,RoundRobin (open-loop),5,0.125
+plateau_validation_k1,RoundRobin (open-loop),6,0.126
+plateau_validation_k1,RoundRobin (open-loop),7,0.128
+plateau_validation_k1,RoundRobin (open-loop),8,0.125
+plateau_validation_k1,RoundRobin (open-loop),9,0.127
+plateau_validation_k1,RoundRobin (open-loop),10,0.127
+plateau_validation_k1,RoundRobin (open-loop),11,0.127
+plateau_validation_k1,RoundRobin (open-loop),12,0.124
+plateau_validation_k1,RoundRobin (open-loop),13,0.122
+plateau_validation_k1,RoundRobin (open-loop),14,0.123
+plateau_validation_k1,RoundRobin (open-loop),15,0.125
+plateau_validation_k1,RoundRobin (open-loop),16,0.127
+plateau_validation_k1,RoundRobin (open-loop),17,0.124
+plateau_validation_k1,RoundRobin (open-loop),18,0.126
+plateau_validation_k1,RoundRobin (open-loop),19,0.126
+plateau_validation_k1,RoundRobin (open-loop),20,0.124
+plateau_validation_k1,RoundRobin (open-loop),21,0.125
+plateau_validation_k1,RoundRobin (open-loop),22,0.126
+plateau_validation_k1,RoundRobin (open-loop),23,0.124
+plateau_validation_k1,RoundRobin (open-loop),24,0.13
+plateau_validation_k1,RoundRobin (open-loop),25,0.124
+plateau_validation_k1,RoundRobin (open-loop),26,0.125
+plateau_validation_k1,RoundRobin (open-loop),27,0.124
+plateau_validation_k1,RoundRobin (open-loop),28,0.126
+plateau_validation_k1,RoundRobin (open-loop),29,0.124
+plateau_validation_k1,RoundRobin (open-loop),30,0.127
+plateau_validation_k1,BeliefUCB (Markov-only),1,0.272
+plateau_validation_k1,BeliefUCB (Markov-only),2,0.292
+plateau_validation_k1,BeliefUCB (Markov-only),3,0.268
+plateau_validation_k1,BeliefUCB (Markov-only),4,0.264
+plateau_validation_k1,BeliefUCB (Markov-only),5,0.28
+plateau_validation_k1,BeliefUCB (Markov-only),6,0.281
+plateau_validation_k1,BeliefUCB (Markov-only),7,0.287
+plateau_validation_k1,BeliefUCB (Markov-only),8,0.265
+plateau_validation_k1,BeliefUCB (Markov-only),9,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),10,0.288
+plateau_validation_k1,BeliefUCB (Markov-only),11,0.29
+plateau_validation_k1,BeliefUCB (Markov-only),12,0.293
+plateau_validation_k1,BeliefUCB (Markov-only),13,0.299
+plateau_validation_k1,BeliefUCB (Markov-only),14,0.284
+plateau_validation_k1,BeliefUCB (Markov-only),15,0.277
+plateau_validation_k1,BeliefUCB (Markov-only),16,0.278
+plateau_validation_k1,BeliefUCB (Markov-only),17,0.274
+plateau_validation_k1,BeliefUCB (Markov-only),18,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),19,0.273
+plateau_validation_k1,BeliefUCB (Markov-only),20,0.263
+plateau_validation_k1,BeliefUCB (Markov-only),21,0.276
+plateau_validation_k1,BeliefUCB (Markov-only),22,0.283
+plateau_validation_k1,BeliefUCB (Markov-only),23,0.261
+plateau_validation_k1,BeliefUCB (Markov-only),24,0.286
+plateau_validation_k1,BeliefUCB (Markov-only),25,0.271
+plateau_validation_k1,BeliefUCB (Markov-only),26,0.268
+plateau_validation_k1,BeliefUCB (Markov-only),27,0.269
+plateau_validation_k1,BeliefUCB (Markov-only),28,0.257
+plateau_validation_k1,BeliefUCB (Markov-only),29,0.281
+plateau_validation_k1,BeliefUCB (Markov-only),30,0.281
+plateau_validation_k1,Original (pre-both-fixes),1,0.301
+plateau_validation_k1,Original (pre-both-fixes),2,0.277
+plateau_validation_k1,Original (pre-both-fixes),3,0.29
+plateau_validation_k1,Original (pre-both-fixes),4,0.238
+plateau_validation_k1,Original (pre-both-fixes),5,0.312
+plateau_validation_k1,Original (pre-both-fixes),6,0.309
+plateau_validation_k1,Original (pre-both-fixes),7,0.297
+plateau_validation_k1,Original (pre-both-fixes),8,0.315
+plateau_validation_k1,Original (pre-both-fixes),9,0.291
+plateau_validation_k1,Original (pre-both-fixes),10,0.29
+plateau_validation_k1,Original (pre-both-fixes),11,0.302
+plateau_validation_k1,Original (pre-both-fixes),12,0.287
+plateau_validation_k1,Original (pre-both-fixes),13,0.29
+plateau_validation_k1,Original (pre-both-fixes),14,0.284
+plateau_validation_k1,Original (pre-both-fixes),15,0.321
+plateau_validation_k1,Original (pre-both-fixes),16,0.272
+plateau_validation_k1,Original (pre-both-fixes),17,0.28
+plateau_validation_k1,Original (pre-both-fixes),18,0.309
+plateau_validation_k1,Original (pre-both-fixes),19,0.299
+plateau_validation_k1,Original (pre-both-fixes),20,0.275
+plateau_validation_k1,Original (pre-both-fixes),21,0.262
+plateau_validation_k1,Original (pre-both-fixes),22,0.268
+plateau_validation_k1,Original (pre-both-fixes),23,0.286
+plateau_validation_k1,Original (pre-both-fixes),24,0.293
+plateau_validation_k1,Original (pre-both-fixes),25,0.269
+plateau_validation_k1,Original (pre-both-fixes),26,0.266
+plateau_validation_k1,Original (pre-both-fixes),27,0.303
+plateau_validation_k1,Original (pre-both-fixes),28,0.287
+plateau_validation_k1,Original (pre-both-fixes),29,0.278
+plateau_validation_k1,Original (pre-both-fixes),30,0.311
+plateau_validation_k1,PlateauOnly (fix 1 only),1,0.295
+plateau_validation_k1,PlateauOnly (fix 1 only),2,0.281
+plateau_validation_k1,PlateauOnly (fix 1 only),3,0.269
+plateau_validation_k1,PlateauOnly (fix 1 only),4,0.247
+plateau_validation_k1,PlateauOnly (fix 1 only),5,0.27
+plateau_validation_k1,PlateauOnly (fix 1 only),6,0.276
+plateau_validation_k1,PlateauOnly (fix 1 only),7,0.26
+plateau_validation_k1,PlateauOnly (fix 1 only),8,0.289
+plateau_validation_k1,PlateauOnly (fix 1 only),9,0.253
+plateau_validation_k1,PlateauOnly (fix 1 only),10,0.307
+plateau_validation_k1,PlateauOnly (fix 1 only),11,0.264
+plateau_validation_k1,PlateauOnly (fix 1 only),12,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),13,0.277
+plateau_validation_k1,PlateauOnly (fix 1 only),14,0.263
+plateau_validation_k1,PlateauOnly (fix 1 only),15,0.245
+plateau_validation_k1,PlateauOnly (fix 1 only),16,0.28
+plateau_validation_k1,PlateauOnly (fix 1 only),17,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),18,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),19,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),20,0.29
+plateau_validation_k1,PlateauOnly (fix 1 only),21,0.278
+plateau_validation_k1,PlateauOnly (fix 1 only),22,0.268
+plateau_validation_k1,PlateauOnly (fix 1 only),23,0.266
+plateau_validation_k1,PlateauOnly (fix 1 only),24,0.269
+plateau_validation_k1,PlateauOnly (fix 1 only),25,0.26
+plateau_validation_k1,PlateauOnly (fix 1 only),26,0.284
+plateau_validation_k1,PlateauOnly (fix 1 only),27,0.272
+plateau_validation_k1,PlateauOnly (fix 1 only),28,0.283
+plateau_validation_k1,PlateauOnly (fix 1 only),29,0.261
+plateau_validation_k1,PlateauOnly (fix 1 only),30,0.256
+plateau_validation_k1,Current (both fixes),1,0.257
+plateau_validation_k1,Current (both fixes),2,0.289
+plateau_validation_k1,Current (both fixes),3,0.28
+plateau_validation_k1,Current (both fixes),4,0.276
+plateau_validation_k1,Current (both fixes),5,0.265
+plateau_validation_k1,Current (both fixes),6,0.267
+plateau_validation_k1,Current (both fixes),7,0.25
+plateau_validation_k1,Current (both fixes),8,0.254
+plateau_validation_k1,Current (both fixes),9,0.271
+plateau_validation_k1,Current (both fixes),10,0.274
+plateau_validation_k1,Current (both fixes),11,0.275
+plateau_validation_k1,Current (both fixes),12,0.29
+plateau_validation_k1,Current (both fixes),13,0.293
+plateau_validation_k1,Current (both fixes),14,0.284
+plateau_validation_k1,Current (both fixes),15,0.271
+plateau_validation_k1,Current (both fixes),16,0.276
+plateau_validation_k1,Current (both fixes),17,0.264
+plateau_validation_k1,Current (both fixes),18,0.247
+plateau_validation_k1,Current (both fixes),19,0.279
+plateau_validation_k1,Current (both fixes),20,0.266
+plateau_validation_k1,Current (both fixes),21,0.277
+plateau_validation_k1,Current (both fixes),22,0.283
+plateau_validation_k1,Current (both fixes),23,0.278
+plateau_validation_k1,Current (both fixes),24,0.293
+plateau_validation_k1,Current (both fixes),25,0.272
+plateau_validation_k1,Current (both fixes),26,0.278
+plateau_validation_k1,Current (both fixes),27,0.279
+plateau_validation_k1,Current (both fixes),28,0.257
+plateau_validation_k1,Current (both fixes),29,0.28
+plateau_validation_k1,Current (both fixes),30,0.276
+plateau_validation_k2,RoundRobin (open-loop),1,0.249
+plateau_validation_k2,RoundRobin (open-loop),2,0.251
+plateau_validation_k2,RoundRobin (open-loop),3,0.251
+plateau_validation_k2,RoundRobin (open-loop),4,0.248
+plateau_validation_k2,RoundRobin (open-loop),5,0.251
+plateau_validation_k2,RoundRobin (open-loop),6,0.252
+plateau_validation_k2,RoundRobin (open-loop),7,0.251
+plateau_validation_k2,RoundRobin (open-loop),8,0.249
+plateau_validation_k2,RoundRobin (open-loop),9,0.253
+plateau_validation_k2,RoundRobin (open-loop),10,0.251
+plateau_validation_k2,RoundRobin (open-loop),11,0.249
+plateau_validation_k2,RoundRobin (open-loop),12,0.249
+plateau_validation_k2,RoundRobin (open-loop),13,0.247
+plateau_validation_k2,RoundRobin (open-loop),14,0.248
+plateau_validation_k2,RoundRobin (open-loop),15,0.25
+plateau_validation_k2,RoundRobin (open-loop),16,0.251
+plateau_validation_k2,RoundRobin (open-loop),17,0.249
+plateau_validation_k2,RoundRobin (open-loop),18,0.252
+plateau_validation_k2,RoundRobin (open-loop),19,0.253
+plateau_validation_k2,RoundRobin (open-loop),20,0.25
+plateau_validation_k2,RoundRobin (open-loop),21,0.249
+plateau_validation_k2,RoundRobin (open-loop),22,0.253
+plateau_validation_k2,RoundRobin (open-loop),23,0.25
+plateau_validation_k2,RoundRobin (open-loop),24,0.254
+plateau_validation_k2,RoundRobin (open-loop),25,0.248
+plateau_validation_k2,RoundRobin (open-loop),26,0.248
+plateau_validation_k2,RoundRobin (open-loop),27,0.248
+plateau_validation_k2,RoundRobin (open-loop),28,0.248
+plateau_validation_k2,RoundRobin (open-loop),29,0.248
+plateau_validation_k2,RoundRobin (open-loop),30,0.252
+plateau_validation_k2,BeliefUCB (Markov-only),1,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),2,0.554
+plateau_validation_k2,BeliefUCB (Markov-only),3,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),4,0.538
+plateau_validation_k2,BeliefUCB (Markov-only),5,0.55
+plateau_validation_k2,BeliefUCB (Markov-only),6,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),7,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),8,0.539
+plateau_validation_k2,BeliefUCB (Markov-only),9,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),10,0.548
+plateau_validation_k2,BeliefUCB (Markov-only),11,0.555
+plateau_validation_k2,BeliefUCB (Markov-only),12,0.534
+plateau_validation_k2,BeliefUCB (Markov-only),13,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),14,0.54
+plateau_validation_k2,BeliefUCB (Markov-only),15,0.523
+plateau_validation_k2,BeliefUCB (Markov-only),16,0.546
+plateau_validation_k2,BeliefUCB (Markov-only),17,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),18,0.544
+plateau_validation_k2,BeliefUCB (Markov-only),19,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),20,0.539
+plateau_validation_k2,BeliefUCB (Markov-only),21,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),22,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),23,0.548
+plateau_validation_k2,BeliefUCB (Markov-only),24,0.536
+plateau_validation_k2,BeliefUCB (Markov-only),25,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),26,0.551
+plateau_validation_k2,BeliefUCB (Markov-only),27,0.543
+plateau_validation_k2,BeliefUCB (Markov-only),28,0.545
+plateau_validation_k2,BeliefUCB (Markov-only),29,0.538
+plateau_validation_k2,BeliefUCB (Markov-only),30,0.535
+plateau_validation_k2,Original (pre-both-fixes),1,0.534
+plateau_validation_k2,Original (pre-both-fixes),2,0.539
+plateau_validation_k2,Original (pre-both-fixes),3,0.518
+plateau_validation_k2,Original (pre-both-fixes),4,0.536
+plateau_validation_k2,Original (pre-both-fixes),5,0.525
+plateau_validation_k2,Original (pre-both-fixes),6,0.515
+plateau_validation_k2,Original (pre-both-fixes),7,0.527
+plateau_validation_k2,Original (pre-both-fixes),8,0.547
+plateau_validation_k2,Original (pre-both-fixes),9,0.538
+plateau_validation_k2,Original (pre-both-fixes),10,0.508
+plateau_validation_k2,Original (pre-both-fixes),11,0.469
+plateau_validation_k2,Original (pre-both-fixes),12,0.527
+plateau_validation_k2,Original (pre-both-fixes),13,0.512
+plateau_validation_k2,Original (pre-both-fixes),14,0.528
+plateau_validation_k2,Original (pre-both-fixes),15,0.538
+plateau_validation_k2,Original (pre-both-fixes),16,0.47
+plateau_validation_k2,Original (pre-both-fixes),17,0.531
+plateau_validation_k2,Original (pre-both-fixes),18,0.537
+plateau_validation_k2,Original (pre-both-fixes),19,0.494
+plateau_validation_k2,Original (pre-both-fixes),20,0.475
+plateau_validation_k2,Original (pre-both-fixes),21,0.528
+plateau_validation_k2,Original (pre-both-fixes),22,0.458
+plateau_validation_k2,Original (pre-both-fixes),23,0.539
+plateau_validation_k2,Original (pre-both-fixes),24,0.476
+plateau_validation_k2,Original (pre-both-fixes),25,0.51
+plateau_validation_k2,Original (pre-both-fixes),26,0.53
+plateau_validation_k2,Original (pre-both-fixes),27,0.494
+plateau_validation_k2,Original (pre-both-fixes),28,0.536
+plateau_validation_k2,Original (pre-both-fixes),29,0.52
+plateau_validation_k2,Original (pre-both-fixes),30,0.54
+plateau_validation_k2,PlateauOnly (fix 1 only),1,0.543
+plateau_validation_k2,PlateauOnly (fix 1 only),2,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),3,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),4,0.536
+plateau_validation_k2,PlateauOnly (fix 1 only),5,0.522
+plateau_validation_k2,PlateauOnly (fix 1 only),6,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),7,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),8,0.524
+plateau_validation_k2,PlateauOnly (fix 1 only),9,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),10,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),11,0.528
+plateau_validation_k2,PlateauOnly (fix 1 only),12,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),13,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),14,0.531
+plateau_validation_k2,PlateauOnly (fix 1 only),15,0.497
+plateau_validation_k2,PlateauOnly (fix 1 only),16,0.533
+plateau_validation_k2,PlateauOnly (fix 1 only),17,0.53
+plateau_validation_k2,PlateauOnly (fix 1 only),18,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),19,0.512
+plateau_validation_k2,PlateauOnly (fix 1 only),20,0.528
+plateau_validation_k2,PlateauOnly (fix 1 only),21,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),22,0.541
+plateau_validation_k2,PlateauOnly (fix 1 only),23,0.508
+plateau_validation_k2,PlateauOnly (fix 1 only),24,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),25,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),26,0.536
+plateau_validation_k2,PlateauOnly (fix 1 only),27,0.545
+plateau_validation_k2,PlateauOnly (fix 1 only),28,0.55
+plateau_validation_k2,PlateauOnly (fix 1 only),29,0.512
+plateau_validation_k2,PlateauOnly (fix 1 only),30,0.539
+plateau_validation_k2,Current (both fixes),1,0.535
+plateau_validation_k2,Current (both fixes),2,0.541
+plateau_validation_k2,Current (both fixes),3,0.524
+plateau_validation_k2,Current (both fixes),4,0.532
+plateau_validation_k2,Current (both fixes),5,0.52
+plateau_validation_k2,Current (both fixes),6,0.525
+plateau_validation_k2,Current (both fixes),7,0.498
+plateau_validation_k2,Current (both fixes),8,0.547
+plateau_validation_k2,Current (both fixes),9,0.54
+plateau_validation_k2,Current (both fixes),10,0.546
+plateau_validation_k2,Current (both fixes),11,0.509
+plateau_validation_k2,Current (both fixes),12,0.552
+plateau_validation_k2,Current (both fixes),13,0.529
+plateau_validation_k2,Current (both fixes),14,0.535
+plateau_validation_k2,Current (both fixes),15,0.521
+plateau_validation_k2,Current (both fixes),16,0.537
+plateau_validation_k2,Current (both fixes),17,0.513
+plateau_validation_k2,Current (both fixes),18,0.545
+plateau_validation_k2,Current (both fixes),19,0.542
+plateau_validation_k2,Current (both fixes),20,0.52
+plateau_validation_k2,Current (both fixes),21,0.539
+plateau_validation_k2,Current (both fixes),22,0.535
+plateau_validation_k2,Current (both fixes),23,0.48
+plateau_validation_k2,Current (both fixes),24,0.534
+plateau_validation_k2,Current (both fixes),25,0.534
+plateau_validation_k2,Current (both fixes),26,0.548
+plateau_validation_k2,Current (both fixes),27,0.546
+plateau_validation_k2,Current (both fixes),28,0.55
+plateau_validation_k2,Current (both fixes),29,0.538
+plateau_validation_k2,Current (both fixes),30,0.532
+plateau_validation_k1,RoundRobin (open-loop),1,0.123
+plateau_validation_k1,RoundRobin (open-loop),2,0.12
+plateau_validation_k1,RoundRobin (open-loop),3,0.126
+plateau_validation_k1,RoundRobin (open-loop),4,0.125
+plateau_validation_k1,RoundRobin (open-loop),5,0.125
+plateau_validation_k1,RoundRobin (open-loop),6,0.126
+plateau_validation_k1,RoundRobin (open-loop),7,0.128
+plateau_validation_k1,RoundRobin (open-loop),8,0.125
+plateau_validation_k1,RoundRobin (open-loop),9,0.127
+plateau_validation_k1,RoundRobin (open-loop),10,0.127
+plateau_validation_k1,RoundRobin (open-loop),11,0.127
+plateau_validation_k1,RoundRobin (open-loop),12,0.124
+plateau_validation_k1,RoundRobin (open-loop),13,0.122
+plateau_validation_k1,RoundRobin (open-loop),14,0.123
+plateau_validation_k1,RoundRobin (open-loop),15,0.125
+plateau_validation_k1,RoundRobin (open-loop),16,0.127
+plateau_validation_k1,RoundRobin (open-loop),17,0.124
+plateau_validation_k1,RoundRobin (open-loop),18,0.126
+plateau_validation_k1,RoundRobin (open-loop),19,0.126
+plateau_validation_k1,RoundRobin (open-loop),20,0.124
+plateau_validation_k1,BeliefUCB (Markov-only),1,0.272
+plateau_validation_k1,BeliefUCB (Markov-only),2,0.292
+plateau_validation_k1,BeliefUCB (Markov-only),3,0.268
+plateau_validation_k1,BeliefUCB (Markov-only),4,0.264
+plateau_validation_k1,BeliefUCB (Markov-only),5,0.28
+plateau_validation_k1,BeliefUCB (Markov-only),6,0.281
+plateau_validation_k1,BeliefUCB (Markov-only),7,0.287
+plateau_validation_k1,BeliefUCB (Markov-only),8,0.265
+plateau_validation_k1,BeliefUCB (Markov-only),9,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),10,0.288
+plateau_validation_k1,BeliefUCB (Markov-only),11,0.29
+plateau_validation_k1,BeliefUCB (Markov-only),12,0.293
+plateau_validation_k1,BeliefUCB (Markov-only),13,0.299
+plateau_validation_k1,BeliefUCB (Markov-only),14,0.284
+plateau_validation_k1,BeliefUCB (Markov-only),15,0.277
+plateau_validation_k1,BeliefUCB (Markov-only),16,0.278
+plateau_validation_k1,BeliefUCB (Markov-only),17,0.274
+plateau_validation_k1,BeliefUCB (Markov-only),18,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),19,0.273
+plateau_validation_k1,BeliefUCB (Markov-only),20,0.263
+plateau_validation_k1,Original (pre-both-fixes),1,0.301
+plateau_validation_k1,Original (pre-both-fixes),2,0.277
+plateau_validation_k1,Original (pre-both-fixes),3,0.29
+plateau_validation_k1,Original (pre-both-fixes),4,0.238
+plateau_validation_k1,Original (pre-both-fixes),5,0.312
+plateau_validation_k1,Original (pre-both-fixes),6,0.309
+plateau_validation_k1,Original (pre-both-fixes),7,0.297
+plateau_validation_k1,Original (pre-both-fixes),8,0.315
+plateau_validation_k1,Original (pre-both-fixes),9,0.291
+plateau_validation_k1,Original (pre-both-fixes),10,0.29
+plateau_validation_k1,Original (pre-both-fixes),11,0.302
+plateau_validation_k1,Original (pre-both-fixes),12,0.287
+plateau_validation_k1,Original (pre-both-fixes),13,0.29
+plateau_validation_k1,Original (pre-both-fixes),14,0.284
+plateau_validation_k1,Original (pre-both-fixes),15,0.321
+plateau_validation_k1,Original (pre-both-fixes),16,0.272
+plateau_validation_k1,Original (pre-both-fixes),17,0.28
+plateau_validation_k1,Original (pre-both-fixes),18,0.309
+plateau_validation_k1,Original (pre-both-fixes),19,0.299
+plateau_validation_k1,Original (pre-both-fixes),20,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),1,0.295
+plateau_validation_k1,PlateauOnly (fix 1 only),2,0.281
+plateau_validation_k1,PlateauOnly (fix 1 only),3,0.269
+plateau_validation_k1,PlateauOnly (fix 1 only),4,0.247
+plateau_validation_k1,PlateauOnly (fix 1 only),5,0.27
+plateau_validation_k1,PlateauOnly (fix 1 only),6,0.276
+plateau_validation_k1,PlateauOnly (fix 1 only),7,0.26
+plateau_validation_k1,PlateauOnly (fix 1 only),8,0.289
+plateau_validation_k1,PlateauOnly (fix 1 only),9,0.253
+plateau_validation_k1,PlateauOnly (fix 1 only),10,0.307
+plateau_validation_k1,PlateauOnly (fix 1 only),11,0.264
+plateau_validation_k1,PlateauOnly (fix 1 only),12,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),13,0.277
+plateau_validation_k1,PlateauOnly (fix 1 only),14,0.263
+plateau_validation_k1,PlateauOnly (fix 1 only),15,0.245
+plateau_validation_k1,PlateauOnly (fix 1 only),16,0.28
+plateau_validation_k1,PlateauOnly (fix 1 only),17,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),18,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),19,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),20,0.29
+plateau_validation_k1,Current (both fixes),1,0.257
+plateau_validation_k1,Current (both fixes),2,0.289
+plateau_validation_k1,Current (both fixes),3,0.287
+plateau_validation_k1,Current (both fixes),4,0.276
+plateau_validation_k1,Current (both fixes),5,0.265
+plateau_validation_k1,Current (both fixes),6,0.265
+plateau_validation_k1,Current (both fixes),7,0.25
+plateau_validation_k1,Current (both fixes),8,0.254
+plateau_validation_k1,Current (both fixes),9,0.271
+plateau_validation_k1,Current (both fixes),10,0.274
+plateau_validation_k1,Current (both fixes),11,0.275
+plateau_validation_k1,Current (both fixes),12,0.29
+plateau_validation_k1,Current (both fixes),13,0.293
+plateau_validation_k1,Current (both fixes),14,0.286
+plateau_validation_k1,Current (both fixes),15,0.271
+plateau_validation_k1,Current (both fixes),16,0.276
+plateau_validation_k1,Current (both fixes),17,0.264
+plateau_validation_k1,Current (both fixes),18,0.247
+plateau_validation_k1,Current (both fixes),19,0.285
+plateau_validation_k1,Current (both fixes),20,0.266
+plateau_validation_k2,RoundRobin (open-loop),1,0.249
+plateau_validation_k2,RoundRobin (open-loop),2,0.251
+plateau_validation_k2,RoundRobin (open-loop),3,0.251
+plateau_validation_k2,RoundRobin (open-loop),4,0.248
+plateau_validation_k2,RoundRobin (open-loop),5,0.251
+plateau_validation_k2,RoundRobin (open-loop),6,0.252
+plateau_validation_k2,RoundRobin (open-loop),7,0.251
+plateau_validation_k2,RoundRobin (open-loop),8,0.249
+plateau_validation_k2,RoundRobin (open-loop),9,0.253
+plateau_validation_k2,RoundRobin (open-loop),10,0.251
+plateau_validation_k2,RoundRobin (open-loop),11,0.249
+plateau_validation_k2,RoundRobin (open-loop),12,0.249
+plateau_validation_k2,RoundRobin (open-loop),13,0.247
+plateau_validation_k2,RoundRobin (open-loop),14,0.248
+plateau_validation_k2,RoundRobin (open-loop),15,0.25
+plateau_validation_k2,RoundRobin (open-loop),16,0.251
+plateau_validation_k2,RoundRobin (open-loop),17,0.249
+plateau_validation_k2,RoundRobin (open-loop),18,0.252
+plateau_validation_k2,RoundRobin (open-loop),19,0.253
+plateau_validation_k2,RoundRobin (open-loop),20,0.25
+plateau_validation_k2,BeliefUCB (Markov-only),1,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),2,0.554
+plateau_validation_k2,BeliefUCB (Markov-only),3,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),4,0.538
+plateau_validation_k2,BeliefUCB (Markov-only),5,0.55
+plateau_validation_k2,BeliefUCB (Markov-only),6,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),7,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),8,0.539
+plateau_validation_k2,BeliefUCB (Markov-only),9,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),10,0.548
+plateau_validation_k2,BeliefUCB (Markov-only),11,0.555
+plateau_validation_k2,BeliefUCB (Markov-only),12,0.534
+plateau_validation_k2,BeliefUCB (Markov-only),13,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),14,0.54
+plateau_validation_k2,BeliefUCB (Markov-only),15,0.523
+plateau_validation_k2,BeliefUCB (Markov-only),16,0.546
+plateau_validation_k2,BeliefUCB (Markov-only),17,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),18,0.544
+plateau_validation_k2,BeliefUCB (Markov-only),19,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),20,0.539
+plateau_validation_k2,Original (pre-both-fixes),1,0.534
+plateau_validation_k2,Original (pre-both-fixes),2,0.539
+plateau_validation_k2,Original (pre-both-fixes),3,0.518
+plateau_validation_k2,Original (pre-both-fixes),4,0.536
+plateau_validation_k2,Original (pre-both-fixes),5,0.525
+plateau_validation_k2,Original (pre-both-fixes),6,0.515
+plateau_validation_k2,Original (pre-both-fixes),7,0.527
+plateau_validation_k2,Original (pre-both-fixes),8,0.547
+plateau_validation_k2,Original (pre-both-fixes),9,0.538
+plateau_validation_k2,Original (pre-both-fixes),10,0.508
+plateau_validation_k2,Original (pre-both-fixes),11,0.469
+plateau_validation_k2,Original (pre-both-fixes),12,0.527
+plateau_validation_k2,Original (pre-both-fixes),13,0.512
+plateau_validation_k2,Original (pre-both-fixes),14,0.528
+plateau_validation_k2,Original (pre-both-fixes),15,0.538
+plateau_validation_k2,Original (pre-both-fixes),16,0.47
+plateau_validation_k2,Original (pre-both-fixes),17,0.531
+plateau_validation_k2,Original (pre-both-fixes),18,0.537
+plateau_validation_k2,Original (pre-both-fixes),19,0.494
+plateau_validation_k2,Original (pre-both-fixes),20,0.475
+plateau_validation_k2,PlateauOnly (fix 1 only),1,0.543
+plateau_validation_k2,PlateauOnly (fix 1 only),2,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),3,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),4,0.536
+plateau_validation_k2,PlateauOnly (fix 1 only),5,0.522
+plateau_validation_k2,PlateauOnly (fix 1 only),6,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),7,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),8,0.524
+plateau_validation_k2,PlateauOnly (fix 1 only),9,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),10,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),11,0.528
+plateau_validation_k2,PlateauOnly (fix 1 only),12,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),13,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),14,0.531
+plateau_validation_k2,PlateauOnly (fix 1 only),15,0.497
+plateau_validation_k2,PlateauOnly (fix 1 only),16,0.533
+plateau_validation_k2,PlateauOnly (fix 1 only),17,0.53
+plateau_validation_k2,PlateauOnly (fix 1 only),18,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),19,0.512
+plateau_validation_k2,PlateauOnly (fix 1 only),20,0.528
+plateau_validation_k2,Current (both fixes),1,0.533
+plateau_validation_k2,Current (both fixes),2,0.541
+plateau_validation_k2,Current (both fixes),3,0.524
+plateau_validation_k2,Current (both fixes),4,0.532
+plateau_validation_k2,Current (both fixes),5,0.52
+plateau_validation_k2,Current (both fixes),6,0.525
+plateau_validation_k2,Current (both fixes),7,0.498
+plateau_validation_k2,Current (both fixes),8,0.547
+plateau_validation_k2,Current (both fixes),9,0.54
+plateau_validation_k2,Current (both fixes),10,0.546
+plateau_validation_k2,Current (both fixes),11,0.509
+plateau_validation_k2,Current (both fixes),12,0.552
+plateau_validation_k2,Current (both fixes),13,0.524
+plateau_validation_k2,Current (both fixes),14,0.535
+plateau_validation_k2,Current (both fixes),15,0.521
+plateau_validation_k2,Current (both fixes),16,0.537
+plateau_validation_k2,Current (both fixes),17,0.513
+plateau_validation_k2,Current (both fixes),18,0.545
+plateau_validation_k2,Current (both fixes),19,0.542
+plateau_validation_k2,Current (both fixes),20,0.52
+plateau_validation_k1,RoundRobin (open-loop),1,0.123
+plateau_validation_k1,RoundRobin (open-loop),2,0.12
+plateau_validation_k1,RoundRobin (open-loop),3,0.126
+plateau_validation_k1,RoundRobin (open-loop),4,0.125
+plateau_validation_k1,RoundRobin (open-loop),5,0.125
+plateau_validation_k1,RoundRobin (open-loop),6,0.126
+plateau_validation_k1,RoundRobin (open-loop),7,0.128
+plateau_validation_k1,RoundRobin (open-loop),8,0.125
+plateau_validation_k1,RoundRobin (open-loop),9,0.127
+plateau_validation_k1,RoundRobin (open-loop),10,0.127
+plateau_validation_k1,RoundRobin (open-loop),11,0.127
+plateau_validation_k1,RoundRobin (open-loop),12,0.124
+plateau_validation_k1,RoundRobin (open-loop),13,0.122
+plateau_validation_k1,RoundRobin (open-loop),14,0.123
+plateau_validation_k1,RoundRobin (open-loop),15,0.125
+plateau_validation_k1,RoundRobin (open-loop),16,0.127
+plateau_validation_k1,RoundRobin (open-loop),17,0.124
+plateau_validation_k1,RoundRobin (open-loop),18,0.126
+plateau_validation_k1,RoundRobin (open-loop),19,0.126
+plateau_validation_k1,RoundRobin (open-loop),20,0.124
+plateau_validation_k1,BeliefUCB (Markov-only),1,0.272
+plateau_validation_k1,BeliefUCB (Markov-only),2,0.292
+plateau_validation_k1,BeliefUCB (Markov-only),3,0.268
+plateau_validation_k1,BeliefUCB (Markov-only),4,0.264
+plateau_validation_k1,BeliefUCB (Markov-only),5,0.28
+plateau_validation_k1,BeliefUCB (Markov-only),6,0.281
+plateau_validation_k1,BeliefUCB (Markov-only),7,0.287
+plateau_validation_k1,BeliefUCB (Markov-only),8,0.265
+plateau_validation_k1,BeliefUCB (Markov-only),9,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),10,0.288
+plateau_validation_k1,BeliefUCB (Markov-only),11,0.29
+plateau_validation_k1,BeliefUCB (Markov-only),12,0.293
+plateau_validation_k1,BeliefUCB (Markov-only),13,0.299
+plateau_validation_k1,BeliefUCB (Markov-only),14,0.284
+plateau_validation_k1,BeliefUCB (Markov-only),15,0.277
+plateau_validation_k1,BeliefUCB (Markov-only),16,0.278
+plateau_validation_k1,BeliefUCB (Markov-only),17,0.274
+plateau_validation_k1,BeliefUCB (Markov-only),18,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),19,0.273
+plateau_validation_k1,BeliefUCB (Markov-only),20,0.263
+plateau_validation_k1,Original (pre-both-fixes),1,0.301
+plateau_validation_k1,Original (pre-both-fixes),2,0.277
+plateau_validation_k1,Original (pre-both-fixes),3,0.29
+plateau_validation_k1,Original (pre-both-fixes),4,0.238
+plateau_validation_k1,Original (pre-both-fixes),5,0.312
+plateau_validation_k1,Original (pre-both-fixes),6,0.309
+plateau_validation_k1,Original (pre-both-fixes),7,0.297
+plateau_validation_k1,Original (pre-both-fixes),8,0.315
+plateau_validation_k1,Original (pre-both-fixes),9,0.291
+plateau_validation_k1,Original (pre-both-fixes),10,0.29
+plateau_validation_k1,Original (pre-both-fixes),11,0.302
+plateau_validation_k1,Original (pre-both-fixes),12,0.287
+plateau_validation_k1,Original (pre-both-fixes),13,0.29
+plateau_validation_k1,Original (pre-both-fixes),14,0.284
+plateau_validation_k1,Original (pre-both-fixes),15,0.321
+plateau_validation_k1,Original (pre-both-fixes),16,0.272
+plateau_validation_k1,Original (pre-both-fixes),17,0.28
+plateau_validation_k1,Original (pre-both-fixes),18,0.309
+plateau_validation_k1,Original (pre-both-fixes),19,0.299
+plateau_validation_k1,Original (pre-both-fixes),20,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),1,0.295
+plateau_validation_k1,PlateauOnly (fix 1 only),2,0.281
+plateau_validation_k1,PlateauOnly (fix 1 only),3,0.269
+plateau_validation_k1,PlateauOnly (fix 1 only),4,0.247
+plateau_validation_k1,PlateauOnly (fix 1 only),5,0.27
+plateau_validation_k1,PlateauOnly (fix 1 only),6,0.276
+plateau_validation_k1,PlateauOnly (fix 1 only),7,0.26
+plateau_validation_k1,PlateauOnly (fix 1 only),8,0.289
+plateau_validation_k1,PlateauOnly (fix 1 only),9,0.253
+plateau_validation_k1,PlateauOnly (fix 1 only),10,0.307
+plateau_validation_k1,PlateauOnly (fix 1 only),11,0.264
+plateau_validation_k1,PlateauOnly (fix 1 only),12,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),13,0.277
+plateau_validation_k1,PlateauOnly (fix 1 only),14,0.263
+plateau_validation_k1,PlateauOnly (fix 1 only),15,0.245
+plateau_validation_k1,PlateauOnly (fix 1 only),16,0.28
+plateau_validation_k1,PlateauOnly (fix 1 only),17,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),18,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),19,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),20,0.29
+plateau_validation_k1,Current (both fixes),1,0.257
+plateau_validation_k1,Current (both fixes),2,0.27
+plateau_validation_k1,Current (both fixes),3,0.278
+plateau_validation_k1,Current (both fixes),4,0.274
+plateau_validation_k1,Current (both fixes),5,0.288
+plateau_validation_k1,Current (both fixes),6,0.267
+plateau_validation_k1,Current (both fixes),7,0.264
+plateau_validation_k1,Current (both fixes),8,0.3
+plateau_validation_k1,Current (both fixes),9,0.271
+plateau_validation_k1,Current (both fixes),10,0.272
+plateau_validation_k1,Current (both fixes),11,0.264
+plateau_validation_k1,Current (both fixes),12,0.272
+plateau_validation_k1,Current (both fixes),13,0.273
+plateau_validation_k1,Current (both fixes),14,0.286
+plateau_validation_k1,Current (both fixes),15,0.298
+plateau_validation_k1,Current (both fixes),16,0.275
+plateau_validation_k1,Current (both fixes),17,0.283
+plateau_validation_k1,Current (both fixes),18,0.247
+plateau_validation_k1,Current (both fixes),19,0.265
+plateau_validation_k1,Current (both fixes),20,0.268
+plateau_validation_k2,RoundRobin (open-loop),1,0.249
+plateau_validation_k2,RoundRobin (open-loop),2,0.251
+plateau_validation_k2,RoundRobin (open-loop),3,0.251
+plateau_validation_k2,RoundRobin (open-loop),4,0.248
+plateau_validation_k2,RoundRobin (open-loop),5,0.251
+plateau_validation_k2,RoundRobin (open-loop),6,0.252
+plateau_validation_k2,RoundRobin (open-loop),7,0.251
+plateau_validation_k2,RoundRobin (open-loop),8,0.249
+plateau_validation_k2,RoundRobin (open-loop),9,0.253
+plateau_validation_k2,RoundRobin (open-loop),10,0.251
+plateau_validation_k2,RoundRobin (open-loop),11,0.249
+plateau_validation_k2,RoundRobin (open-loop),12,0.249
+plateau_validation_k2,RoundRobin (open-loop),13,0.247
+plateau_validation_k2,RoundRobin (open-loop),14,0.248
+plateau_validation_k2,RoundRobin (open-loop),15,0.25
+plateau_validation_k2,RoundRobin (open-loop),16,0.251
+plateau_validation_k2,RoundRobin (open-loop),17,0.249
+plateau_validation_k2,RoundRobin (open-loop),18,0.252
+plateau_validation_k2,RoundRobin (open-loop),19,0.253
+plateau_validation_k2,RoundRobin (open-loop),20,0.25
+plateau_validation_k2,BeliefUCB (Markov-only),1,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),2,0.554
+plateau_validation_k2,BeliefUCB (Markov-only),3,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),4,0.538
+plateau_validation_k2,BeliefUCB (Markov-only),5,0.55
+plateau_validation_k2,BeliefUCB (Markov-only),6,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),7,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),8,0.539
+plateau_validation_k2,BeliefUCB (Markov-only),9,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),10,0.548
+plateau_validation_k2,BeliefUCB (Markov-only),11,0.555
+plateau_validation_k2,BeliefUCB (Markov-only),12,0.534
+plateau_validation_k2,BeliefUCB (Markov-only),13,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),14,0.54
+plateau_validation_k2,BeliefUCB (Markov-only),15,0.523
+plateau_validation_k2,BeliefUCB (Markov-only),16,0.546
+plateau_validation_k2,BeliefUCB (Markov-only),17,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),18,0.544
+plateau_validation_k2,BeliefUCB (Markov-only),19,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),20,0.539
+plateau_validation_k2,Original (pre-both-fixes),1,0.534
+plateau_validation_k2,Original (pre-both-fixes),2,0.539
+plateau_validation_k2,Original (pre-both-fixes),3,0.518
+plateau_validation_k2,Original (pre-both-fixes),4,0.536
+plateau_validation_k2,Original (pre-both-fixes),5,0.525
+plateau_validation_k2,Original (pre-both-fixes),6,0.515
+plateau_validation_k2,Original (pre-both-fixes),7,0.527
+plateau_validation_k2,Original (pre-both-fixes),8,0.547
+plateau_validation_k2,Original (pre-both-fixes),9,0.538
+plateau_validation_k2,Original (pre-both-fixes),10,0.508
+plateau_validation_k2,Original (pre-both-fixes),11,0.469
+plateau_validation_k2,Original (pre-both-fixes),12,0.527
+plateau_validation_k2,Original (pre-both-fixes),13,0.512
+plateau_validation_k2,Original (pre-both-fixes),14,0.528
+plateau_validation_k2,Original (pre-both-fixes),15,0.538
+plateau_validation_k2,Original (pre-both-fixes),16,0.47
+plateau_validation_k2,Original (pre-both-fixes),17,0.531
+plateau_validation_k2,Original (pre-both-fixes),18,0.537
+plateau_validation_k2,Original (pre-both-fixes),19,0.494
+plateau_validation_k2,Original (pre-both-fixes),20,0.475
+plateau_validation_k2,PlateauOnly (fix 1 only),1,0.543
+plateau_validation_k2,PlateauOnly (fix 1 only),2,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),3,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),4,0.536
+plateau_validation_k2,PlateauOnly (fix 1 only),5,0.522
+plateau_validation_k2,PlateauOnly (fix 1 only),6,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),7,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),8,0.524
+plateau_validation_k2,PlateauOnly (fix 1 only),9,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),10,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),11,0.528
+plateau_validation_k2,PlateauOnly (fix 1 only),12,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),13,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),14,0.531
+plateau_validation_k2,PlateauOnly (fix 1 only),15,0.497
+plateau_validation_k2,PlateauOnly (fix 1 only),16,0.533
+plateau_validation_k2,PlateauOnly (fix 1 only),17,0.53
+plateau_validation_k2,PlateauOnly (fix 1 only),18,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),19,0.512
+plateau_validation_k2,PlateauOnly (fix 1 only),20,0.528
+plateau_validation_k2,Current (both fixes),1,0.549
+plateau_validation_k2,Current (both fixes),2,0.547
+plateau_validation_k2,Current (both fixes),3,0.522
+plateau_validation_k2,Current (both fixes),4,0.548
+plateau_validation_k2,Current (both fixes),5,0.525
+plateau_validation_k2,Current (both fixes),6,0.537
+plateau_validation_k2,Current (both fixes),7,0.547
+plateau_validation_k2,Current (both fixes),8,0.549
+plateau_validation_k2,Current (both fixes),9,0.547
+plateau_validation_k2,Current (both fixes),10,0.544
+plateau_validation_k2,Current (both fixes),11,0.545
+plateau_validation_k2,Current (both fixes),12,0.552
+plateau_validation_k2,Current (both fixes),13,0.532
+plateau_validation_k2,Current (both fixes),14,0.541
+plateau_validation_k2,Current (both fixes),15,0.549
+plateau_validation_k2,Current (both fixes),16,0.54
+plateau_validation_k2,Current (both fixes),17,0.514
+plateau_validation_k2,Current (both fixes),18,0.545
+plateau_validation_k2,Current (both fixes),19,0.543
+plateau_validation_k2,Current (both fixes),20,0.542
+plateau_validation_k1,RoundRobin (open-loop),1,0.123
+plateau_validation_k1,RoundRobin (open-loop),2,0.12
+plateau_validation_k1,RoundRobin (open-loop),3,0.126
+plateau_validation_k1,RoundRobin (open-loop),4,0.125
+plateau_validation_k1,RoundRobin (open-loop),5,0.125
+plateau_validation_k1,RoundRobin (open-loop),6,0.126
+plateau_validation_k1,RoundRobin (open-loop),7,0.128
+plateau_validation_k1,RoundRobin (open-loop),8,0.125
+plateau_validation_k1,RoundRobin (open-loop),9,0.127
+plateau_validation_k1,RoundRobin (open-loop),10,0.127
+plateau_validation_k1,RoundRobin (open-loop),11,0.127
+plateau_validation_k1,RoundRobin (open-loop),12,0.124
+plateau_validation_k1,RoundRobin (open-loop),13,0.122
+plateau_validation_k1,RoundRobin (open-loop),14,0.123
+plateau_validation_k1,RoundRobin (open-loop),15,0.125
+plateau_validation_k1,RoundRobin (open-loop),16,0.127
+plateau_validation_k1,RoundRobin (open-loop),17,0.124
+plateau_validation_k1,RoundRobin (open-loop),18,0.126
+plateau_validation_k1,RoundRobin (open-loop),19,0.126
+plateau_validation_k1,RoundRobin (open-loop),20,0.124
+plateau_validation_k1,BeliefUCB (Markov-only),1,0.272
+plateau_validation_k1,BeliefUCB (Markov-only),2,0.292
+plateau_validation_k1,BeliefUCB (Markov-only),3,0.268
+plateau_validation_k1,BeliefUCB (Markov-only),4,0.264
+plateau_validation_k1,BeliefUCB (Markov-only),5,0.28
+plateau_validation_k1,BeliefUCB (Markov-only),6,0.281
+plateau_validation_k1,BeliefUCB (Markov-only),7,0.287
+plateau_validation_k1,BeliefUCB (Markov-only),8,0.265
+plateau_validation_k1,BeliefUCB (Markov-only),9,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),10,0.288
+plateau_validation_k1,BeliefUCB (Markov-only),11,0.29
+plateau_validation_k1,BeliefUCB (Markov-only),12,0.293
+plateau_validation_k1,BeliefUCB (Markov-only),13,0.299
+plateau_validation_k1,BeliefUCB (Markov-only),14,0.284
+plateau_validation_k1,BeliefUCB (Markov-only),15,0.277
+plateau_validation_k1,BeliefUCB (Markov-only),16,0.278
+plateau_validation_k1,BeliefUCB (Markov-only),17,0.274
+plateau_validation_k1,BeliefUCB (Markov-only),18,0.275
+plateau_validation_k1,BeliefUCB (Markov-only),19,0.273
+plateau_validation_k1,BeliefUCB (Markov-only),20,0.263
+plateau_validation_k1,Original (pre-both-fixes),1,0.301
+plateau_validation_k1,Original (pre-both-fixes),2,0.277
+plateau_validation_k1,Original (pre-both-fixes),3,0.29
+plateau_validation_k1,Original (pre-both-fixes),4,0.238
+plateau_validation_k1,Original (pre-both-fixes),5,0.312
+plateau_validation_k1,Original (pre-both-fixes),6,0.309
+plateau_validation_k1,Original (pre-both-fixes),7,0.297
+plateau_validation_k1,Original (pre-both-fixes),8,0.315
+plateau_validation_k1,Original (pre-both-fixes),9,0.291
+plateau_validation_k1,Original (pre-both-fixes),10,0.29
+plateau_validation_k1,Original (pre-both-fixes),11,0.302
+plateau_validation_k1,Original (pre-both-fixes),12,0.287
+plateau_validation_k1,Original (pre-both-fixes),13,0.29
+plateau_validation_k1,Original (pre-both-fixes),14,0.284
+plateau_validation_k1,Original (pre-both-fixes),15,0.321
+plateau_validation_k1,Original (pre-both-fixes),16,0.272
+plateau_validation_k1,Original (pre-both-fixes),17,0.28
+plateau_validation_k1,Original (pre-both-fixes),18,0.309
+plateau_validation_k1,Original (pre-both-fixes),19,0.299
+plateau_validation_k1,Original (pre-both-fixes),20,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),1,0.295
+plateau_validation_k1,PlateauOnly (fix 1 only),2,0.281
+plateau_validation_k1,PlateauOnly (fix 1 only),3,0.269
+plateau_validation_k1,PlateauOnly (fix 1 only),4,0.247
+plateau_validation_k1,PlateauOnly (fix 1 only),5,0.27
+plateau_validation_k1,PlateauOnly (fix 1 only),6,0.276
+plateau_validation_k1,PlateauOnly (fix 1 only),7,0.26
+plateau_validation_k1,PlateauOnly (fix 1 only),8,0.289
+plateau_validation_k1,PlateauOnly (fix 1 only),9,0.253
+plateau_validation_k1,PlateauOnly (fix 1 only),10,0.307
+plateau_validation_k1,PlateauOnly (fix 1 only),11,0.264
+plateau_validation_k1,PlateauOnly (fix 1 only),12,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),13,0.277
+plateau_validation_k1,PlateauOnly (fix 1 only),14,0.263
+plateau_validation_k1,PlateauOnly (fix 1 only),15,0.245
+plateau_validation_k1,PlateauOnly (fix 1 only),16,0.28
+plateau_validation_k1,PlateauOnly (fix 1 only),17,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),18,0.275
+plateau_validation_k1,PlateauOnly (fix 1 only),19,0.293
+plateau_validation_k1,PlateauOnly (fix 1 only),20,0.29
+plateau_validation_k1,Current (both fixes),1,0.257
+plateau_validation_k1,Current (both fixes),2,0.27
+plateau_validation_k1,Current (both fixes),3,0.278
+plateau_validation_k1,Current (both fixes),4,0.274
+plateau_validation_k1,Current (both fixes),5,0.288
+plateau_validation_k1,Current (both fixes),6,0.267
+plateau_validation_k1,Current (both fixes),7,0.264
+plateau_validation_k1,Current (both fixes),8,0.3
+plateau_validation_k1,Current (both fixes),9,0.271
+plateau_validation_k1,Current (both fixes),10,0.272
+plateau_validation_k1,Current (both fixes),11,0.264
+plateau_validation_k1,Current (both fixes),12,0.272
+plateau_validation_k1,Current (both fixes),13,0.273
+plateau_validation_k1,Current (both fixes),14,0.286
+plateau_validation_k1,Current (both fixes),15,0.298
+plateau_validation_k1,Current (both fixes),16,0.275
+plateau_validation_k1,Current (both fixes),17,0.283
+plateau_validation_k1,Current (both fixes),18,0.247
+plateau_validation_k1,Current (both fixes),19,0.265
+plateau_validation_k1,Current (both fixes),20,0.268
+plateau_validation_k2,RoundRobin (open-loop),1,0.249
+plateau_validation_k2,RoundRobin (open-loop),2,0.251
+plateau_validation_k2,RoundRobin (open-loop),3,0.251
+plateau_validation_k2,RoundRobin (open-loop),4,0.248
+plateau_validation_k2,RoundRobin (open-loop),5,0.251
+plateau_validation_k2,RoundRobin (open-loop),6,0.252
+plateau_validation_k2,RoundRobin (open-loop),7,0.251
+plateau_validation_k2,RoundRobin (open-loop),8,0.249
+plateau_validation_k2,RoundRobin (open-loop),9,0.253
+plateau_validation_k2,RoundRobin (open-loop),10,0.251
+plateau_validation_k2,RoundRobin (open-loop),11,0.249
+plateau_validation_k2,RoundRobin (open-loop),12,0.249
+plateau_validation_k2,RoundRobin (open-loop),13,0.247
+plateau_validation_k2,RoundRobin (open-loop),14,0.248
+plateau_validation_k2,RoundRobin (open-loop),15,0.25
+plateau_validation_k2,RoundRobin (open-loop),16,0.251
+plateau_validation_k2,RoundRobin (open-loop),17,0.249
+plateau_validation_k2,RoundRobin (open-loop),18,0.252
+plateau_validation_k2,RoundRobin (open-loop),19,0.253
+plateau_validation_k2,RoundRobin (open-loop),20,0.25
+plateau_validation_k2,BeliefUCB (Markov-only),1,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),2,0.554
+plateau_validation_k2,BeliefUCB (Markov-only),3,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),4,0.538
+plateau_validation_k2,BeliefUCB (Markov-only),5,0.55
+plateau_validation_k2,BeliefUCB (Markov-only),6,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),7,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),8,0.539
+plateau_validation_k2,BeliefUCB (Markov-only),9,0.549
+plateau_validation_k2,BeliefUCB (Markov-only),10,0.548
+plateau_validation_k2,BeliefUCB (Markov-only),11,0.555
+plateau_validation_k2,BeliefUCB (Markov-only),12,0.534
+plateau_validation_k2,BeliefUCB (Markov-only),13,0.541
+plateau_validation_k2,BeliefUCB (Markov-only),14,0.54
+plateau_validation_k2,BeliefUCB (Markov-only),15,0.523
+plateau_validation_k2,BeliefUCB (Markov-only),16,0.546
+plateau_validation_k2,BeliefUCB (Markov-only),17,0.535
+plateau_validation_k2,BeliefUCB (Markov-only),18,0.544
+plateau_validation_k2,BeliefUCB (Markov-only),19,0.537
+plateau_validation_k2,BeliefUCB (Markov-only),20,0.539
+plateau_validation_k2,Original (pre-both-fixes),1,0.534
+plateau_validation_k2,Original (pre-both-fixes),2,0.539
+plateau_validation_k2,Original (pre-both-fixes),3,0.518
+plateau_validation_k2,Original (pre-both-fixes),4,0.536
+plateau_validation_k2,Original (pre-both-fixes),5,0.525
+plateau_validation_k2,Original (pre-both-fixes),6,0.515
+plateau_validation_k2,Original (pre-both-fixes),7,0.527
+plateau_validation_k2,Original (pre-both-fixes),8,0.547
+plateau_validation_k2,Original (pre-both-fixes),9,0.538
+plateau_validation_k2,Original (pre-both-fixes),10,0.508
+plateau_validation_k2,Original (pre-both-fixes),11,0.469
+plateau_validation_k2,Original (pre-both-fixes),12,0.527
+plateau_validation_k2,Original (pre-both-fixes),13,0.512
+plateau_validation_k2,Original (pre-both-fixes),14,0.528
+plateau_validation_k2,Original (pre-both-fixes),15,0.538
+plateau_validation_k2,Original (pre-both-fixes),16,0.47
+plateau_validation_k2,Original (pre-both-fixes),17,0.531
+plateau_validation_k2,Original (pre-both-fixes),18,0.537
+plateau_validation_k2,Original (pre-both-fixes),19,0.494
+plateau_validation_k2,Original (pre-both-fixes),20,0.475
+plateau_validation_k2,PlateauOnly (fix 1 only),1,0.543
+plateau_validation_k2,PlateauOnly (fix 1 only),2,0.539
+plateau_validation_k2,PlateauOnly (fix 1 only),3,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),4,0.536
+plateau_validation_k2,PlateauOnly (fix 1 only),5,0.522
+plateau_validation_k2,PlateauOnly (fix 1 only),6,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),7,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),8,0.524
+plateau_validation_k2,PlateauOnly (fix 1 only),9,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),10,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),11,0.528
+plateau_validation_k2,PlateauOnly (fix 1 only),12,0.537
+plateau_validation_k2,PlateauOnly (fix 1 only),13,0.544
+plateau_validation_k2,PlateauOnly (fix 1 only),14,0.531
+plateau_validation_k2,PlateauOnly (fix 1 only),15,0.497
+plateau_validation_k2,PlateauOnly (fix 1 only),16,0.533
+plateau_validation_k2,PlateauOnly (fix 1 only),17,0.53
+plateau_validation_k2,PlateauOnly (fix 1 only),18,0.529
+plateau_validation_k2,PlateauOnly (fix 1 only),19,0.512
+plateau_validation_k2,PlateauOnly (fix 1 only),20,0.528
+plateau_validation_k2,Current (both fixes),1,0.549
+plateau_validation_k2,Current (both fixes),2,0.547
+plateau_validation_k2,Current (both fixes),3,0.522
+plateau_validation_k2,Current (both fixes),4,0.548
+plateau_validation_k2,Current (both fixes),5,0.525
+plateau_validation_k2,Current (both fixes),6,0.537
+plateau_validation_k2,Current (both fixes),7,0.547
+plateau_validation_k2,Current (both fixes),8,0.549
+plateau_validation_k2,Current (both fixes),9,0.547
+plateau_validation_k2,Current (both fixes),10,0.544
+plateau_validation_k2,Current (both fixes),11,0.545
+plateau_validation_k2,Current (both fixes),12,0.552
+plateau_validation_k2,Current (both fixes),13,0.532
+plateau_validation_k2,Current (both fixes),14,0.541
+plateau_validation_k2,Current (both fixes),15,0.549
+plateau_validation_k2,Current (both fixes),16,0.54
+plateau_validation_k2,Current (both fixes),17,0.514
+plateau_validation_k2,Current (both fixes),18,0.545
+plateau_validation_k2,Current (both fixes),19,0.543
+plateau_validation_k2,Current (both fixes),20,0.542

@@ -1,0 +1,441 @@
+data_source,seed_semantics,suite,scheduler,seed,interception_ratio
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),1,0.255
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),2,0.253
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),3,0.266
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),4,0.25
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),5,0.259
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),6,0.249
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),7,0.26
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),8,0.257
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),9,0.26
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,RoundRobin (open-loop),10,0.263
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),1,0.263
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),2,0.256
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),3,0.257
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),4,0.245
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),5,0.257
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),6,0.248
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),7,0.26
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),8,0.261
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),9,0.25
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,Random (naive),10,0.253
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),1,0.502
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),2,0.497
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),3,0.541
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),4,0.494
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),5,0.565
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),6,0.539
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),7,0.494
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),8,0.514
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),9,0.518
+synthetic,environment+scheduler (each seed is a different environment),A_prototype,BeliefScheduler (learned),10,0.561
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),1,0.123
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),2,0.12
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),3,0.126
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),4,0.125
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),5,0.125
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),6,0.126
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),7,0.128
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),8,0.125
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),9,0.127
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,RoundRobin (open-loop),10,0.127
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),1,0.129
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),2,0.123
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),3,0.127
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),4,0.12
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),5,0.127
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),6,0.122
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),7,0.125
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),8,0.126
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),9,0.124
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,Random (naive),10,0.121
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),1,0.286
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),2,0.294
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),3,0.282
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),4,0.284
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),5,0.273
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),6,0.297
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),7,0.274
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),8,0.254
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),9,0.291
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k1,BeliefUCB (learned),10,0.291
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),1,0.249
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),2,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),3,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),4,0.248
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),5,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),6,0.252
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),7,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),8,0.249
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),9,0.253
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,RoundRobin (open-loop),10,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),1,0.247
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),2,0.256
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),3,0.243
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),4,0.245
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),5,0.251
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),6,0.25
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),7,0.249
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),8,0.246
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),9,0.245
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,Random (naive),10,0.252
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),1,0.548
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),2,0.549
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),3,0.547
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),4,0.543
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),5,0.532
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),6,0.552
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),7,0.549
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),8,0.552
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),9,0.543
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k2,BeliefUCB (learned),10,0.54
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),1,0.373
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),2,0.375
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),3,0.377
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),4,0.373
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),5,0.372
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),6,0.375
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),7,0.375
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),8,0.376
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),9,0.373
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,RoundRobin (open-loop),10,0.378
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),1,0.372
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),2,0.378
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),3,0.372
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),4,0.375
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),5,0.37
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),6,0.376
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),7,0.368
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),8,0.381
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),9,0.373
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,Random (naive),10,0.376
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),1,0.679
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),2,0.689
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),3,0.681
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),4,0.69
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),5,0.68
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),6,0.675
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),7,0.682
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),8,0.691
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),9,0.693
+synthetic,environment+scheduler (each seed is a different environment),B_multichannel_k3,BeliefUCB (learned),10,0.692
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),1,0.123
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),2,0.12
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),3,0.126
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),4,0.125
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),5,0.125
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),6,0.126
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),7,0.128
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),8,0.125
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),9,0.127
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,RoundRobin (open-loop),10,0.127
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),1,0.272
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),2,0.292
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),3,0.268
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),4,0.264
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),5,0.28
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),6,0.281
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),7,0.287
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),8,0.265
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),9,0.275
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,BeliefUCB (Markov-only),10,0.288
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),1,0.29
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),2,0.276
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),3,0.27
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),4,0.282
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),5,0.292
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),6,0.285
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),7,0.295
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),8,0.287
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),9,0.27
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k1,PRIAware (Markov+periodicity),10,0.286
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),1,0.249
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),2,0.251
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),3,0.251
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),4,0.248
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),5,0.251
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),6,0.252
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),7,0.251
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),8,0.249
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),9,0.253
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,RoundRobin (open-loop),10,0.251
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),1,0.549
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),2,0.554
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),3,0.541
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),4,0.538
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),5,0.55
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),6,0.537
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),7,0.535
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),8,0.539
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),9,0.549
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,BeliefUCB (Markov-only),10,0.548
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),1,0.551
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),2,0.548
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),3,0.532
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),4,0.551
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),5,0.534
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),6,0.55
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),7,0.548
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),8,0.547
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),9,0.552
+synthetic,environment+scheduler (each seed is a different environment),C_beacon_k2,PRIAware (Markov+periodicity),10,0.537
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),1,0.113
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),2,0.107
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),3,0.12
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),4,0.117
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),5,0.118
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),6,0.119
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),7,0.122
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),8,0.117
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),9,0.119
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,RoundRobin (open-loop),10,0.12
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),1,0.321
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),2,0.335
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),3,0.333
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),4,0.323
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),5,0.339
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),6,0.321
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),7,0.314
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),8,0.327
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),9,0.321
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,BeliefUCB (Markov-only),10,0.319
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),1,0.343
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),2,0.313
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),3,0.357
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),4,0.375
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),5,0.355
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),6,0.31
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),7,0.326
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),8,0.367
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),9,0.356
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k1,PRIAware (Markov+periodicity),10,0.365
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),1,0.232
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),2,0.236
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),3,0.235
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),4,0.228
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),5,0.235
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),6,0.235
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),7,0.233
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),8,0.229
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),9,0.238
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,RoundRobin (open-loop),10,0.233
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),1,0.473
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),2,0.483
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),3,0.474
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),4,0.471
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),5,0.472
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),6,0.475
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),7,0.497
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),8,0.47
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),9,0.464
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,BeliefUCB (Markov-only),10,0.49
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),1,0.525
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),2,0.511
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),3,0.519
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),4,0.524
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),5,0.53
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),6,0.515
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),7,0.515
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),8,0.53
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),9,0.521
+synthetic,environment+scheduler (each seed is a different environment),D_sparse_k2,PRIAware (Markov+periodicity),10,0.54
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,1,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,2,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,3,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,4,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,5,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,6,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,7,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,8,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,9,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,BeliefUCB,10,0.026217228464419477
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,1,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,2,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,3,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,4,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,5,1.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,6,1.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,7,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,8,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,9,0.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_radar,PRIAware,10,1.0
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,1,0.8884758364312267
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,2,0.8950366151342555
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,3,0.9003189792663477
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,4,0.8234649122807017
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,5,0.863593603010348
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,6,0.8483870967741935
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,7,0.8485772357723578
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,8,0.8811369509043928
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,9,0.8607954545454546
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,BeliefUCB,10,0.8819617622610141
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,1,0.8884758364312267
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,2,0.8950366151342555
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,3,0.9003189792663477
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,4,0.8234649122807017
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,5,0.7920978363123237
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,6,0.7752688172043011
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,7,0.8485772357723578
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,8,0.8811369509043928
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,9,0.8607954545454546
+synthetic,environment+scheduler (each seed is a different environment),D_per_emitter_comm1,PRIAware,10,0.8104738154613467
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),1,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),2,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),3,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),4,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),5,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),6,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),7,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),8,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),9,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,RoundRobin (open-loop),10,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),1,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),2,0.118
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),3,0.116
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),4,0.114
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),5,0.115
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),6,0.127
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),7,0.141
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),8,0.117
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),9,0.139
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,Random (naive),10,0.126
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),1,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),2,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),3,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),4,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),5,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),6,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),7,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),8,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),9,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,BeliefUCB (Markov+UCB),10,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),1,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),2,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),3,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),4,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),5,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),6,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),7,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),8,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),9,0.918
+h5:config_169.h5,scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment),E_turing_pdw,PRIAware (Markov+periodicity),10,0.918
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),1,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),2,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),3,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),4,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),5,1.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),6,1.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),7,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),8,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),9,0.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,PRIAware (original),10,1.0
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),1,0.9063670411985019
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),2,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),3,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),4,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),5,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),6,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),7,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),8,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),9,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_radar_capture,Persistent (fixed),10,0.9363295880149812
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),1,0.8884758364312267
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),2,0.8950366151342555
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),3,0.9003189792663477
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),4,0.8234649122807017
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),5,0.7920978363123237
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),6,0.7752688172043011
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),7,0.8485772357723578
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),8,0.8811369509043928
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),9,0.8607954545454546
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,PRIAware (original),10,0.8104738154613467
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),1,0.7026022304832714
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),2,0.7469487388120423
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),3,0.8022328548644339
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),4,0.7247807017543859
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),5,0.7648165569143932
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),6,0.7365591397849462
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),7,0.7510162601626016
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),8,0.7760551248923342
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),9,0.7376893939393939
+synthetic,environment+scheduler (each seed is a different environment),F_fix_comm1_capture,Persistent (fixed),10,0.7855361596009975
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),1,0.126
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),2,0.128
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),3,0.126
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),4,0.128
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),5,0.127
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),6,0.124
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),7,0.123
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),8,0.127
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),9,0.126
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,RoundRobin (open-loop),10,0.126
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),1,0.303
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),2,0.308
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),3,0.307
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),4,0.313
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),5,0.312
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),6,0.319
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),7,0.31
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),8,0.308
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),9,0.297
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,BeliefUCB (no periodicity),10,0.311
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),1,0.303
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),2,0.31
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),3,0.307
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),4,0.313
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),5,0.312
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),6,0.319
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),7,0.31
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),8,0.296
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),9,0.272
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,PRIAware (single-periodicity),10,0.31
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),1,0.25
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),2,0.284
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),3,0.26
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),4,0.294
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),5,0.28
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),6,0.269
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),7,0.276
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),8,0.289
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),9,0.281
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_overall,ScanAwarePRIScheduler (two-tier),10,0.269
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),1,0.16
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),2,0.15812917594654788
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),3,0.16853932584269662
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),4,0.16099773242630386
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),5,0.16129032258064516
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),6,0.15265486725663716
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),7,0.1554054054054054
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),8,0.17002237136465326
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),9,0.16554809843400448
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,RoundRobin (open-loop),10,0.16027088036117382
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),1,0.03111111111111111
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),2,0.05790645879732739
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),3,0.020224719101123594
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),4,0.034013605442176874
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),5,0.05069124423963134
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),6,0.01327433628318584
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),7,0.009009009009009009
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),8,0.013422818791946308
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),9,0.017897091722595078
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,BeliefUCB (no periodicity),10,0.011286681715575621
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),1,0.03111111111111111
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),2,0.0378619153674833
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),3,0.020224719101123594
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),4,0.027210884353741496
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),5,0.0576036866359447
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),6,0.01327433628318584
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),7,0.009009009009009009
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),8,0.042505592841163314
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),9,0.19015659955257272
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,PRIAware (single-periodicity),10,0.011286681715575621
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),1,0.7222222222222222
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),2,0.6347438752783965
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),3,0.6584269662921348
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),4,0.6145124716553289
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),5,0.4631336405529954
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),6,0.8938053097345132
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),7,0.3153153153153153
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),8,0.6465324384787472
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),9,0.5838926174496645
+synthetic,environment+scheduler (each seed is a different environment),G_scan_aware_radar_capture,ScanAwarePRIScheduler (two-tier),10,0.34085778781038373

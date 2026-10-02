@@ -1,0 +1,1211 @@
+================================================================================
+SIH MASTER EXPERIMENT RUNNER
+================================================================================
+Project directory: D:\Code\SIH\SIH
+Python executable: D:\Code\SIH\SIH\.venv\Scripts\python.exe
+Scripts to run: 20
+Real TSRD dataset: D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  Applied to: run_on_turing_dataset.py, multi_seed_robustness.py, validate_pdw_multiseed.py, tune_confidence_threshold.py, prediction_accuracy_metrics.py
+  Everything else runs against the synthetic stand-in / its own controlled synthetic scenario, unchanged.
+
+
+################################################################################
+EXPERIMENT 1/20
+################################################################################
+
+
+================================================================================
+STARTING: scan_scheduler_prototype.py
+================================================================================
+Scenario: 8 bands, 4000 steps, 4 concurrent emitters (2 Markov comms, 1 periodic beacon, 1 frequency-agile threat)
+
+Scheduler                                |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+----------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)          |           26.0% |            0.260 |                 1.48
+Random (naive baseline)                  |           26.0% |            0.260 |                 1.42
+BeliefScheduler (learned, closed-loop)   |           49.4% |            0.494 |                 1.64
+
+--------------------------------------------------------------------------------
+FINISHED: scan_scheduler_prototype.py
+Exit code: 0
+Time: 0.3 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 2/20
+################################################################################
+
+================================================================================
+STARTING: scan_scheduler_v2.py
+================================================================================
+Scenario: 8 bands, 4000 steps, 4 concurrent emitters (2 Markov comms, 1 periodic beacon, 1 frequency-agile threat)
+
+--- k_channels = 1 (receiver scans 1 band(s) per step) ---
+Scheduler                                |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+----------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)          |           12.8% |            0.260 |                 1.48
+Random (naive baseline)                  |           12.5% |            0.260 |                 1.42
+BeliefUCB (learned, closed-loop)         |           27.4% |            0.562 |                 1.39
+
+--- k_channels = 2 (receiver scans 2 band(s) per step) ---
+Scheduler                                |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+----------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)          |           25.1% |            0.452 |                  1.4
+Random (naive baseline)                  |           24.9% |            0.454 |                  1.0
+BeliefUCB (learned, closed-loop)         |           54.9% |            0.902 |                  0.9
+
+--- k_channels = 3 (receiver scans 3 band(s) per step) ---
+Scheduler                                |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+----------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)          |           37.5% |            0.614 |                 0.65
+Random (naive baseline)                  |           36.8% |            0.601 |                 0.74
+BeliefUCB (learned, closed-loop)         |           68.2% |            0.939 |                 0.64
+
+
+--------------------------------------------------------------------------------
+FINISHED: scan_scheduler_v2.py
+Exit code: 0
+Time: 0.3 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 3/20
+################################################################################
+
+================================================================================
+STARTING: scan_scheduler_v3_pri.py
+================================================================================
+Scenario: 8 bands, 4000 steps, 4 concurrent emitters (2 Markov comms, 1 periodic beacon [bands 2,5,6 -- true period 12 steps], 1 frequency-agile threat)
+
+--- k_channels = 1 ---
+Scheduler                                  |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+------------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)            |           12.8% |            0.260 |                 1.48
+BeliefUCB (Markov-only, learned)           |           28.7% |            0.586 |                 1.46
+PRIAware (Markov + periodicity, learned)   |           29.5% |            0.591 |                 1.37
+
+--- k_channels = 2 ---
+Scheduler                                  |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+------------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)            |           25.1% |            0.452 |                  1.4
+BeliefUCB (Markov-only, learned)           |           53.5% |            0.895 |                  0.9
+PRIAware (Markov + periodicity, learned)   |           54.8% |            0.899 |                 0.85
+
+PRI diagnostic (true beacon period = 12 steps, on bands 2/5/6):
+  band 2 (beacon):        not enough hits observed yet
+  band 5 (beacon):        not enough hits observed yet
+  band 6 (beacon):        not enough hits observed yet
+  band 1 (comm/agile):    not enough hits observed yet
+  band 4 (comm/agile):    not enough hits observed yet
+  band 0 (comm/agile):    not enough hits observed yet
+  band 3 (comm/agile):    not enough hits observed yet
+  band 7 (comm/agile):    not enough hits observed yet
+====================================================================================================
+Sparse scenario: 8 bands, 4000 steps (800-step warmup) -- a single-pulse-per-cycle fixed-PRI radar (band 5, true period 12 steps, ON for just 1 step per cycle) alongside 2 Markov comms + 1 agile threat
+
+--- k_channels = 1 ---
+Scheduler                                  |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+------------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)            |           11.8% |            0.135 |                 1.37
+BeliefUCB (Markov-only, learned)           |           35.6% |            0.434 |                 0.89
+PRIAware (Markov + periodicity, learned)   |           37.1% |            0.449 |                 0.54
+
+--- k_channels = 2 ---
+Scheduler                                  |  Interception % |  Avg Reward/step |  Avg Intercept Delay
+------------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)            |           23.2% |            0.256 |                 0.76
+BeliefUCB (Markov-only, learned)           |           50.4% |            0.513 |                  0.4
+PRIAware (Markov + periodicity, learned)   |           52.7% |            0.515 |                 0.29
+
+The blended interception % above can be misleading here -- it's dominated by
+the loud, near-always-on comm-1 channel. What actually matters for an EW system
+is PER-EMITTER capture, especially of the one threat that's genuinely hard to
+predict without a periodicity model:
+
+  BeliefUCB : fixed-PRI radar caught    0/267 (  0.0%)   comm-1 caught  876/1005 ( 87.2%)   [band5 estimated PRI=None, confidence=0.00]
+  PRIAware  : fixed-PRI radar caught  267/267 (100.0%)   comm-1 caught  798/1005 ( 79.4%)   [band5 estimated PRI=12.0, confidence=1.00]
+
+--------------------------------------------------------------------------------
+FINISHED: scan_scheduler_v3_pri.py
+Exit code: 0
+Time: 7.9 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 4/20
+################################################################################
+
+================================================================================
+STARTING: scan_scheduler_v4_persistent.py
+================================================================================
+Quick single-seed sanity check (seed=11, matches earlier reports):
+
+Scheduler                        |  Interception % |  Avg Reward/step
+---------------------------------------------------------------------
+BeliefUCB (Markov-only)          |           33.2% |            0.375
+PRIAware (original)              |           36.1% |            0.408
+PRIAware (persistent, fixed)     |           34.3% |            0.387
+
+--------------------------------------------------------------------------------
+FINISHED: scan_scheduler_v4_persistent.py
+Exit code: 0
+Time: 2.2 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 5/20
+################################################################################
+
+================================================================================
+STARTING: scan_aware_scheduler.py
+================================================================================
+Isolated scenario: one spatially-scanning fixed-PRI radar (band 5), scan_period=40, beam_dwell=6, inner PRI=3, sidelobe_leak=2%, 6000 steps
+
+RoundRobin (open-loop baseline)                      | interception= 15.7% | avg_reward/step=0.009
+PRIAware (single-periodicity, blind to nesting)      | interception= 64.5% | avg_reward/step=0.037
+ScanAwarePRIScheduler (this class)                   | interception= 77.9% | avg_reward/step=0.045
+
+--------------------------------------------------------------------------------
+FINISHED: scan_aware_scheduler.py
+Exit code: 0
+Time: 2.4 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 6/20
+################################################################################
+
+================================================================================
+STARTING: demo_spatial_scan_emitter.py
+================================================================================
+Legend: '#' = pulse received  '.' = in-beam but PRI silent  ' ' = out of beam
+
+t=   0: #..#..                                  
+t=  40: ..#..#                                  
+t=  80: .#..#.                                  
+
+6 pulses received over 120 steps (18 in-beam steps, 102 out-of-beam steps)
+Expected beam passes: 3 full rotations of 40 steps, 6 in-beam steps each -> ~18 in-beam steps
+Within each pass, inner PRI=3 -> expect roughly beam_dwell/pri pulses per pass
+
+--------------------------------------------------------------------------------
+FINISHED: demo_spatial_scan_emitter.py
+Exit code: 0
+Time: 0.1 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 7/20
+################################################################################
+
+
+================================================================================
+STARTING: diagnose_beacon_regression.py
+================================================================================
+Beacon scenario: bands [2, 5, 6] host the periodic beacon (band 6 ALSO hosts the frequency-agile threat -- a genuine collision), comm bands [1, 4]. 10 seeds, 4000 steps.
+
+=== k_channels = 1 ===
+  Beacon capture   -- BeliefUCB:  27.9% +/-  5.6%   PRIAware:  29.6% +/-  5.9%
+  Comm capture     -- BeliefUCB:  46.0% +/-  7.1%   PRIAware:  43.3% +/-  7.5%
+
+=== k_channels = 2 ===
+  Beacon capture   -- BeliefUCB:  75.1% +/-  1.7%   PRIAware:  72.5% +/-  5.4%
+  Comm capture     -- BeliefUCB:  51.4% +/-  3.6%   PRIAware:  54.3% +/-  8.7%
+  'Double beacon bet' steps (both k=2 slots on beacon bands, PRIAware only): mean 1780 / 4000 steps (44.5%)
+  Of those double-bet steps, fraction landing >=1 hit: mean 87.3%  (a hit rate here below what a comm-band bet would get is the direct cost of this behaviour)
+
+Per-band confidence detail, seed=1, k=2 (PRIAware):
+  band 2: pri_estimate=None, confidence=0.00
+  band 5: pri_estimate=12.0, confidence=0.83
+  band 6 (also hosts agile threat): pri_estimate=None, confidence=0.00
+
+--------------------------------------------------------------------------------
+FINISHED: diagnose_beacon_regression.py
+Exit code: 0
+Time: 31.6 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 8/20
+################################################################################
+
+================================================================================
+STARTING: diagnose_pri_lockon.py
+================================================================================
+Sparse radar: band 5, true PRI = 12 steps, warmup = 800 steps, 4000 steps total, 40 seeds
+
+Theory check: warmup uses a shuffled full sweep over 8 bands each lap, so band 5 gets scanned ~100 times during warmup (exactly once per lap). The radar is ON for only 1/12 of all steps, so if warmup scans landed on band 5 at effectively random step offsets, the EXPECTED number of confirmed hits during warmup is roughly 100 / 12 = 8.3.
+_update_pri_model requires >= 8 confirmed hits before it will even attempt an estimate. That expected count sits right AT the threshold -- sowhether a seed clears 8 hits by the end of warmup is a coin-flip, not a robust property of the scheduler.
+
+Confirmed hits on band 5 accumulated DURING warmup, across 40 seeds:
+  mean = 7.95, stdev = 2.69, min = 2, max = 13
+  (scans on band 5 during warmup: mean = 100.0, expected ~100)
+  seeds with < 8 confirmed hits by END of warmup: 19/40
+
+Final lock-on outcome: 21/40 seeds reached confidence >= 0.75 by end of run; 19/40 never did.
+
+ seed | hits@warmup | final_hits |  final_pri | confidence | radar_capture%
+---------------------------------------------------------------------------
+    1 |           6 |          6 |       None |       0.00 |           0.0%
+    2 |           7 |          7 |       None |       0.00 |           0.0%
+    3 |           7 |          7 |       None |       0.00 |           0.0%
+    4 |           6 |          6 |       None |       0.00 |           0.0%
+    5 |          12 |         30 |      12.00 |       1.00 |         100.0%
+    6 |          11 |         30 |      12.00 |       1.00 |         100.0%
+    7 |           3 |          3 |       None |       0.00 |           0.0%
+    8 |           7 |          7 |       None |       0.00 |           0.0%
+    9 |           5 |          5 |       None |       0.00 |           0.0%
+   10 |          11 |         30 |      12.00 |       1.00 |         100.0%
+   11 |           9 |         30 |      12.00 |       1.00 |         100.0%
+   12 |          10 |         30 |      12.00 |       1.00 |         100.0%
+   13 |           8 |         30 |      12.00 |       1.00 |         100.0%
+   14 |           5 |          5 |       None |       0.00 |           0.0%
+   15 |           6 |          6 |       None |       0.00 |           0.0%
+   16 |          10 |         30 |      12.00 |       1.00 |         100.0%
+   17 |          11 |         30 |      12.00 |       1.00 |         100.0%
+   18 |           2 |          2 |       None |       0.00 |           0.0%
+   19 |           9 |         30 |      12.00 |       1.00 |         100.0%
+   20 |          12 |         30 |      12.00 |       1.00 |         100.0%
+   21 |           6 |          6 |       None |       0.00 |           0.0%
+   22 |           6 |          6 |       None |       0.00 |           0.0%
+   23 |           8 |         30 |      12.00 |       1.00 |         100.0%
+   24 |          11 |         30 |      12.00 |       1.00 |         100.0%
+   25 |           5 |          5 |       None |       0.00 |           0.0%
+   26 |          11 |         30 |      12.00 |       1.00 |         100.0%
+   27 |           8 |         30 |      12.00 |       1.00 |         100.0%
+   28 |           5 |          5 |       None |       0.00 |           0.0%
+   29 |          12 |         30 |      12.00 |       1.00 |         100.0%
+   30 |           7 |          7 |       None |       0.00 |           0.0%
+   31 |           8 |         30 |      12.00 |       1.00 |         100.0%
+   32 |          13 |         30 |      12.00 |       1.00 |         100.0%
+   33 |           6 |          6 |       None |       0.00 |           0.0%
+   34 |          11 |         30 |      12.00 |       1.00 |         100.0%
+   35 |           8 |         30 |      12.00 |       1.00 |         100.0%
+   36 |           4 |          4 |       None |       0.00 |           0.0%
+   37 |           9 |         30 |      12.00 |       1.00 |         100.0%
+   38 |           7 |          7 |       None |       0.00 |           0.0%
+   39 |           7 |          7 |       None |       0.00 |           0.0%
+   40 |           9 |         30 |      12.00 |       1.00 |         100.0%
+
+For seeds that DID lock on (confidence >= 0.75), when did that happen relative to warmup end (t=800)?
+  seed   5: first locked at t=  301 (during warmup), n_hits at that point = 8
+  seed   6: first locked at t=  505 (during warmup), n_hits at that point = 8
+  seed  10: first locked at t=  637 (during warmup), n_hits at that point = 8
+  seed  11: first locked at t=  529 (during warmup), n_hits at that point = 8
+  seed  12: first locked at t=  637 (during warmup), n_hits at that point = 8
+  seed  13: first locked at t=  661 (during warmup), n_hits at that point = 8
+  seed  16: first locked at t=  733 (during warmup), n_hits at that point = 8
+  seed  17: first locked at t=  661 (during warmup), n_hits at that point = 8
+  seed  19: first locked at t=  673 (during warmup), n_hits at that point = 8
+  seed  20: first locked at t=  601 (during warmup), n_hits at that point = 8
+  seed  23: first locked at t=  601 (during warmup), n_hits at that point = 8
+  seed  24: first locked at t=  481 (during warmup), n_hits at that point = 8
+  seed  26: first locked at t=  505 (during warmup), n_hits at that point = 8
+  seed  27: first locked at t=  697 (during warmup), n_hits at that point = 8
+  seed  29: first locked at t=  409 (during warmup), n_hits at that point = 8
+  seed  31: first locked at t=  745 (during warmup), n_hits at that point = 8
+  seed  32: first locked at t=  337 (during warmup), n_hits at that point = 8
+  seed  34: first locked at t=  553 (during warmup), n_hits at that point = 8
+  seed  35: first locked at t=  697 (during warmup), n_hits at that point = 8
+  seed  37: first locked at t=  697 (during warmup), n_hits at that point = 8
+  seed  40: first locked at t=  721 (during warmup), n_hits at that point = 8
+
+For seeds that NEVER locked on, what happened instead?
+  seed   1: best attempt reached confidence=0.00 pri_estimate=None at t=289 (n_hits=1, final count=6)
+  seed   2: best attempt reached confidence=0.00 pri_estimate=None at t=1 (n_hits=1, final count=7)
+  seed   3: best attempt reached confidence=0.00 pri_estimate=None at t=61 (n_hits=1, final count=7)
+  seed   4: best attempt reached confidence=0.00 pri_estimate=None at t=25 (n_hits=1, final count=6)
+  seed   7: best attempt reached confidence=0.00 pri_estimate=None at t=181 (n_hits=1, final count=3)
+  seed   8: best attempt reached confidence=0.00 pri_estimate=None at t=49 (n_hits=1, final count=7)
+  seed   9: best attempt reached confidence=0.00 pri_estimate=None at t=157 (n_hits=1, final count=5)
+  seed  14: best attempt reached confidence=0.00 pri_estimate=None at t=37 (n_hits=1, final count=5)
+  seed  15: best attempt reached confidence=0.00 pri_estimate=None at t=49 (n_hits=1, final count=6)
+  seed  18: best attempt reached confidence=0.00 pri_estimate=None at t=109 (n_hits=1, final count=2)
+  seed  21: best attempt reached confidence=0.00 pri_estimate=None at t=85 (n_hits=1, final count=6)
+  seed  22: best attempt reached confidence=0.00 pri_estimate=None at t=13 (n_hits=1, final count=6)
+  seed  25: best attempt reached confidence=0.00 pri_estimate=None at t=241 (n_hits=1, final count=5)
+  seed  28: best attempt reached confidence=0.00 pri_estimate=None at t=145 (n_hits=1, final count=5)
+  seed  30: best attempt reached confidence=0.00 pri_estimate=None at t=97 (n_hits=1, final count=7)
+  seed  33: best attempt reached confidence=0.00 pri_estimate=None at t=181 (n_hits=1, final count=6)
+  seed  36: best attempt reached confidence=0.00 pri_estimate=None at t=73 (n_hits=1, final count=4)
+  seed  38: best attempt reached confidence=0.00 pri_estimate=None at t=61 (n_hits=1, final count=7)
+  seed  39: best attempt reached confidence=0.00 pri_estimate=None at t=49 (n_hits=1, final count=7)
+
+--------------------------------------------------------------------------------
+FINISHED: diagnose_pri_lockon.py
+Exit code: 0
+Time: 37.0 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 9/20
+################################################################################
+
+================================================================================
+STARTING: multi_seed_robustness.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 10
+================================================================================
+DATA SOURCE: real TSRD pulse train  D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  6668 pulses, ToA span 16.32 s (collection_time 30.0 s), freq range 500-18000 MHz
+  seed semantics: scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment)
+
+  *** SCAN-MODE FILE -- READ THIS BEFORE QUOTING AN INTERCEPTION RATIO ***
+  The receiver that produced this recording was ITSELF a fixed-sweep
+  scanning receiver (36 dwells, 2.15 s per full sweep).
+  So this file is the OUTPUT of an open-loop scanner -- the very baseline
+  this project exists to beat. Every pulse that scanner missed is absent
+  here and is invisible to our scheduler, which means:
+    - the interception denominator is 'what the open-loop scanner already
+      caught', not 'what the emitters actually transmitted';
+    - periodicity found in this stream is partly the ORIGINAL RECEIVER's
+      sweep revisit period, not emitter structure.
+  A stare-mode file is the oracle needed to score scan SCHEDULING honestly.
+  Treat numbers from this file as re-capture efficiency on a pre-filtered
+  stream, not as interception rate against the environment.
+
+  Ground truth derived from file metadata (n_bands=8):
+    band 0: TRUTH 1693.24 us  [= 84.662 scan-steps at dwell 20.0 us]  (label 2 (SMART-L EWC Long Range), Fixed -> 1693.24 us, 94 pulses)
+    band 1: TRUTH 700.00 us  [= 35.000 scan-steps at dwell 20.0 us]  (label 0 (AEGIS SPY-1D Naval Fire Control Radar), Staggered (group of 5,sum) -> 700.00 us, 6521 pulses)
+    band 2: no truth -- only 0 pulses in band
+    band 3: no truth -- label 3 is frequency-agile: only 50.9% of its pulses land in this band
+    band 4: no truth -- label 3 is frequency-agile: only 49.1% of its pulses land in this band
+    band 5: no truth -- only 0 pulses in band
+    band 6: no truth -- only 0 pulses in band
+    band 7: no truth -- only 0 pulses in band
+
+NOTE: --h5 affects suite E only; A-D and F-G remain synthetic by design.
+
+Running every comparison across 10 seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+====================================================================================================
+
+[A] Original prototype, single-channel, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    25.7% +/-  0.5%   |   24.9% |   26.6%
+Random (naive)                             |    25.5% +/-  0.6%   |   24.5% |   26.3%
+BeliefScheduler (learned)                  |    52.2% +/-  2.7%   |   49.4% |   56.5%
+  BeliefScheduler vs RoundRobin                 : +26.5pp +/-  2.5pp   (min +23.4pp, max +30.6pp)  -- won in 10/10 seeds
+
+====================================================================================================
+
+[B] Multi-channel (v2), k_channels=1, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    12.5% +/-  0.2%   |   12.0% |   12.8%
+Random (naive)                             |    12.4% +/-  0.3%   |   12.0% |   12.9%
+BeliefUCB (learned)                        |    28.3% +/-  1.3%   |   25.4% |   29.7%
+  BeliefUCB vs RoundRobin                       : +15.7pp +/-  1.3pp   (min +12.9pp, max +17.4pp)  -- won in 10/10 seeds
+
+[B] Multi-channel (v2), k_channels=2, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    25.1% +/-  0.2%   |   24.8% |   25.3%
+Random (naive)                             |    24.8% +/-  0.4%   |   24.3% |   25.6%
+BeliefUCB (learned)                        |    54.6% +/-  0.6%   |   53.2% |   55.2%
+  BeliefUCB vs RoundRobin                       : +29.5pp +/-  0.7pp   (min +28.1pp, max +30.3pp)  -- won in 10/10 seeds
+
+[B] Multi-channel (v2), k_channels=3, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    37.5% +/-  0.2%   |   37.2% |   37.8%
+Random (naive)                             |    37.4% +/-  0.4%   |   36.8% |   38.1%
+BeliefUCB (learned)                        |    68.5% +/-  0.6%   |   67.5% |   69.3%
+  BeliefUCB vs RoundRobin                       : +31.1pp +/-  0.6pp   (min +30.0pp, max +32.0pp)  -- won in 10/10 seeds
+
+====================================================================================================
+
+[C] Beacon scenario (v3), k_channels=1, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    12.5% +/-  0.2%   |   12.0% |   12.8%
+BeliefUCB (Markov-only)                    |    27.7% +/-  1.0%   |   26.4% |   29.2%
+PRIAware (Markov+periodicity)              |    28.3% +/-  0.9%   |   27.0% |   29.5%
+  PRIAware vs BeliefUCB                         :  +0.6pp +/-  1.2pp   (min  -1.6pp, max  +2.2pp)  -- won in 7/10 seeds
+
+[C] Beacon scenario (v3), k_channels=2, 10 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    25.1% +/-  0.2%   |   24.8% |   25.3%
+BeliefUCB (Markov-only)                    |    54.4% +/-  0.7%   |   53.5% |   55.4%
+PRIAware (Markov+periodicity)              |    54.5% +/-  0.8%   |   53.2% |   55.2%
+  PRIAware vs BeliefUCB                         :  +0.1pp +/-  1.1pp   (min  -1.6pp, max  +1.3pp)  -- won in 6/10 seeds
+
+====================================================================================================
+
+[D] Sparse fixed-PRI radar (v3), k_channels=1, 10 seeds, 800-step warmup (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    11.7% +/-  0.4%   |   10.7% |   12.2%
+BeliefUCB (Markov-only)                    |    32.5% +/-  0.8%   |   31.4% |   33.9%
+PRIAware (Markov+periodicity)              |    34.7% +/-  2.3%   |   31.0% |   37.5%
+  PRIAware vs BeliefUCB (blended %)             :  +2.1pp +/-  2.4pp   (min  -2.2pp, max  +5.2pp)  -- won in 8/10 seeds
+
+[D] Sparse fixed-PRI radar (v3), k_channels=2, 10 seeds, 800-step warmup (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    23.3% +/-  0.3%   |   22.8% |   23.8%
+BeliefUCB (Markov-only)                    |    47.7% +/-  1.0%   |   46.4% |   49.7%
+PRIAware (Markov+periodicity)              |    52.3% +/-  0.9%   |   51.1% |   54.0%
+  PRIAware vs BeliefUCB (blended %)             :  +4.6pp +/-  1.4pp   (min  +1.8pp, max  +6.0pp)  -- won in 10/10 seeds
+
+[D] Per-emitter capture, k_channels=1, 10 seeds, 800-step warmup -- the metric that actually matters (blended % hides this)
+
+  Fixed-PRI radar (band 5) capture rate
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+BeliefUCB                                  |     0.3% +/-  0.8%   |    0.0% |    2.6%
+PRIAware                                   |    30.0% +/- 48.3%   |    0.0% |  100.0%
+
+  Comm-1 (band 1) capture rate
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+BeliefUCB                                  |    86.9% +/-  2.4%   |   82.3% |   90.0%
+PRIAware                                   |    84.8% +/-  4.5%   |   77.5% |   90.0%
+  PRIAware vs BeliefUCB on radar capture        : +29.7pp +/- 47.9pp   (min  +0.0pp, max +100.0pp)  -- won in 3/10 seeds
+  PRIAware vs BeliefUCB on comm-1 capture (expected cost):  -2.2pp +/-  3.5pp   (min  -7.3pp, max  +0.0pp)  -- won in 0/10 seeds
+
+====================================================================================================
+
+[E] Turing synthetic PDW stand-in, k_channels=1, dwell=200.0us, 10 seeds (each seed = a different synthetic pulse stream)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    12.7% +/-  0.0%   |   12.7% |   12.7%
+Random (naive)                             |    12.4% +/-  1.0%   |   11.4% |   14.1%
+BeliefUCB (Markov+UCB)                     |    91.8% +/-  0.0%   |   91.8% |   91.8%
+PRIAware (Markov+periodicity)              |    91.8% +/-  0.0%   |   91.8% |   91.8%
+  BeliefUCB vs RoundRobin                       : +79.1pp +/-  0.0pp   (min +79.1pp, max +79.1pp)  -- won in 10/10 seeds
+  PRIAware vs BeliefUCB                         :  +0.0pp +/-  0.0pp   (min  +0.0pp, max  +0.0pp)  -- won in 0/10 seeds
+
+====================================================================================================
+
+[F] Fix validation: PRIAware (original) vs Persistent (fixed), per-emitter capture, 10 seeds, 800-step warmup
+
+  Fixed-PRI radar (band 5) capture rate
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+PRIAware (original)                        |    30.0% +/- 48.3%   |    0.0% |  100.0%
+Persistent (fixed)                         |    93.3% +/-  0.9%   |   90.6% |   93.6%
+
+  Comm-1 (band 1) capture rate
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+PRIAware (original)                        |    84.8% +/-  4.5%   |   77.5% |   90.0%
+Persistent (fixed)                         |    75.3% +/-  3.0%   |   70.3% |   80.2%
+  Seeds with radar capture > 50%: original 3/10, fixed 10/10
+
+====================================================================================================
+
+[G] ScanAwarePRIScheduler, spatially-scanning radar in mixed traffic, 10 seeds (8000 steps each, radar priority weight=4.0)
+
+  Overall interception
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    12.6% +/-  0.2%   |   12.3% |   12.8%
+BeliefUCB (no periodicity)                 |    30.9% +/-  0.6%   |   29.7% |   31.9%
+PRIAware (single-periodicity)              |    30.5% +/-  1.3%   |   27.2% |   31.9%
+ScanAwarePRIScheduler (two-tier)           |    27.5% +/-  1.3%   |   25.0% |   29.4%
+
+  Radar-band (band 5) capture rate
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    16.1% +/-  0.5%   |   15.3% |   17.0%
+BeliefUCB (no periodicity)                 |     2.6% +/-  1.7%   |    0.9% |    5.8%
+PRIAware (single-periodicity)              |     4.4% +/-  5.4%   |    0.9% |   19.0%
+ScanAwarePRIScheduler (two-tier)           |    58.7% +/- 17.4%   |   31.5% |   89.4%
+  ScanAware vs PRIAware on radar capture        : +54.3pp +/- 18.1pp   (min +30.6pp, max +88.1pp)  -- won in 10/10 seeds
+  ScanAware vs PRIAware on overall interception (the cost):  -3.0pp +/-  2.0pp   (min  -5.3pp, max  +0.9pp)  -- won in 1/10 seeds
+
+  Lock-sanity check (scan_period_estimate within 10% of true 40, beam_dwell_estimate <= 18): 10/10 seeds clean
+  No bad locks found in this sweep.
+
+====================================================================================================
+
+Raw per-seed results written to multi_seed_results.csv
+
+BOTTOM LINE: every 'X beats Y' delta above reports how many of the 10 seeds the win held in. A delta whose mean is well clear of 0 relative to its stdev, and that wins in most/all seeds, is a robust effect rather than a seed-lottery artifact.
+
+--------------------------------------------------------------------------------
+FINISHED: multi_seed_robustness.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 10
+Exit code: 0
+Time: 318.4 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 10/20
+################################################################################
+
+================================================================================
+STARTING: tune_confidence_threshold.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+================================================================================
+DATA SOURCE: real TSRD pulse train  D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  6668 pulses, ToA span 16.32 s (collection_time 30.0 s), freq range 500-18000 MHz
+  seed semantics: scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment)
+
+  *** SCAN-MODE FILE -- READ THIS BEFORE QUOTING AN INTERCEPTION RATIO ***
+  The receiver that produced this recording was ITSELF a fixed-sweep
+  scanning receiver (36 dwells, 2.15 s per full sweep).
+  So this file is the OUTPUT of an open-loop scanner -- the very baseline
+  this project exists to beat. Every pulse that scanner missed is absent
+  here and is invisible to our scheduler, which means:
+    - the interception denominator is 'what the open-loop scanner already
+      caught', not 'what the emitters actually transmitted';
+    - periodicity found in this stream is partly the ORIGINAL RECEIVER's
+      sweep revisit period, not emitter structure.
+  A stare-mode file is the oracle needed to score scan SCHEDULING honestly.
+  Treat numbers from this file as re-capture efficiency on a pre-filtered
+  stream, not as interception rate against the environment.
+
+  Ground truth derived from file metadata (n_bands=8):
+    band 0: TRUTH 1693.24 us  [= 84.662 scan-steps at dwell 20.0 us]  (label 2 (SMART-L EWC Long Range), Fixed -> 1693.24 us, 94 pulses)
+    band 1: TRUTH 700.00 us  [= 35.000 scan-steps at dwell 20.0 us]  (label 0 (AEGIS SPY-1D Naval Fire Control Radar), Staggered (group of 5,sum) -> 700.00 us, 6521 pulses)
+    band 2: no truth -- only 0 pulses in band
+    band 3: no truth -- label 3 is frequency-agile: only 50.9% of its pulses land in this band
+    band 4: no truth -- label 3 is frequency-agile: only 49.1% of its pulses land in this band
+    band 5: no truth -- only 0 pulses in band
+    band 6: no truth -- only 0 pulses in band
+    band 7: no truth -- only 0 pulses in band
+
+PDW half of the sweep uses band 0 (true period 1693.24 us = 84.662 steps at dwell 20.0 us)
+
+Sweeping confidence_scale over [0.25, 0.2, 0.17, 0.15, 0.12, 0.1]
+Beacon check: 20 seeds, identical-environment methodology, k=1 and k=2
+PDW check: 15 seeds, band 0 (true PRI=1693us) lock-on classification
+
+  scale |  k=1 vs Plateau |  k=2 vs Plateau |  k=2 vs BeliefUCB |   PDW band correct |  PDW harmonic |  PDW no-lock
+-------------------------------------------------------------------------------------------------------------------
+   0.25 |   +0.3pp (10/20) |   +0.4pp (17/20) |    -0.5pp ( 6/20) |              15/15 |          0/15 |         0/15
+   0.20 |   +0.1pp (12/20) |   +0.7pp (16/20) |    -0.2pp ( 0/20) |              15/15 |          0/15 |         0/15
+   0.17 |   +0.1pp (12/20) |   +0.7pp (17/20) |    -0.1pp ( 0/20) |              15/15 |          0/15 |         0/15
+   0.15 |   -0.1pp (12/20) |   +0.7pp (17/20) |    -0.1pp ( 0/20) |               0/15 |          0/15 |        15/15
+   0.12 |   -0.0pp (13/20) |   +0.9pp (17/20) |    +0.0pp ( 0/20) |               0/15 |          0/15 |        15/15
+   0.10 |   -0.0pp (13/20) |   +0.9pp (17/20) |    +0.0pp ( 0/20) |               0/15 |          0/15 |        15/15
+
+Reading this table: we want, relative to scale=0.25 (the current/original value):
+  - k=2 vs Plateau delta to move toward 0 or positive (currently -0.3pp/2-3 wins out of ~30
+    in the full validation -- here on a smaller 20-seed sweep sample)
+  - k=1 vs Plateau delta to not get meaningfully worse
+  - PDW band correct-lock count to stay at or above scale=0.25's count (NOT regress
+    toward PlateauOnly's pre-fix 14/20 -- see validate_pdw_multiseed.py)
+
+Baseline (scale=0.25): k=1 vs Plateau +0.3pp, k=2 vs Plateau +0.4pp, PDW band correct 15/15
+
+  scale=0.20: k=2 improves=True (delta +0.7pp), k=1 no-worse=True (delta +0.1pp), PDW preserved=True (15/15 vs baseline 15/15)
+  scale=0.17: k=2 improves=True (delta +0.7pp), k=1 no-worse=True (delta +0.1pp), PDW preserved=True (15/15 vs baseline 15/15)
+  scale=0.15: k=2 improves=True (delta +0.7pp), k=1 no-worse=True (delta -0.1pp), PDW preserved=False (0/15 vs baseline 15/15)
+  scale=0.12: k=2 improves=True (delta +0.9pp), k=1 no-worse=True (delta -0.0pp), PDW preserved=False (0/15 vs baseline 15/15)
+  scale=0.10: k=2 improves=True (delta +0.9pp), k=1 no-worse=True (delta -0.0pp), PDW preserved=False (0/15 vs baseline 15/15)
+
+Selected confidence_scale = 0.2 -- improves the beacon k=2 eagerness cost without regressing k=1 or the PDW fractional-PRI lock-on.
+
+--------------------------------------------------------------------------------
+FINISHED: tune_confidence_threshold.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+Exit code: 0
+Time: 5104.1 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 11/20
+################################################################################
+
+================================================================================
+STARTING: validate_offbyone_fix.py
+================================================================================
+Off-by-one-fix confirmation, beacon scenario, identical-environment methodology, 30 seeds (1..30), k=1 and k=2.
+
+--- k=1 ---
+Scheduler                        |    mean |  stdev |    min |    max
+-----------------------------------------------------------------
+BeliefUCB                        |   27.9% |   1.3% |  25.5% |  30.4%
+PreOffByOneFix (session start)   |   27.8% |   1.6% |  24.9% |  31.5%
+Current (with off-by-one fix)    |   28.2% |   1.4% |  25.7% |  31.5%
+  Current vs PreOffByOneFix (this session's fix, isolated)  :  +0.4pp +/-  1.5pp  -- won 13/30
+  Current vs BeliefUCB (net vs baseline)                    :  +0.4pp +/-  1.3pp  -- won 14/30
+
+--- k=2 ---
+Scheduler                        |    mean |  stdev |    min |    max
+-----------------------------------------------------------------
+BeliefUCB                        |   54.4% |   0.8% |  52.3% |  55.8%
+PreOffByOneFix (session start)   |   53.4% |   1.5% |  48.6% |  55.8%
+Current (with off-by-one fix)    |   54.0% |   1.3% |  50.2% |  56.0%
+  Current vs PreOffByOneFix (this session's fix, isolated)  :  +0.6pp +/-  1.5pp  -- won 23/30
+  Current vs BeliefUCB (net vs baseline)                    :  -0.5pp +/-  1.1pp  -- won 9/30
+
+
+--------------------------------------------------------------------------------
+FINISHED: validate_offbyone_fix.py
+Exit code: 0
+Time: 115.4 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 12/20
+################################################################################
+
+================================================================================
+STARTING: validate_plateau_fix.py
+================================================================================
+Validating the burst-plateau jitter fix in isolation from the later harmonic-selection fix, across 20 seeds (1..20).
+
+
+[Plateau validation] Beacon scenario, k_channels=1, 20 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    12.5% +/-  0.2%   |   12.0% |   12.8%
+BeliefUCB (Markov-only)                    |    27.9% +/-  1.0%   |   26.3% |   29.9%
+Original (pre-both-fixes)                  |    29.2% +/-  1.9%   |   23.8% |   32.1%
+PlateauOnly (fix 1 only)                   |    27.5% +/-  1.7%   |   24.5% |   30.7%
+Current (both fixes)                       |    27.4% +/-  1.3%   |   24.7% |   30.0%
+  Original vs BeliefUCB (baseline, pre-fix) :  +1.3pp +/-  2.0pp   (min  -2.6pp, max  +5.0pp)  -- won in 14/20 seeds
+  PlateauOnly vs BeliefUCB (fix 1 alone)    :  -0.4pp +/-  1.9pp   (min  -3.2pp, max  +2.7pp)  -- won in 8/20 seeds
+  PlateauOnly vs Original (fix 1's OWN contribution):  -1.7pp +/-  2.4pp   (min  -7.6pp, max  +1.7pp)  -- won in 6/20 seeds
+  Current vs BeliefUCB (both fixes, shipped state):  -0.5pp +/-  1.8pp   (min  -2.8pp, max  +3.5pp)  -- won in 8/20 seeds
+
+[Plateau validation] Beacon scenario, k_channels=2, 20 seeds (4000 steps each)
+Scheduler                                  |     mean +/- stdev |      min |      max
+-------------------------------------------------------------------------------------
+RoundRobin (open-loop)                     |    25.0% +/-  0.2%   |   24.7% |   25.3%
+BeliefUCB (Markov-only)                    |    54.2% +/-  0.8%   |   52.3% |   55.5%
+Original (pre-both-fixes)                  |    51.8% +/-  2.4%   |   46.9% |   54.7%
+PlateauOnly (fix 1 only)                   |    53.2% +/-  1.2%   |   49.7% |   54.4%
+Current (both fixes)                       |    54.1% +/-  1.0%   |   51.4% |   55.2%
+  Original vs BeliefUCB (baseline, pre-fix) :  -2.3pp +/-  2.7pp   (min  -8.6pp, max  +1.5pp)  -- won in 2/20 seeds
+  PlateauOnly vs BeliefUCB (fix 1 alone)    :  -1.0pp +/-  1.1pp   (min  -2.8pp, max  +0.9pp)  -- won in 4/20 seeds
+  PlateauOnly vs Original (fix 1's OWN contribution):  +1.3pp +/-  2.6pp   (min  -4.1pp, max  +6.3pp)  -- won in 13/20 seeds
+  Current vs BeliefUCB (both fixes, shipped state):  -0.1pp +/-  1.3pp   (min  -2.5pp, max  +2.6pp)  -- won in 9/20 seeds
+
+--------------------------------------------------------------------------------
+FINISHED: validate_plateau_fix.py
+Exit code: 0
+Time: 127.5 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 13/20
+################################################################################
+
+================================================================================
+STARTING: validate_warmup_dwell_fix.py
+================================================================================
+====================================================================================================
+switch_cost_steps = 1   (warmup_dwell_steps = 3, warmup_steps scaled 800 -> 1200, switch_lead_steps = 1)
+====================================================================================================
+
+Radar capture (band 5, 30 seeds):
+  A) dwell=1, warmup=800 (original, broken):    0.7% +/-   0.5%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  1.9%)
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled):    0.0% +/-   0.0%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  0.0%)
+  C) dwell, jitter=0, warmup scaled (no jitter):    0.0% +/-   0.0%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  0.0%)
+  D) dwell, jitter=1, warmup scaled (PRIAware):   76.7% +/-  42.3%   (locked-on >50% in 23/30 seeds,  min=  0.0%  max=100.0%)
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX):   93.2% +/-   0.4%   (locked-on >50% in 30/30 seeds,  min= 91.4%  max= 93.6%)
+
+Comm-1 capture (band 1, the cost, 30 seeds):
+  A) dwell=1, warmup=800 (original, broken):   73.2% +/-  13.0%   (locked-on >50% in 29/30 seeds,  min=  7.2%  max= 81.7%)
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled):   80.2% +/-   2.0%   (locked-on >50% in 30/30 seeds,  min= 76.4%  max= 84.7%)
+  C) dwell, jitter=0, warmup scaled (no jitter):   81.2% +/-   4.9%   (locked-on >50% in 30/30 seeds,  min= 60.8%  max= 89.7%)
+  D) dwell, jitter=1, warmup scaled (PRIAware):   57.0% +/-  20.0%   (locked-on >50% in 25/30 seeds,  min=  0.0%  max= 89.7%)
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX):   48.1% +/-  14.0%   (locked-on >50% in 22/30 seeds,  min=  0.0%  max= 59.9%)
+
+Final periodicity confidence on band 5 (30 seeds):
+  A) dwell=1, warmup=800 (original, broken)     : mean=0.00  locked(>=0.5) in 0/30 seeds
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled): mean=0.00  locked(>=0.5) in 0/30 seeds
+  C) dwell, jitter=0, warmup scaled (no jitter) : mean=0.00  locked(>=0.5) in 0/30 seeds
+  D) dwell, jitter=1, warmup scaled (PRIAware)  : mean=0.77  locked(>=0.5) in 23/30 seeds
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX): mean=1.00  locked(>=0.5) in 30/30 seeds
+
+====================================================================================================
+switch_cost_steps = 2   (warmup_dwell_steps = 4, warmup_steps scaled 800 -> 1600, switch_lead_steps = 2)
+====================================================================================================
+
+Radar capture (band 5, 30 seeds):
+  A) dwell=1, warmup=800 (original, broken):    0.6% +/-   0.6%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  2.2%)
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled):    0.0% +/-   0.0%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  0.0%)
+  C) dwell, jitter=0, warmup scaled (no jitter):    0.0% +/-   0.0%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max=  0.0%)
+  D) dwell, jitter=1, warmup scaled (PRIAware):   83.3% +/-  37.3%   (locked-on >50% in 25/30 seeds,  min=  0.0%  max=100.0%)
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX):   92.0% +/-   0.2%   (locked-on >50% in 30/30 seeds,  min= 91.5%  max= 92.5%)
+
+Comm-1 capture (band 1, the cost, 30 seeds):
+  A) dwell=1, warmup=800 (original, broken):   72.2% +/-   6.2%   (locked-on >50% in 30/30 seeds,  min= 54.7%  max= 81.8%)
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled):   73.8% +/-  16.8%   (locked-on >50% in 28/30 seeds,  min=  0.0%  max= 85.0%)
+  C) dwell, jitter=0, warmup scaled (no jitter):   69.6% +/-  27.7%   (locked-on >50% in 26/30 seeds,  min=  0.0%  max= 87.8%)
+  D) dwell, jitter=1, warmup scaled (PRIAware):   38.8% +/-  22.3%   (locked-on >50% in 5/30 seeds,  min=  0.0%  max= 84.2%)
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX):   28.1% +/-   9.8%   (locked-on >50% in 0/30 seeds,  min=  0.0%  max= 36.0%)
+
+Final periodicity confidence on band 5 (30 seeds):
+  A) dwell=1, warmup=800 (original, broken)     : mean=0.00  locked(>=0.5) in 0/30 seeds
+  B) dwell, jitter=0, warmup=800 (dwell only, unscaled): mean=0.00  locked(>=0.5) in 0/30 seeds
+  C) dwell, jitter=0, warmup scaled (no jitter) : mean=0.00  locked(>=0.5) in 0/30 seeds
+  D) dwell, jitter=1, warmup scaled (PRIAware)  : mean=0.83  locked(>=0.5) in 25/30 seeds
+  E) dwell, jitter=1, warmup scaled + v4 persistent (FULL FIX): mean=1.00  locked(>=0.5) in 30/30 seeds
+
+====================================================================================================
+Sanity check: cost=0 must reproduce the exact existing headline (100.0% / 79.0%), all variants collapse to the same thing since dwell/jitter only matter when there's something to settle from
+====================================================================================================
+  dwell=1 (default)     : radar=100.0%  comm1=79.4%  conf=1.00
+  dwell=2, jitter=1     : radar=0.0%  comm1=85.4%  conf=0.00
+
+--------------------------------------------------------------------------------
+FINISHED: validate_warmup_dwell_fix.py
+Exit code: 0
+Time: 165.8 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 14/20
+################################################################################
+
+================================================================================
+STARTING: validate_beacon_switchcost_dwell.py
+================================================================================
+====================================================================================================
+Beacon scenario, k_channels=1  (30 seeds)
+====================================================================================================
+
+--- switch_cost_steps = 0 (baseline, no fix applicable) ---
+  RoundRobin (open-loop reference)                    :   12.5% +/-   0.2%   (min= 12.0%  max= 13.0%)
+  BeliefUCB (Markov-only)                             :   27.9% +/-   1.3%   (min= 25.5%  max= 30.4%)
+  PRIAware, warmup=0 (project's existing convention)  :   28.2% +/-   1.3%   (min= 25.7%  max= 31.5%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.32  locked(>=0.5) in 11/30 seeds
+
+--- switch_cost_steps = 1 (fix variants use warmup_dwell_steps=3, warmup_steps=1200, switch_lead_steps=1) ---
+  RoundRobin (open-loop reference)                    :    0.0% +/-   0.0%   (min=  0.0%  max=  0.0%)
+  BeliefUCB (Markov-only)                             :   18.2% +/-   1.6%   (min= 13.7%  max= 21.1%)
+  PRIAware, warmup=0 (project's existing convention)  :   18.1% +/-   2.1%   (min= 12.1%  max= 21.6%)
+  PRIAware + dwell/jitter/lead fix                    :   13.6% +/-   2.4%   (min= 10.9%  max= 20.4%)
+  PersistentPRIAware(v4) + dwell/jitter/lead fix      :   13.8% +/-   2.6%   (min= 10.9%  max= 20.4%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.63  locked(>=0.5) in 21/30 seeds
+    PRIAware + dwell/jitter/lead fix                  : mean_conf=0.03  locked(>=0.5) in 1/30 seeds
+    PersistentPRIAware(v4) + dwell/jitter/lead fix    : mean_conf=0.06  locked(>=0.5) in 2/30 seeds
+
+--- switch_cost_steps = 2 (fix variants use warmup_dwell_steps=4, warmup_steps=1600, switch_lead_steps=2) ---
+  RoundRobin (open-loop reference)                    :    0.0% +/-   0.0%   (min=  0.0%  max=  0.0%)
+  BeliefUCB (Markov-only)                             :   14.5% +/-   1.3%   (min= 11.1%  max= 17.9%)
+  PRIAware, warmup=0 (project's existing convention)  :   13.4% +/-   2.9%   (min=  8.3%  max= 18.2%)
+  PRIAware + dwell/jitter/lead fix                    :   12.0% +/-   0.9%   (min=  8.8%  max= 13.6%)
+  PersistentPRIAware(v4) + dwell/jitter/lead fix      :   12.0% +/-   0.9%   (min=  8.8%  max= 13.6%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.36  locked(>=0.5) in 11/30 seeds
+    PRIAware + dwell/jitter/lead fix                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PersistentPRIAware(v4) + dwell/jitter/lead fix    : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+
+====================================================================================================
+Beacon scenario, k_channels=2  (30 seeds)
+====================================================================================================
+
+--- switch_cost_steps = 0 (baseline, no fix applicable) ---
+  RoundRobin (open-loop reference)                    :   25.0% +/-   0.2%   (min= 24.7%  max= 25.4%)
+  BeliefUCB (Markov-only)                             :   54.4% +/-   0.8%   (min= 52.3%  max= 55.8%)
+  PRIAware, warmup=0 (project's existing convention)  :   54.0% +/-   1.3%   (min= 50.2%  max= 56.0%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.20  locked(>=0.5) in 7/30 seeds
+
+--- switch_cost_steps = 1 (fix variants use warmup_dwell_steps=3, warmup_steps=1200, switch_lead_steps=1) ---
+  RoundRobin (open-loop reference)                    :    0.0% +/-   0.0%   (min=  0.0%  max=  0.0%)
+  BeliefUCB (Markov-only)                             :   33.8% +/-   1.3%   (min= 30.4%  max= 36.3%)
+  PRIAware, warmup=0 (project's existing convention)  :   35.3% +/-   1.8%   (min= 31.5%  max= 38.2%)
+  PRIAware + dwell/jitter/lead fix                    :   30.2% +/-   1.3%   (min= 26.9%  max= 33.2%)
+  PersistentPRIAware(v4) + dwell/jitter/lead fix      :   30.2% +/-   1.3%   (min= 26.9%  max= 33.2%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.52  locked(>=0.5) in 18/30 seeds
+    PRIAware + dwell/jitter/lead fix                  : mean_conf=0.05  locked(>=0.5) in 2/30 seeds
+    PersistentPRIAware(v4) + dwell/jitter/lead fix    : mean_conf=0.05  locked(>=0.5) in 2/30 seeds
+
+--- switch_cost_steps = 2 (fix variants use warmup_dwell_steps=4, warmup_steps=1600, switch_lead_steps=2) ---
+  RoundRobin (open-loop reference)                    :    0.0% +/-   0.0%   (min=  0.0%  max=  0.0%)
+  BeliefUCB (Markov-only)                             :   30.2% +/-   1.1%   (min= 28.4%  max= 33.1%)
+  PRIAware, warmup=0 (project's existing convention)  :   31.0% +/-   1.6%   (min= 27.8%  max= 33.9%)
+  PRIAware + dwell/jitter/lead fix                    :   22.9% +/-   0.8%   (min= 21.2%  max= 24.1%)
+  PersistentPRIAware(v4) + dwell/jitter/lead fix      :   22.9% +/-   0.8%   (min= 21.2%  max= 24.1%)
+  beacon periodicity lock-on (max confidence across bands 2/5/6):
+    RoundRobin (open-loop reference)                  : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    BeliefUCB (Markov-only)                           : mean_conf=0.00  locked(>=0.5) in 0/30 seeds
+    PRIAware, warmup=0 (project's existing convention): mean_conf=0.57  locked(>=0.5) in 18/30 seeds
+    PRIAware + dwell/jitter/lead fix                  : mean_conf=0.03  locked(>=0.5) in 1/30 seeds
+    PersistentPRIAware(v4) + dwell/jitter/lead fix    : mean_conf=0.03  locked(>=0.5) in 1/30 seeds
+
+
+====================================================================================================
+Mechanism isolation (cost=1, k=1): which piece of the fix actually costs interception?
+====================================================================================================
+  1) baseline: warmup=0, lead=0                               :  18.9% +/-  2.0%
+  2) dwell-fix only: warmup=1200,dwell=3,jit=1, lead=0        :  14.9% +/-  2.7%
+  3) lead only: warmup=0, lead=1                              :  18.4% +/-  1.4%
+  4) both (the combo tested above)                            :  14.2% +/-  2.4%
+
+--------------------------------------------------------------------------------
+FINISHED: validate_beacon_switchcost_dwell.py
+Exit code: 0
+Time: 407.5 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 15/20
+################################################################################
+
+================================================================================
+STARTING: validate_scan_aware_mixed.py
+================================================================================
+Mixed competitive scenario, 8000 steps, k=1, 10 seeds, radar priority weight=4.0
+
+Scheduler                            |  Overall % |  Radar-band %
+-----------------------------------------------------------------
+RoundRobin (open-loop baseline)      |     12.6%  |        16.2%
+BeliefUCB (no periodicity model)     |     31.0%  |         2.5%
+PRIAware (single-periodicity)        |     30.6%  |         4.5%
+ScanAwarePRIScheduler (two-tier)     |     27.8%  |        60.8%
+
+--------------------------------------------------------------------------------
+FINISHED: validate_scan_aware_mixed.py
+Exit code: 0
+Time: 188.6 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 16/20
+################################################################################
+
+================================================================================
+STARTING: switch_cost_comparison.py
+================================================================================
+--- How many band-switches does each scheduler make? (k=1, 4000 steps) ---
+  RoundRobin  : 4000 switches out of 4000 steps (100.0% of steps trigger a switch)
+  Random      : 3494 switches out of 4000 steps (87.3% of steps trigger a switch)
+  BeliefUCB   : 1497 switches out of 4000 steps (37.4% of steps trigger a switch)
+
+--- Beacon scenario, k_channels=1 ---
+switch_cost |    RoundRobin |        Random |     BeliefUCB
+-----------------------------------------------------------
+          0 |         12.8% |         12.4% |         28.2%
+          1 |          0.0% |          1.4% |         15.9%
+          2 |          0.0% |          0.2% |         11.1%
+          4 |          0.0% |          0.0% |          9.6%
+
+--- Beacon scenario, k_channels=2 ---
+switch_cost |    RoundRobin |        Random |     BeliefUCB
+-----------------------------------------------------------
+          0 |         25.1% |         24.8% |         54.8%
+          1 |          0.0% |          6.0% |         32.2%
+          2 |          0.0% |          1.4% |         30.7%
+          4 |          0.0% |          0.1% |         13.6%
+
+--- Beacon scenario, k_channels=3 ---
+switch_cost |    RoundRobin |        Random |     BeliefUCB
+-----------------------------------------------------------
+          0 |         37.5% |         36.4% |         68.5%
+          1 |          0.0% |         13.1% |         50.1%
+          2 |          0.0% |          4.8% |         45.4%
+          4 |          0.0% |          0.7% |         29.8%
+
+--- Sparse fixed-PRI radar, per-emitter capture, k=1 ---
+("PRIAware" uses defaults -- warmup switches every step, so it's
+ devastated by switch cost the same way RoundRobin is. "PRIAware+dwell"
+ adds warmup_dwell_steps/jitter + switch_lead_steps -- see
+ validate_warmup_dwell_fix.py for the 30-seed validation of this fix.)
+
+switch_cost |  BeliefUCB radar% |  PRIAware radar% |  PRIAware comm1% |  +dwell radar% |  +dwell comm1%
+-------------------------------------------------------------------------------------------------------
+          0 |              0.0% |           100.0% |            79.4% |           n/a  |           n/a 
+          1 |              0.4% |             0.4% |            77.8% |         100.0% |          54.7%
+          2 |              0.0% |             0.4% |            49.7% |         100.0% |           0.0%
+          4 |              0.0% |             0.0% |            63.9% |         100.0% |           0.0%
+
+(NOTE: +dwell numbers are single-seed spot checks like everything else in
+ this table -- see validate_warmup_dwell_fix.py for the real 30-seed picture,
+ since this project has repeatedly found single-seed reads misleading.)
+
+
+--------------------------------------------------------------------------------
+FINISHED: switch_cost_comparison.py
+Exit code: 0
+Time: 4.9 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 17/20
+################################################################################
+
+================================================================================
+STARTING: settle_fix_interaction.py
+================================================================================
+Paired-identical-environment comparison, beacon scenario, k=2, 30 seeds (1..30).
+Every scheduler below sees the EXACT SAME ground-truth environment trajectory for a given seed (verified: none of these schedulers consume their own randomness with warmup_steps=0).
+
+Scheduler                      |    mean |  stdev |    min |    max
+-----------------------------------------------------------------
+BeliefUCB (Markov-only)        |   54.4% |   0.8% |  52.3% |  55.8%
+Original (pre-both-fixes)      |   51.9% |   1.8% |  48.1% |  54.8%
+PlateauOnly (fix 1 only)       |   53.6% |   1.1% |  51.7% |  55.8%
+Current (both fixes)           |   54.0% |   1.3% |  50.2% |  56.0%
+
+  PlateauOnly vs Original (fix 1's contribution, IDENTICAL envs):  +1.8pp +/-  1.8pp  -- won 25/30
+  Current vs PlateauOnly (fix 2's ADDED effect, IDENTICAL envs):  +0.3pp +/-  1.0pp  -- won 22/30
+  Current vs Original (both fixes combined, IDENTICAL envs):  +2.1pp +/-  2.2pp  -- won 27/30
+  Current vs BeliefUCB (net vs baseline, IDENTICAL envs)  :  -0.5pp +/-  1.1pp  -- won 9/30
+
+Worst Current-vs-PlateauOnly seed under IDENTICAL environments: seed 23 (-3.2pp)
+  band 2: PlateauOnly pri=None conf=0.00 jitter=1.00 | Current pri=None conf=0.00 jitter=2.00
+  band 5: PlateauOnly pri=None conf=0.00 jitter=2.00 | Current pri=None conf=0.00 jitter=2.00
+  band 6: PlateauOnly pri=None conf=0.00 jitter=1.00 | Current pri=None conf=0.00 jitter=1.00
+
+--------------------------------------------------------------------------------
+FINISHED: settle_fix_interaction.py
+Exit code: 0
+Time: 116.3 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 18/20
+################################################################################
+
+================================================================================
+STARTING: validate_pdw_multiseed.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 20 --dwell-us 20
+================================================================================
+DATA SOURCE: real TSRD pulse train  D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  6668 pulses, ToA span 16.32 s (collection_time 30.0 s), freq range 500-18000 MHz
+  seed semantics: scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment)
+
+  *** SCAN-MODE FILE -- READ THIS BEFORE QUOTING AN INTERCEPTION RATIO ***
+  The receiver that produced this recording was ITSELF a fixed-sweep
+  scanning receiver (36 dwells, 2.15 s per full sweep).
+  So this file is the OUTPUT of an open-loop scanner -- the very baseline
+  this project exists to beat. Every pulse that scanner missed is absent
+  here and is invisible to our scheduler, which means:
+    - the interception denominator is 'what the open-loop scanner already
+      caught', not 'what the emitters actually transmitted';
+    - periodicity found in this stream is partly the ORIGINAL RECEIVER's
+      sweep revisit period, not emitter structure.
+  A stare-mode file is the oracle needed to score scan SCHEDULING honestly.
+  Treat numbers from this file as re-capture efficiency on a pre-filtered
+  stream, not as interception rate against the environment.
+
+  Ground truth derived from file metadata (n_bands=8):
+    band 0: TRUTH 1693.24 us  [= 84.662 scan-steps at dwell 20.0 us]  (label 2 (SMART-L EWC Long Range), Fixed -> 1693.24 us, 94 pulses)
+    band 1: TRUTH 700.00 us  [= 35.000 scan-steps at dwell 20.0 us]  (label 0 (AEGIS SPY-1D Naval Fire Control Radar), Staggered (group of 5,sum) -> 700.00 us, 6521 pulses)
+    band 2: no truth -- only 0 pulses in band
+    band 3: no truth -- label 3 is frequency-agile: only 50.9% of its pulses land in this band
+    band 4: no truth -- label 3 is frequency-agile: only 49.1% of its pulses land in this band
+    band 5: no truth -- only 0 pulses in band
+    band 6: no truth -- only 0 pulses in band
+    band 7: no truth -- only 0 pulses in band
+
+PDW multi-seed validation of the harmonic-lock-on fix, 20 seeds (0..19), dwell=20.0us, k=1
+True periodic bands in use: {0: 1693.2440419927827, 1: 700.0}
+
+Scheduler                        |     Interception %
+-------------------------------------------------------
+BeliefUCB                        |     97.1% +/-  0.0pp
+PlateauOnly (pre-harmonic-fix)   |     97.0% +/-  0.0pp
+PRIAware (current, both fixes)   |     67.7% +/-  0.0pp
+PersistentPRIAware (v4)          |     67.7% +/-  0.0pp
+
+Per-band lock-on classification across 20 seeds (CORRECT = within 5% of true period; HARMONIC = locked on a ~0.5x/2x/3x multiple of the truth; WRONG = locked on something else; NO LOCK = never reached confidence >= min_confidence):
+
+PlateauOnly (pre-harmonic-fix):
+  band 0 (true PRI=1693us = 84.662 steps): CORRECT= 0  HARMONIC= 0  WRONG= 0  NO LOCK=20  (/20 seeds)
+  band 1 (true PRI=700us = 35.000 steps): CORRECT= 0  HARMONIC= 0  WRONG= 0  NO LOCK=20  (/20 seeds)
+
+PRIAware (current, both fixes):
+  band 0 (true PRI=1693us = 84.662 steps): CORRECT=20  HARMONIC= 0  WRONG= 0  NO LOCK= 0  (/20 seeds)
+  band 1 (true PRI=700us = 35.000 steps): CORRECT=20  HARMONIC= 0  WRONG= 0  NO LOCK= 0  (/20 seeds)
+
+PersistentPRIAware (v4):
+  band 0 (true PRI=1693us = 84.662 steps): CORRECT=20  HARMONIC= 0  WRONG= 0  NO LOCK= 0  (/20 seeds)
+  band 1 (true PRI=700us = 35.000 steps): CORRECT=20  HARMONIC= 0  WRONG= 0  NO LOCK= 0  (/20 seeds)
+
+
+Raw per-seed results written to pdw_multiseed_results.csv
+
+--------------------------------------------------------------------------------
+FINISHED: validate_pdw_multiseed.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 20 --dwell-us 20
+Exit code: 0
+Time: 1690.3 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 19/20
+################################################################################
+
+================================================================================
+STARTING: prediction_accuracy_metrics.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 20 --dwell-us 20
+================================================================================
+DATA SOURCE: real TSRD pulse train  D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  6668 pulses, ToA span 16.32 s (collection_time 30.0 s), freq range 500-18000 MHz
+  seed semantics: scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment)
+
+  *** SCAN-MODE FILE -- READ THIS BEFORE QUOTING AN INTERCEPTION RATIO ***
+  The receiver that produced this recording was ITSELF a fixed-sweep
+  scanning receiver (36 dwells, 2.15 s per full sweep).
+  So this file is the OUTPUT of an open-loop scanner -- the very baseline
+  this project exists to beat. Every pulse that scanner missed is absent
+  here and is invisible to our scheduler, which means:
+    - the interception denominator is 'what the open-loop scanner already
+      caught', not 'what the emitters actually transmitted';
+    - periodicity found in this stream is partly the ORIGINAL RECEIVER's
+      sweep revisit period, not emitter structure.
+  A stare-mode file is the oracle needed to score scan SCHEDULING honestly.
+  Treat numbers from this file as re-capture efficiency on a pre-filtered
+  stream, not as interception rate against the environment.
+
+  Ground truth derived from file metadata (n_bands=8):
+    band 0: TRUTH 1693.24 us  [= 84.662 scan-steps at dwell 20.0 us]  (label 2 (SMART-L EWC Long Range), Fixed -> 1693.24 us, 94 pulses)
+    band 1: TRUTH 700.00 us  [= 35.000 scan-steps at dwell 20.0 us]  (label 0 (AEGIS SPY-1D Naval Fire Control Radar), Staggered (group of 5,sum) -> 700.00 us, 6521 pulses)
+    band 2: no truth -- only 0 pulses in band
+    band 3: no truth -- label 3 is frequency-agile: only 50.9% of its pulses land in this band
+    band 4: no truth -- label 3 is frequency-agile: only 49.1% of its pulses land in this band
+    band 5: no truth -- only 0 pulses in band
+    band 6: no truth -- only 0 pulses in band
+    band 7: no truth -- only 0 pulses in band
+
+Prediction-accuracy metrics, 20 seeds (0..19), dwell=20.0us
+
+PRIAware (current, both fixes)
+  Percentage of correct predictions (final-state lock-on, all bands/seeds): 100.0%  (40/40)
+  Average intercept time error (predicted-vs-true next occurrence): 4853.47 us  (n=17340 predictions, stdev=95066.44 us)
+    band 0 (true PRI=1693us): mean err=252512.57us over 160 predictions
+    band 1 (true PRI=700us): mean err=2546.98us over 17180 predictions
+
+PersistentPRIAware (v4)
+  Percentage of correct predictions (final-state lock-on, all bands/seeds): 100.0%  (40/40)
+  Average intercept time error (predicted-vs-true next occurrence): 4853.47 us  (n=17340 predictions, stdev=95066.44 us)
+    band 0 (true PRI=1693us): mean err=252512.57us over 160 predictions
+    band 1 (true PRI=700us): mean err=2546.98us over 17180 predictions
+
+ScanAwarePRIScheduler (Gap #2)
+  Percentage of correct predictions (final-state lock-on, all bands/seeds): 0.0%  (0/40)
+  Average intercept time error (predicted-vs-true next occurrence): 501031.79 us  (n=420 predictions, stdev=891197.78 us)
+    band 0 (true PRI=1693us): mean err=618871.64us over 340 predictions
+    band 1 (true PRI=700us): mean err=212.39us over 80 predictions
+
+
+--------------------------------------------------------------------------------
+FINISHED: prediction_accuracy_metrics.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --seeds 20 --dwell-us 20
+Exit code: 0
+Time: 4341.4 seconds
+--------------------------------------------------------------------------------
+
+
+################################################################################
+EXPERIMENT 20/20
+################################################################################
+
+================================================================================
+STARTING: run_on_turing_dataset.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --dwell-us 20
+================================================================================
+DATA SOURCE: real TSRD pulse train  D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5
+  6668 pulses, ToA span 16.32 s (collection_time 30.0 s), freq range 500-18000 MHz
+  seed semantics: scheduler-randomness-only (one fixed recording; seeds do NOT vary the environment)
+
+  *** SCAN-MODE FILE -- READ THIS BEFORE QUOTING AN INTERCEPTION RATIO ***
+  The receiver that produced this recording was ITSELF a fixed-sweep
+  scanning receiver (36 dwells, 2.15 s per full sweep).
+  So this file is the OUTPUT of an open-loop scanner -- the very baseline
+  this project exists to beat. Every pulse that scanner missed is absent
+  here and is invisible to our scheduler, which means:
+    - the interception denominator is 'what the open-loop scanner already
+      caught', not 'what the emitters actually transmitted';
+    - periodicity found in this stream is partly the ORIGINAL RECEIVER's
+      sweep revisit period, not emitter structure.
+  A stare-mode file is the oracle needed to score scan SCHEDULING honestly.
+  Treat numbers from this file as re-capture efficiency on a pre-filtered
+  stream, not as interception rate against the environment.
+
+  Ground truth derived from file metadata (n_bands=8):
+    band 0: TRUTH 1693.24 us  [= 84.662 scan-steps at dwell 20.0 us]  (label 2 (SMART-L EWC Long Range), Fixed -> 1693.24 us, 94 pulses)
+    band 1: TRUTH 700.00 us  [= 35.000 scan-steps at dwell 20.0 us]  (label 0 (AEGIS SPY-1D Naval Fire Control Radar), Staggered (group of 5,sum) -> 700.00 us, 6521 pulses)
+    band 2: no truth -- only 0 pulses in band
+    band 3: no truth -- label 3 is frequency-agile: only 50.9% of its pulses land in this band
+    band 4: no truth -- label 3 is frequency-agile: only 49.1% of its pulses land in this band
+    band 5: no truth -- only 0 pulses in band
+    band 6: no truth -- only 0 pulses in band
+    band 7: no truth -- only 0 pulses in band
+
+Band occupancy (fraction of steps ON): b0=0.012%, b1=0.477%, b2=0.000%, b3=0.003%, b4=0.003%, b5=0.000%, b6=0.000%, b7=0.000%
+  NOTE: bands [2, 5, 6, 7] are ON in 0% of steps -- permanently dead channels. A learned scheduler beats round-robin partly just by noticing them, which is a trivial win; discount the headline gap accordingly.
+
+Replaying 815948 scan steps across 8 bands (dwell = 20.0 us, 16.32 s of data, k_channels = 1, warmup_steps = 0, switch_cost_steps = 0)
+
+Scheduler                                |  Interception % |  Avg Reward/step |  Avg Intercept Delay | Switches |  Wasted (settling)
+------------------------------------------------------------------------------------------------------------------------------------
+RoundRobin (open-loop baseline)          |           12.7% |            0.001 |                    0 |        0 |                  0
+Random (naive baseline)                  |           12.5% |            0.001 |                    0 |        0 |                  0
+BeliefUCB (Markov + UCB, learned)        |           97.1% |            0.005 |                    0 |        0 |                  0
+PRIAware (Markov + periodicity, learned) |           67.7% |            0.003 |                    0 |        0 |                  0
+PersistentPRIAware (seed-robust fix)     |           67.7% |            0.003 |                    0 |        0 |                  0
+
+PRI diagnostic for PRIAware (Markov + periodicity, learned) -- any bands where a stable period was detected (rest either aren't periodic, or didn't get enough samples this run):
+  band 0: estimated PRI = 84.98402140212453 scan-steps (~1699.7 us), confidence = 0.84
+  band 1: estimated PRI = 35 scan-steps (~700.0 us), confidence = 0.79
+
+PRI diagnostic for PersistentPRIAware (seed-robust fix) -- any bands where a stable period was detected (rest either aren't periodic, or didn't get enough samples this run):
+  band 0: estimated PRI = 84.98402140212453 scan-steps (~1699.7 us), confidence = 0.84
+  band 1: estimated PRI = 35 scan-steps (~700.0 us), confidence = 0.79
+
+--------------------------------------------------------------------------------
+FINISHED: run_on_turing_dataset.py --h5 D:\Code\SIH\SIH\Datasets\Turing datasets\Validation\config_169.h5 --dwell-us 20
+Exit code: 0
+Time: 223.3 seconds
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+ALL EXPERIMENTS FINISHED
+================================================================================
+Total time: 214.83 minutes
+
+Successful:
+  [OK] scan_scheduler_prototype.py
+  [OK] scan_scheduler_v2.py
+  [OK] scan_scheduler_v3_pri.py
+  [OK] scan_scheduler_v4_persistent.py
+  [OK] scan_aware_scheduler.py
+  [OK] demo_spatial_scan_emitter.py
+  [OK] diagnose_beacon_regression.py
+  [OK] diagnose_pri_lockon.py
+  [OK] multi_seed_robustness.py
+  [OK] tune_confidence_threshold.py
+  [OK] validate_offbyone_fix.py
+  [OK] validate_plateau_fix.py
+  [OK] validate_warmup_dwell_fix.py
+  [OK] validate_beacon_switchcost_dwell.py
+  [OK] validate_scan_aware_mixed.py
+  [OK] switch_cost_comparison.py
+  [OK] settle_fix_interaction.py
+  [OK] validate_pdw_multiseed.py
+  [OK] prediction_accuracy_metrics.py
+  [OK] run_on_turing_dataset.py
+
+Failed / skipped:
+  None
+
+================================================================================
+RUN COMPLETE
+================================================================================
